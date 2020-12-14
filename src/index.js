@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './pages';
+import './utils/flexible';
 const Root = () => (
     <React.StrictMode>
         <App />
