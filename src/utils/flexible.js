@@ -1,6 +1,5 @@
 const remInit = (prmWidth, defaWidth) => {
     let key;
-
     function reRem() {
         let width = document.documentElement.getBoundingClientRect.width;
         if (!defaWidth || prmWidth > defaWidth) {
@@ -8,7 +7,7 @@ const remInit = (prmWidth, defaWidth) => {
         }
 
         const rem = width * 100 / prmWidth;
-        const rootStyle = `html{font-size:${rem}px !important}`
+        const rootStyle = 'html{font-size:' + rem + 'px !important}'
         const rootRem = document.getElementById('rootRem') || document.createElement('style');
         if (!document.getElementById('rootRem')) {
             document.getElementsByTagName('head')[0].appendChild(rootRem);
@@ -44,3 +43,4 @@ const remInit = (prmWidth, defaWidth) => {
         }, false);
     }
 }
+remInit(320, 720);
