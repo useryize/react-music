@@ -1,7 +1,7 @@
 const remInit = (prmWidth, defaWidth) => {
     let key;
     function reRem() {
-        let width = document.documentElement.getBoundingClientRect.width;
+        let width = document.documentElement.getBoundingClientRect().width;
         if (!defaWidth || prmWidth > defaWidth) {
             defaWidth = 720;
         }
