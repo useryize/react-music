@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 const { lazy, Suspense } = React;
-const Find = lazy(() => import('./components/Find'));
+const Find = lazy(() => import('../components/Find'));
 
 const App = () => (
     <BrowserRouter>
