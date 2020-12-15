@@ -1,14 +1,15 @@
 import React from 'react';
-import styles from './index.module.css';
+// import styles from './index.module.css';
 // import { get } from '../../utils/axios';
-const { useEffect, useReducer } = React;
+import { Button } from 'antd-mobile';
+const { useEffect } = React;
 
 const Banner = () => {
     useEffect(() => {
         // get({url: 'list.json'})
     }, []);
     return (
-        <div className={styles.box}>798</div>
+        <Button type="ghost" >small</Button>
     )
 }
 
