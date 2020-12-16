@@ -9,7 +9,7 @@ const App = () => (
         <Suspense fallback={null}>
             <Switch>
                 <Route path="/find" component={Find} />
-                <Redirect from='/' to='/Find' />
+                <Redirect from='/' to='/find' />
             </Switch>
         </Suspense>
     </BrowserRouter>

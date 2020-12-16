@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useReducer} from 'react';
 import Banner from '../../components/Banner';
 import createContextFind from '../../hooks/Find/createContextFind';
-const Find = () => (
-    <createContextFind.Provider value={{}}>
-        <Banner />
-    </createContextFind.Provider>
-);
+import { reducer, initialState } from '../../hooks/Find/useReducerFind';
+const Find = () => {
+    const [state,dispatch] = useReducer(reducer, initialState);
+    return (
+        <createContextFind.Provider value={{state, dispatch}}>
+            <Banner />
+        </createContextFind.Provider>
+    )
+};
 export default Find;
