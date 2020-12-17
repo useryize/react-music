@@ -10,7 +10,9 @@ const { useEffect, useContext } = React;
 const Banner = () => {
     const { state, dispatch } = useContext(createContextFind);
     useEffect(() => {
+        // other code
         findBannerList({dispatch});
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
     <Button type="ghost" onClick={() => {
