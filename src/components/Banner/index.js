@@ -1,8 +1,8 @@
 import React from 'react';
 import createContextFind from '../../hooks/Find/createContextFind';
 import { findBannerList } from '../../hooks/Find/useReducerFind';
-import { Carousel, Button } from 'antd-mobile';
-import styles from './index.module.css';
+import { Carousel } from 'antd-mobile';
+import styles from './index.module.less';
 
 const { useEffect, useContext } = React;
 
@@ -34,11 +34,10 @@ const Banner = () => {
                         return <div key={index}><img src={item.imageUrl} alt={item.typeTitle} />456</div>
                     })
                 }
-                <Button onClick={() => {
-                    alert(JSON.stringify(state))
-                }}>789</Button>
             </Carousel >
-            <div className={styles.box}>456</div>
+            <div className={styles.box} onClick={() => {
+                    alert(JSON.stringify(state))
+                }}>456</div>
         </>
 
     )
