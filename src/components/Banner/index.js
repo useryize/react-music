@@ -20,25 +20,25 @@ const Banner = () => {
         findBannerList({ dispatch });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    
     return (
-        <>
+        <div className={styles.bannerBox}>
             <Carousel
-
-                autoplay={false}
-                infinite
-                beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-                afterChange={index => console.log('slide to', index)}
+                autoplay={true}
+                infinite= {true}
+                // dotStyle= {}
             >
                 {
                     banners && banners.map((item, index) => {
-                        return <div key={index}><img src={item.imageUrl} alt={item.typeTitle} />456</div>
+                        return <div key={index}><img className={styles.img} src={item.imageUrl} alt={item.typeTitle} /></div>
                     })
                 }
             </Carousel >
-            <div className={styles.box} onClick={() => {
-                    alert(JSON.stringify(state))
-                }}>456</div>
-        </>
+            <div className={styles.console} onClick={() => {
+                    // alert(JSON.stringify(state));
+                    alert(JSON.stringify(styles.dotStyle));
+                }}>console</div>
+        </div>
 
     )
 }
