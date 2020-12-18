@@ -4,9 +4,7 @@ import App from './app';
 import './utils/flexible';
 import './assets/style/global.module.css';
 const Root = () => (
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>
+    <App />
 );
 
 ReactDOM.render(<Root />, document.getElementById('root'));
