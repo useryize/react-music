@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-export const get = ({ url, prm }) => {
+export const axiosGet = ({ url, prm }) => {
     return new Promise((resolve, reject) => {
         axios.get(url, {
             params: prm
