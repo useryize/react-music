@@ -12,7 +12,7 @@ const Banner = () => {
             banners = []
         }
     },
-        state,
+        // state,
         dispatch
     } = useContext(createContextFind);
     useEffect(() => {
@@ -20,24 +20,24 @@ const Banner = () => {
         findBannerList({ dispatch });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    
+
     return (
         <div className={styles.bannerBox}>
             <Carousel
                 autoplay={true}
-                infinite= {true}
-                // dotStyle= {}
+                infinite={true}
+            // dotStyle= {}
             >
                 {
                     banners && banners.map((item, index) => {
-                        return <div key={index}><img className={styles.img} src={item.imageUrl} alt={item.typeTitle} /></div>
+                        return <div key={index} className={styles.imgBox}><img className={styles.img} src={item.imageUrl} alt={item.typeTitle} /></div>
                     })
                 }
             </Carousel >
             <div className={styles.console} onClick={() => {
-                    // alert(JSON.stringify(state));
-                    alert(JSON.stringify(styles.dotStyle));
-                }}>console</div>
+                // alert(JSON.stringify(state));
+                alert(JSON.stringify(styles.dotStyle));
+            }}>console</div>
         </div>
 
     )
