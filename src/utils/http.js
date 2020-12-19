@@ -3,7 +3,7 @@ import { SERVER } from './apis';
 
 //根据环境变量区分接口默认地址这里看自己需求配
 const handleResponse = (response) => {
-    return response.data
+    return response
 }
 
 const handleError = (error) => {
@@ -13,7 +13,7 @@ const handleError = (error) => {
 
 const createInstance = () => {
     const instance = axios.create({
-        baseURL: SERVER,
+        baseURL: './' || SERVER,
         withCredentials: false,
         timeout: '40000',
         responseType: 'json',
