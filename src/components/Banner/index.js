@@ -34,11 +34,6 @@ const Banner = () => {
                     })
                 }
             </Carousel >
-            <div className={styles.console} onClick={() => {
-                // alert(JSON.stringify(state));
-                alert(JSON.stringify(styles.dotStyle));
-                alert(JSON.stringify(banners));
-            }}>console</div>
         </div>
 
     )
