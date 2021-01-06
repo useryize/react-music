@@ -1,5 +1,17 @@
-import axios from './http';
+import axios from 'axios';
 
+axios.defaults.headers.get['Content-TYpe'] = 'application/json; charset=utf-8';
+axios.defaults.headers.get['Accept'] = 'application/json; charset=utf-8';
+axios.defaults.withCredentials = true;
+
+axios.interceptors.response.use(
+    function (response) {
+        return response;
+    },
+    function (error) {
+
+    },
+);
 
 export const axiosGet = ({ url, prm }) => {
     return new Promise((resolve, reject) => {
