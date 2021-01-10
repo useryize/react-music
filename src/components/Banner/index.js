@@ -26,8 +26,7 @@ const Banner = () => {
     }, []);
 
     useEffect(() => {
-        let a = new Swiper(swiperDom, { loop: true, autoplay: true, });
-        console.error(a);
+        // let a = new Swiper(swiperDom, { loop: true, autoplay: true, });
         
     }, [banners]);
     return (
