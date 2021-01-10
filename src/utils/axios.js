@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-// axios.defaults.headers.get['Content-Type'] = 'application/json; charset=utf-8';
-// axios.defaults.headers.get['Accept'] = 'application/json; charset=utf-8';
-// axios.defaults.withCredentials = true;
+axios.defaults.headers.get['Content-Type'] = 'application/json; charset=utf-8';
+axios.defaults.headers.get['Accept'] = 'application/json; charset=utf-8';
+axios.defaults.headers.get['Content-Security-Policy'] = 'upgrade-insecure-requests';
+axios.defaults.withCredentials = true;
 
 axios.interceptors.response.use(
     function (response) {
