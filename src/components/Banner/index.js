@@ -26,17 +26,27 @@ const Banner = () => {
     }, []);
 
     useEffect(() => {
-        // let a = new Swiper(swiperDom, { loop: true, autoplay: true, });
-        
-    }, [banners]);
+        new Swiper(swiperDom.current, {
+            loop: true
+        });
+        console.error(swiperDom.current)
+    }, []);
+
     return (
-        <div ref={swiperDom} className={`${styles.bannerBox} swiper-container`} onClick={(e) => {
-            console.error(12345);
-        }}>
-            <div className={`${styles.carouselBox} swiper-slide`}>
+        <div ref={swiperDom} className={`${styles.bannerBox} swiper-container`}>
+            <div className="swiper-wrapper">
                 {
                     banners && banners.map((item, index) => {
-                        return <div key={index} className={styles.imgBox}><img className={styles.img} src={item.pic} alt={item.typeTitle} /></div>
+                        return (
+                            <div className="swiper-slide">
+                                <div key={index} className={`${styles.carouselBox} `}>
+                                    <div className={styles.imgBox}>
+                                        <img className={styles.img} src={item.pic} alt={item.typeTitle} />
+                                    </div>
+                                </div>
+                            </div>
+
+                        )
                     })
                 }
             </div>
