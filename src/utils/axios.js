@@ -16,7 +16,7 @@ axios.interceptors.response.use(
 
 export const axiosGet = ({ url, prm }) => {
     return new Promise((resolve, reject) => {
-        axios.post(url, {
+        axios.get(url, {
             params: prm
         }).then(res => {
             resolve(res.data);
