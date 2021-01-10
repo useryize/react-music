@@ -32,7 +32,7 @@ const Banner = () => {
     }, [banners]);
     return (
         <div ref={swiperDom} className={`${styles.bannerBox} swiper-container`} onClick={(e) => {
-            console.error(e);
+            console.error(12345);
         }}>
             <div className={`${styles.carouselBox} swiper-slide`}>
                 {
