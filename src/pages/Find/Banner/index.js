@@ -1,6 +1,6 @@
 import React from 'react';
-import createContextFind from '../../hooks/Find/createContextFind';
-import { findBannerList } from '../../hooks/Find/useReducerFind';
+import createContextFind from '../../../hooks/Find/createContextFind';
+import { findBannerList } from '../../../hooks/Find/useReducerFind';
 // import { Carousel } from 'antd-mobile';
 import Swiper from "swiper"
 import "swiper/swiper-bundle.css";
@@ -29,16 +29,14 @@ const Banner = () => {
         new Swiper(swiperDom.current, {
             loop: true
         });
-        console.error(swiperDom.current)
     }, []);
-    console.error(banners);
     return (
         <div ref={swiperDom} className={`${styles.bannerBox} swiper-container`}>
             <div className="swiper-wrapper">
                 {
                     banners && banners.map((item, index) => {
                         return (
-                            <div className="swiper-slide">
+                            <div className="swiper-slide" key={index}>
                                 <div key={index} className={`${styles.carouselBox} `}>
                                     <div className={styles.imgBox}>
                                         <img className={styles.img} src={item.pic} alt={item.typeTitle} />
