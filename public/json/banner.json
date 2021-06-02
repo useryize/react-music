@@ -1,7 +1,7 @@
 {
     "banners": [
         {
-            "jsonType": "banner",
+            "jsonType": "banner 首页banner",
             "pic": "http://p1.music.126.net/VZaFTpUkTIV0DnHT5NayrA==/109951165555264231.jpg",
             "targetId": 1804879213,
             "adid": null,

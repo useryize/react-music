@@ -31,7 +31,7 @@ const Banner = () => {
         });
         console.error(swiperDom.current)
     }, []);
-
+    console.error(banners);
     return (
         <div ref={swiperDom} className={`${styles.bannerBox} swiper-container`}>
             <div className="swiper-wrapper">
