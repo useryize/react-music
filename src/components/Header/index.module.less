@@ -1,21 +1,31 @@
 .headBox {
     display: flex;
-    height: .4rem;
+    height: .6rem;
     margin:  0 .15rem;
-    padding: .1rem 0;
+    padding: .2rem 0;
+    position: relative;
+    z-index: 1;
     .left {
         .more {
             width: .6rem;
-            height: .4rem;
+            height: .6rem;
             background: url('./icon/more.png') left center no-repeat;
             background-size: .4rem auto;
         }
     }
     .center {
         width: calc(100% - 1.2rem);
-        height: .4rem;
-        border-radius: .2rem;
-        background: #ffffff url('./icon/find.png') left center no-repeat;
+        height: .6rem;
+        border-radius: .3rem;
+        background: #ffffff url('./icon/find.png') .1rem center no-repeat;
         background-size: .3rem auto;
+        box-sizing: border-box;
+        padding-left: .5rem;
+        line-height: .6rem;
+        color: #8e8e8e;
     }
+}
+.sidebarStyle {
+    width: 100%;
+    background-color: #ffffff;
 }
