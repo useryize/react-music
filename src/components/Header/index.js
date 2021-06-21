@@ -3,9 +3,9 @@ import { Drawer } from 'antd-mobile';
 import styles from './index.module.less';
 const Headers = () => {
     let [searchTitle] = useState('hooks')
-    const sidebar = (
-        <div>2143</div>
-    )
+    // const sidebar = (
+    //     <div>2143</div>
+    // )
     return (
         <Fragment>
             <div className={styles.headBox}>
@@ -19,8 +19,10 @@ const Headers = () => {
                 position="left"
                 open={true}
                 className={styles.sidebarStyle}
-                sidebar={sidebar}
-            />
+                // sidebar={sidebar}
+            >
+                <div>kjk</div>
+            </Drawer>
         </Fragment>
 
     )
