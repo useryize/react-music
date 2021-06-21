@@ -41,23 +41,14 @@ const Banner = () => {
     return (
         <div className={`swiper-container ${styles.bannerBox}`}>
             <div className="swiper-wrapper">
-                {/* <div className={`swiper-slide ${styles.banner}`}>Slide 1</div>
-                <div className={`swiper-slide ${styles.banner}`}>Slide 2</div>
-                <div className={`swiper-slide ${styles.banner}`}>Slide 3</div>
-                <div className={`swiper-slide ${styles.banner}`}>Slide 4</div>
-                <div className={`swiper-slide ${styles.banner}`}>Slide 5</div>
-                <div className={`swiper-slide ${styles.banner}`}>Slide 6</div>
-                <div className={`swiper-slide ${styles.banner}`}>Slide 7</div>
-                <div className={`swiper-slide ${styles.banner}`}>Slide 8</div> */}
                 {
                     banners.map((item, index) => {
                         return (
                             <div
                                 className={`swiper-slide ${styles.banner}`} key={index}
-                            style={{ backgroundImage: `url(${item.pic})` }}
+                                style={{ backgroundImage: `url(${item.pic})` }}
                             >
-                                {item.typeTitle}
-                                {/* <img className={styles.imgBox} src={item.pic} alt={item.typeTitle} /> */}
+                                <div className={styles.tigs}>{item.typeTitle}</div>
                             </div>
                         )
                     })
