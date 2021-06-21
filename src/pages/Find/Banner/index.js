@@ -1,9 +1,9 @@
 import React from 'react';
 import createContextFind from '../../../hooks/Find/createContextFind';
 import { findBannerList } from '../../../hooks/Find/useReducerFind';
-import { Carousel } from 'antd-mobile';
-// import Swiper from "swiper"
-// import "swiper/swiper-bundle.css";
+// import { Carousel } from 'antd-mobile';
+import Swiper from "swiper"
+import "swiper/swiper-bundle.css";
 import styles from './index.module.less';
 
 const {
@@ -30,35 +30,63 @@ const Banner = () => {
     }, []);
 
     useEffect(() => {
-        // new Swiper(swiperDom.current, {
-        //     loop: true
-        // });
-    }, []);
+        let swiper = new Swiper('.swiper-container', {
+            loop: true
+        });
+        return () => {
+            swiper.destroy();
+        }
+    }, [banners]);
 
     return (
-        banners && banners.length > 0 &&
-        <div className={styles.bannerBox}>
-            <Carousel
-                autoplay
-                infinite
-            >
+        <div className={`swiper-container ${styles.bannerBox}`}>
+            <div className="swiper-wrapper">
+                {/* <div className={`swiper-slide ${styles.banner}`}>Slide 1</div>
+                <div className={`swiper-slide ${styles.banner}`}>Slide 2</div>
+                <div className={`swiper-slide ${styles.banner}`}>Slide 3</div>
+                <div className={`swiper-slide ${styles.banner}`}>Slide 4</div>
+                <div className={`swiper-slide ${styles.banner}`}>Slide 5</div>
+                <div className={`swiper-slide ${styles.banner}`}>Slide 6</div>
+                <div className={`swiper-slide ${styles.banner}`}>Slide 7</div>
+                <div className={`swiper-slide ${styles.banner}`}>Slide 8</div> */}
                 {
-                    banners && banners.map((item, index) => {
+                    banners.map((item, index) => {
                         return (
                             <div
-                                className={styles.banner} key={index}
-                                style={{ backgroundImage: `url(${item.pic})` }}
+                                className={`swiper-slide ${styles.banner}`} key={index}
+                            style={{ backgroundImage: `url(${item.pic})` }}
                             >
+                                {item.typeTitle}
                                 {/* <img className={styles.imgBox} src={item.pic} alt={item.typeTitle} /> */}
                             </div>
                         )
                     })
                 }
-            </Carousel>
+            </div>
         </div>
-
-
     )
+    // return (
+    //     banners && banners.length > 0 &&
+    //     <div className={styles.bannerBox}>
+    //         <Carousel
+    //             autoplay
+    //             infinite
+    //         >
+    //             {
+    //                 banners && banners.map((item, index) => {
+    //                     return (
+    //                         <div
+    //                             className={styles.banner} key={index}
+    //                             style={{ backgroundImage: `url(${item.pic})` }}
+    //                         >
+    //                             {/* <img className={styles.imgBox} src={item.pic} alt={item.typeTitle} /> */}
+    //                         </div>
+    //                     )
+    //                 })
+    //             }
+    //         </Carousel>
+    //     </div>
+    // )
     // return (
     //     <div ref={swiperDom} className={`${styles.bannerBox} swiper-container`}>
     //         <div className="swiper-wrapper">
