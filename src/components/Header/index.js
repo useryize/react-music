@@ -1,9 +1,15 @@
 import React from 'react';
-import styles from './icon/index.less';
+import styles from './index.module.less';
 const Headers = () => {
 
     return (
-        <div className={styles.box}>asdasd</div>
+        <div className={styles.headBox}>
+            <div className={styles.left}>
+                <div className={styles.more}></div>
+            </div>
+            <div className={styles.center}></div>
+            <div className={styles.right}></div>
+        </div>
     )
 };
 
