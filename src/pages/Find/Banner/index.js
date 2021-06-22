@@ -31,7 +31,10 @@ const Banner = () => {
 
     useEffect(() => {
         let swiper = new Swiper('.swiper-container', {
-            loop: true
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+            }
         });
         return () => {
             swiper.destroy();
@@ -53,6 +56,7 @@ const Banner = () => {
                         )
                     })
                 }
+                <div class="swiper-pagination"></div>
             </div>
         </div>
     )
