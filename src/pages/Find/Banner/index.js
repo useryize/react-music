@@ -2,9 +2,11 @@ import React from 'react';
 import createContextFind from '../../../hooks/Find/createContextFind';
 import { findBannerList } from '../../../hooks/Find/useReducerFind';
 // import { Carousel } from 'antd-mobile';
-import Swiper from "swiper"
+import Swiper, { Pagination } from "swiper";
 import "swiper/swiper-bundle.css";
 import styles from './index.module.less';
+
+Swiper.use([Pagination]);
 
 const {
     useEffect,
@@ -56,8 +58,8 @@ const Banner = () => {
                         )
                     })
                 }
-                <div class="swiper-pagination"></div>
             </div>
+            <div className="swiper-pagination"></div>
         </div>
     )
     // return (
