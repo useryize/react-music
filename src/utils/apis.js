@@ -3,5 +3,5 @@ export const SERVER = `http://${serverAddr}:3000`;
 
 export const bannerUrl = `/json/banner.json`; // banner
 // export const bannerUrl = `${SERVER}/banner`; // banner
-export const personalized = `/personalized`; // 推荐歌单
+export const personalized = `/json/paylist.json`; // 推荐歌单
 export const newsong = `/personalized/newsong`; // 最新音乐

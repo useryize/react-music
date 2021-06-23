@@ -1,24 +1,33 @@
 import { axiosGet } from '../../utils/axios';
-import { bannerUrl } from '../../utils/apis';
+import { bannerUrl, personalized } from '../../utils/apis';
 const FIND_BANNER_LIST = 'FIND_BANNER_LIST';
+const FIND_RECOM_LIST = 'FIND_RECOM_LIST';
 
 export const initialState = {
-    list: {}
+    bannerList: {},
+    recomList: {},
+
 }
 
 export const reducer = (state = initialState, action) => {
     if (action.type === 'FIND_BANNER_LIST') {
         return {
             ...state,
-            list: action.list
+            bannerList: action.bannerList,
+        }
+    }
+    if (action.type === 'FIND_RECOM_LIST') {
+        return {
+            ...state,
+            recomList: action.recomList,
         }
     }
     return state;
 }
 
 
-
-export const findBannerList = ({ dispatch }) => {
+// banner
+export const findBannerList = ({ dispatch } = {}) => {
     axiosGet({
         url: bannerUrl,
         prm: {
@@ -28,7 +37,18 @@ export const findBannerList = ({ dispatch }) => {
     }).then((res) => {
         dispatch({
             type: FIND_BANNER_LIST,
-            list: res
+            bannerList: res
         })
     })
 };
+
+// 推荐歌单
+export const findRecomList = ({ dispatch } = {}) => {
+    axiosGet({
+        url: personalized,
+        prm: {}
+    }).then((res) => {
+        dispatch({ type: FIND_RECOM_LIST, recomList: res })
+
+    })
+}
