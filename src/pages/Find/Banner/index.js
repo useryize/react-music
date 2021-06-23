@@ -32,7 +32,7 @@ const Banner = () => {
     }, []);
 
     useEffect(() => {
-        let swiper = new Swiper('.swiper-container', {
+        let swiper = new Swiper('.swiper-container-banner', {
             loop: true,
             pagination: {
                 el: '.swiper-pagination',
@@ -44,7 +44,7 @@ const Banner = () => {
     }, [banners]);
 
     return (
-        <div className={`swiper-container ${styles.bannerBox}`}>
+        <div className={`swiper-container swiper-container-banner ${styles.bannerBox}`}>
             <div className="swiper-wrapper">
                 {
                     banners.map((item, index) => {
