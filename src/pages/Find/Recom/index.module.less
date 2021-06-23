@@ -1,0 +1,41 @@
+.recomBox {
+    margin: 0 .15rem;
+
+    .title {
+        font-size: .26rem;
+        padding: .2rem 0;
+    }
+
+    .itemBox {
+        display: flex;
+        flex-wrap: wrap;
+
+        .item {
+            width: 2rem;
+            overflow: hidden;
+            flex-grow: 0;
+            flex-shrink: 0;
+
+            .pic {
+                width: 2rem;
+                height: 2rem;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+
+            .name {
+                width: 100%;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                overflow: hidden;
+                font-size: .14rem;
+            }
+        }
+    }
+}
