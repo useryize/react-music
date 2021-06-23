@@ -18,7 +18,7 @@ const {
 const Banner = () => {
     // const swiperDom = useRef(null);
     const { state: {
-        list: {
+        bannerList: {
             banners = []
         }
     },
