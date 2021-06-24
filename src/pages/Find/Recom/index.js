@@ -16,7 +16,7 @@ const Recom = () => {
     } = useContext(createContextFind);
 
     useEffect(() => {
-        // other code
+        //  other code
         findRecomList({ dispatch });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
