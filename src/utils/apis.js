@@ -1,6 +1,5 @@
-const serverAddr = '47.115.57.59'
-const envDev = true
-export const SERVER = `http://${serverAddr}:3000`;
+const envDev = false
+export const SERVER = 'https://useryize.vercel.app'
 
 
 export const bannerUrl = envDev ? `/json/banner.json` : `${SERVER}/banner`; // banner
