@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
 // axios.defaults.headers.get['Accept'] = 'application/json; charset=utf-8';
 // axios.defaults.headers.get['Content-Security-Policy'] = 'upgrade-insecure-requests';
 // axios.defaults.headers.get['Access-Control-Allow-Headers'] = 'Content-Type,XFILENAME,XFILECATEGORY,XFILESIZE';
