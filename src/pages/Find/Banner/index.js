@@ -2,6 +2,7 @@ import React from 'react';
 import createContextFind from '../../../hooks/Find/createContextFind';
 import { findBannerList } from '../../../hooks/Find/useReducerFind';
 // import { Carousel } from 'antd-mobile';
+// import { Swiper } from 'antd-mobile'
 import Swiper, { Pagination } from "swiper";
 import "swiper/swiper-bundle.css";
 import styles from './index.module.less';
@@ -42,7 +43,15 @@ const Banner = () => {
             swiper.destroy();
         }
     }, [banners]);
-
+    // return (
+    //     <Swiper>
+    //         {
+    //             banners.map((item, index) => (
+    //                 <Swiper.Item key={index}>{item.pic}</Swiper.Item>
+    //             ))
+    //         }
+    //     </Swiper>
+    // )
     return (
         <div className={`swiper-container swiper-container-banner ${styles.bannerBox}`}>
             <div className="swiper-wrapper">

@@ -1,12 +1,9 @@
 import React, { useState, Fragment } from 'react';
-import { Drawer } from 'antd-mobile';
+import { Popup } from 'antd-mobile';
 import styles from './index.module.less';
 const Headers = () => {
     let [searchTitle] = useState('hooks');
     let [drawerShow, drawerShowFun] = useState(false);
-    const sidebar = (
-        <div>2143</div>
-    )
     return (
         <Fragment>
             <div className={styles.headBox}>
@@ -16,16 +13,14 @@ const Headers = () => {
                 <div className={styles.center}>{searchTitle}</div>
                 <div className={styles.right}></div>
             </div>
-            <Drawer
+            <Popup
                 position="left"
-                open={drawerShow}
-                touch={false}
-                className={styles.sidebarStyle}
-                sidebar={sidebar}
-                onOpenChange={() => drawerShowFun(false)}
+                visible={drawerShow}
+                onMaskClick={() => drawerShowFun(false)}
+                bodyStyle={{ width: '60vw' }}
             >
-                <div></div>
-            </Drawer>
+                <div>个人中心</div>
+            </Popup>
         </Fragment>
 
     )
