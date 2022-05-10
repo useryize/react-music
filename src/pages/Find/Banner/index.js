@@ -43,6 +43,9 @@ const Banner = () => {
 	//         swiper.destroy();
 	//     }
 	// }, [banners]);
+	if(banners.length === 0) {
+		return <div className={styles.emptyBanner}>加载中...</div>
+	}
 	return (
 		<div className={styles.bannerBox}>
 			<Swiper
