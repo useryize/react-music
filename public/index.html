@@ -13,16 +13,16 @@
     <div id="root"></div>
     <script>
         // rem 适配 
-        function setRem() {
-            let domWidth = document.documentElement.clientWidth || document.body.clientWidth;
-            let domID = document.getElementsByTagName('html')[0];
-            domWidth = domWidth > 750 ? 750 : domWidth;
-            domID.style.fontSize = domWidth / 3.75 + 'px'; // 375宽为基准 1rem = 100px
-        }
-        setRem();
-        window.onresize = function () {
-            setRem()
-        }
+//         function setRem() {
+//             let domWidth = document.documentElement.clientWidth || document.body.clientWidth;
+//             let domID = document.getElementsByTagName('html')[0];
+//             domWidth = domWidth > 750 ? 750 : domWidth;
+//             domID.style.fontSize = domWidth / 3.75 + 'px'; // 375宽为基准 1rem = 100px
+//         }
+//         setRem();
+//         window.onresize = function () {
+//             setRem()
+//         }
     </script>
 </body>
 
