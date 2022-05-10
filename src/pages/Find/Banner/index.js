@@ -49,7 +49,7 @@ const Banner = () => {
 				{
 					banners.map((item, index) => (
 						<Swiper.Item key={index}>
-							<div className={styles.item} style={{ backgroundImage: `url(${item.pic})` }}>
+							<div className={styles.banner} style={{ backgroundImage: `url(${item.pic})` }}>
 								<div className={styles.tigs}>{item.typeTitle}</div>
 							</div>
 						</Swiper.Item>
