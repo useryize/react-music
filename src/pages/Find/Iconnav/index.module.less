@@ -32,16 +32,18 @@
         flex-shrink: 0;
         flex-grow: 0;
         width: .86rem;
+        overflow: hidden;
 
         .img {
             width: .86rem;
             height: .86rem;
             border-radius: 50%;
-            overflow: hidden;
-            background-color: #fe5151;
-            // mask-image: url(./icon.png);
-			mask-repeat: no-repeat;
-            mask-size: .86rem .86rem;
+            // background: url(./icon.png) no-repeat center center;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: .86rem .86rem;
+            filter: drop-shadow(red .865rem 0);
+            transform: translateX(-100%)
         }
 
         .name {
