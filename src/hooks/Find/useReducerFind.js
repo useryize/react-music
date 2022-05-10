@@ -1,12 +1,13 @@
 import { axiosGet } from '../../utils/axios';
-import { bannerUrl, personalized } from '../../utils/apis';
+import { bannerUrl, personalized, homepageDragonBall } from '../../utils/apis';
 const FIND_BANNER_LIST = 'FIND_BANNER_LIST';
 const FIND_RECOM_LIST = 'FIND_RECOM_LIST';
+const HOME_PAGE_DRAGON_BALL = 'HOME_PAGE_DRAGON_BALL';
 
 export const initialState = {
     bannerList: {},
     recomList: {},
-
+    iconNavList: {}
 }
 
 export const reducer = (state = initialState, action) => {
@@ -20,6 +21,12 @@ export const reducer = (state = initialState, action) => {
         return {
             ...state,
             recomList: action.recomList,
+        }
+    }
+    if (action.type === 'HOME_PAGE_DRAGON_BALL') {
+        return {
+            ...state,
+            iconNavList: action.iconNavList,
         }
     }
     return state;
@@ -50,5 +57,15 @@ export const findRecomList = ({ dispatch } = {}) => {
     }).then((res) => {
         dispatch({ type: FIND_RECOM_LIST, recomList: res })
 
+    })
+}
+
+// 圆形图标入口列表
+export const getFindIconNav = ({ dispatch } = {}) => {
+    axiosGet({
+        url: homepageDragonBall,
+        prm: {}
+    }).then((res) => {
+        dispatch({ type: HOME_PAGE_DRAGON_BALL, iconNavList: res })
     })
 }
