@@ -45,7 +45,22 @@ const Banner = () => {
 	// }, [banners]);
 	return (
 		<div className={styles.bannerBox}>
-			<Swiper>
+			<Swiper
+				loop={true}
+				rubberband={true}
+				stuckAtBoundary={true}
+				indicatorProps={{
+					style: {
+						'--dot-color': 'rgba(0, 0, 0, 0.4)',
+						'--active-dot-color': '#ffffff',
+						'--dot-size': '.1rem',
+						'--active-dot-size': '.3rem',
+						'--dot-border-radius': '50%',
+						'--active-dot-border-radius': '.15rem',
+						'--dot-spacing': '.08rem',
+					}
+				}}
+			>
 				{
 					banners.map((item, index) => (
 						<Swiper.Item key={index}>
