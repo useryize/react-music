@@ -10,6 +10,7 @@ const {
 const Iconnav = () => {
 	const { state: { iconNavList = [] } = {}, dispatch } = useContext(createContextFind)
 	// const [iconList] = useState(Array.from({ length: 50 }))
+	console.error(iconNavList);
 	useEffect(() => {
 		getFindIconNav({ dispatch })
 	}, [])
@@ -18,8 +19,8 @@ const Iconnav = () => {
 			{
 				iconNavList && iconNavList.map((item, index) => (
 					<div className={styles.item} key={(item && item.id) || index}>
-						<div className={styles.img} style={{ maskImage: `url(${item.iconUrl})` }}></div>
-						<div className={styles.name}>{item.name}</div>
+						<div className={styles.img} style={{ backgroundImage: `url(${item.iconUrl})` }}></div>
+						<div className={styles.name}>{(item && item.name) || ''}</div>
 					</div>
 				))
 			}
