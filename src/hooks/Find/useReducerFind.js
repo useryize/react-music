@@ -66,6 +66,6 @@ export const getFindIconNav = ({ dispatch } = {}) => {
         url: homepageDragonBall,
         prm: {}
     }).then((res) => {
-        dispatch({ type: HOME_PAGE_DRAGON_BALL, iconNavList: res })
+        dispatch({ type: HOME_PAGE_DRAGON_BALL, iconNavList: (res && res.data) || [] })
     })
 }
