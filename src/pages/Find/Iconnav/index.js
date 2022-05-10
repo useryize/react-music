@@ -16,7 +16,7 @@ const Iconnav = () => {
 	return (
 		<div className={styles.iconBox}>
 			{
-				iconNavList.map((item, index) => (
+				iconNavList && iconNavList.map((item, index) => (
 					<div className={styles.item} key={(item && item.id) || index}>
 						<div className={styles.img} style={{ maskImage: `url(${item.iconUrl})` }}></div>
 						<div className={styles.name}>{item.name}</div>
