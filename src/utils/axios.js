@@ -26,7 +26,7 @@ axios.interceptors.response.use(
     },
     (error) => {
         // console.log(error.config);
-        // console.log(error.response);
+        console.log(error.response);
         return Promise.reject(error)
     }
 )
@@ -38,8 +38,7 @@ export const axiosGet = ({ url, prm }) => {
                 resolve(res && res.data);
             })
             .catch(err => {
-                console.error(err);
-                // reject(err.data);
+                reject(err.data);
             })
     });
 }
