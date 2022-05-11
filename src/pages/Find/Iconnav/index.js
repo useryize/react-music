@@ -14,6 +14,11 @@ const Iconnav = () => {
 	useEffect(() => {
 		getFindIconNav({ dispatch })
 	}, [])
+
+	if (iconNavList.length === 0) {
+		return <div className={styles.emptyInfo}>加载中...</div>
+	}
+
 	return (
 		<div className={styles.iconBox}>
 			{
