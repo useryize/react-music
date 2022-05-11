@@ -11,16 +11,7 @@ const Iconnav = () => {
 	const { state: { iconNavList = [] } = {}, dispatch } = useContext(createContextFind)
 	// const [iconList] = useState(Array.from({ length: 50 }))
 	useEffect(() => {
-		let key = ''
-		const res = getFindIconNav({ dispatch })
-		res.then(() => {
-			clearInterval(key)
-		})
-		res.catch(() => {
-			key = setInterval(() => {
-				getFindIconNav({ dispatch })
-			}, 1000)
-		})
+		getFindIconNav({ dispatch })
 	}, [])
 	return (
 		<div className={styles.iconBox}>
