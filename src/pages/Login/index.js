@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.module.less'
-import { Form, Input, Button } from 'antd-mobile'
+import {  Input, Button } from 'antd-mobile'
 const style = {
 	'--font-size': '.2rem',
 	'--color': '#333333',

@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { Popup, Avatar, Button } from 'antd-mobile';
+import { Popup, Avatar } from 'antd-mobile';
 import styles from './index.module.less';
 const Headers = () => {
     let [searchTitle] = useState('hooks');

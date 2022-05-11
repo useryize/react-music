@@ -1,5 +1,6 @@
 import { axiosGet } from '../../utils/axios';
 import { bannerUrl, personalized, homepageDragonBall } from '../../utils/apis';
+import moment from 'moment'
 const FIND_BANNER_LIST = 'FIND_BANNER_LIST';
 const FIND_RECOM_LIST = 'FIND_RECOM_LIST';
 const HOME_PAGE_DRAGON_BALL = 'HOME_PAGE_DRAGON_BALL';
@@ -38,8 +39,8 @@ export const findBannerList = ({ dispatch } = {}) => {
     const axiosRes = axiosGet({
         url: bannerUrl,
         prm: {
-            // 0: pc,1: android,2: iphone,3: ipad
-            type: 2
+            timestamp: moment().toDate().getTime(), // 加上时间戳接口缓存
+            type: 2 // 0: pc,1: android,2: iphone,3: ipad
         }
     })
     axiosRes.then((res) => {
@@ -66,7 +67,9 @@ export const findRecomList = ({ dispatch } = {}) => {
 export const getFindIconNav = ({ dispatch } = {}) => {
     const axiosRes = axiosGet({
         url: homepageDragonBall,
-        prm: {}
+        prm: {
+            timestamp: moment().toDate().getTime(), // 加上时间戳接口缓存
+        }
     })
     axiosRes.then((res) => {
         dispatch({ type: HOME_PAGE_DRAGON_BALL, iconNavList: (res && res.data) || [] })
