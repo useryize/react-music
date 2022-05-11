@@ -2,6 +2,7 @@ import React from 'react';
 import createContextFind from '../../../hooks/Find/createContextFind'
 import { getFindIconNav } from '../../../hooks/Find/useReducerFind'
 import styles from './index.module.less'
+// import icon from './icon.png'
 const {
 	// useState,
 	useContext,
@@ -18,7 +19,9 @@ const Iconnav = () => {
 			{
 				iconNavList && iconNavList.map((item, index) => (
 					<div className={styles.item} key={(item && item.id) || index}>
-						<div className={styles.img} style={{ backgroundImage: `url(${item.iconUrl})` }}></div>
+						<div className={styles.imgBox}>
+							<div className={styles.img} style={{ backgroundImage: `url(${item.iconUrl})` }}></div>
+						</div>
 						<div className={styles.name}>{(item && item.name) || ''}</div>
 					</div>
 				))
