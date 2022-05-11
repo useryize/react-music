@@ -21,15 +21,23 @@ const Banner = () => {
 	const { state: {
 		bannerList: {
 			banners = []
-		}
+		} = {}
 	},
 		// state,
 		dispatch
 	} = useContext(createContextFind);
 	useEffect(() => {
-		// other code
-		findBannerList({ dispatch });
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		let key = ''
+		const res = findBannerList({ dispatch });
+		// 接口请求失败1s后再次请求
+		res.then(() => {
+			clearInterval(key)
+		})
+		res.catch(() => {
+			key = setInterval(() => {
+				findBannerList({ dispatch })
+			}, 1000)
+		})
 	}, []);
 
 	// useEffect(() => {
@@ -43,7 +51,7 @@ const Banner = () => {
 	//         swiper.destroy();
 	//     }
 	// }, [banners]);
-	if(banners.length === 0) {
+	if (banners.length === 0) {
 		return <div className={styles.emptyBanner}>加载中...</div>
 	}
 	return (
