@@ -1,8 +1,23 @@
+.emptyInfo {
+    text-align: center;
+    margin: .2rem;
+    height: 1rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eaeaea;
+    font-size: .14rem;
+    color: #bbbbbb;
+	border-radius: .2rem;
+}
+
 .iconBox {
     display: flex;
     overflow-x: auto;
-    margin: 0 .2rem;
-	text-align: center;
+    margin: .2rem;
+    text-align: center;
+
     &::-webkit-scrollbar {
         /*滚动条整体样式*/
         width: 0;
@@ -32,14 +47,15 @@
     .item {
         flex-shrink: 0;
         flex-grow: 0;
-		margin-right: .3rem;
+        margin-right: .3rem;
+
         .imgBox {
             overflow: hidden;
             border-radius: 50%;
             background-color: #fef2f2;
-			
+
             .img {
-				margin: 0 auto;
+                margin: 0 auto;
                 width: .86rem;
                 height: .86rem;
                 border-radius: 50%;
@@ -55,7 +71,8 @@
 
 
         .name {
-            font-size: .16rem;
+			margin-top: .1rem;
+            font-size: .18rem;
             color: #696969;
         }
     }
