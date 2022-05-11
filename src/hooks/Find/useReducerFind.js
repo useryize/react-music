@@ -35,18 +35,20 @@ export const reducer = (state = initialState, action) => {
 
 // banner
 export const findBannerList = ({ dispatch } = {}) => {
-    axiosGet({
+    const axiosRes = axiosGet({
         url: bannerUrl,
         prm: {
             // 0: pc,1: android,2: iphone,3: ipad
             type: 2
         }
-    }).then((res) => {
+    })
+    axiosRes.then((res) => {
         dispatch({
             type: FIND_BANNER_LIST,
             bannerList: res
         })
     })
+    return axiosRes
 };
 
 // 推荐歌单
@@ -62,10 +64,12 @@ export const findRecomList = ({ dispatch } = {}) => {
 
 // 圆形图标入口列表
 export const getFindIconNav = ({ dispatch } = {}) => {
-    axiosGet({
+    const axiosRes = axiosGet({
         url: homepageDragonBall,
         prm: {}
-    }).then((res) => {
+    })
+    axiosRes.then((res) => {
         dispatch({ type: HOME_PAGE_DRAGON_BALL, iconNavList: (res && res.data) || [] })
     })
+    return axiosRes
 }
