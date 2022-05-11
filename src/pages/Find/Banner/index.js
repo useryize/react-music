@@ -27,17 +27,7 @@ const Banner = () => {
 		dispatch
 	} = useContext(createContextFind);
 	useEffect(() => {
-		let key = ''
-		const res = findBannerList({ dispatch });
-		// 接口请求失败1s后再次请求
-		res.then(() => {
-			clearInterval(key)
-		})
-		res.catch(() => {
-			key = setInterval(() => {
-				findBannerList({ dispatch })
-			}, 1000)
-		})
+		findBannerList({ dispatch });
 	}, []);
 
 	// useEffect(() => {
