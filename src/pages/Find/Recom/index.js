@@ -5,48 +5,57 @@ import { findRecomList } from '../../../hooks/Find/useReducerFind';
 
 import createContextFind from '../../../hooks/Find/createContextFind';
 const {
-	useContext,
-	useEffect,
-	// useState,
+    useContext,
+    useEffect,
+    // useState,
 } = React;
 const Recom = () => {
-	const {
-		state: {
-			recomList = []
-		} = {},
-		dispatch
-	} = useContext(createContextFind);
-	// const [list] = useState(Array.from({ length: 20 }).map(item => ({ picUrl: '', name: 'XXX' })))
-	useEffect(() => {
-		findRecomList({ dispatch });
-	}, []);
-	// useEffect(() => {
-	//     let swiper = new Swiper('.swiper-container-recom', {
-	//         slidesPerView: 3,
-	//         spaceBetween: 30,
-	//     });
-	//     return () => {
-	//         swiper.destroy();
-	//     }
-	// }, [playlists]);
-	return (
-		<div className={styles.recomBox}>
-			<div className={styles.title}>推荐歌单</div>
-			<div className={styles.itemBox}>
-				{
-					recomList.map((item, index) => (
-						<div className={styles.item} key={index}>
-							<div className={styles.pic}>
-								<img src={item.picUrl} alt="" />
-							</div>
-							<div className={styles.name}>{item.name}</div>
-						</div>
-					))
-				}
+    const {
+        state: {
+            recomList = []
+        } = {},
+        dispatch,
+        props
+    } = useContext(createContextFind);
+    // const [list] = useState(Array.from({ length: 20 }).map(item => ({ picUrl: '', name: 'XXX' })))
+    useEffect(() => {
+        findRecomList({ dispatch });
+    }, []);
+    // useEffect(() => {
+    //     let swiper = new Swiper('.swiper-container-recom', {
+    //         slidesPerView: 3,
+    //         spaceBetween: 30,
+    //     });
+    //     return () => {
+    //         swiper.destroy();
+    //     }
+    // }, [playlists]);
+    const toSongSheetDetails = (item) => {
+        const { history } = props;
+        history.push({
+            pathname: `/songSheetDetails/${item.id}`,
+        });
+    }
+    return (
+        <div className={styles.recomBox}>
+            <div className={styles.title}>推荐歌单</div>
+            <div className={styles.itemBox}>
+                {
+                    recomList.map((item, index) => (
+                        <div className={styles.item} key={index} onClick={() => {
+                            toSongSheetDetails(item)
+                        }}>
+                            <div className={styles.pic}>
+                                <img src={item.picUrl} alt="" />
+                            </div>
+                            <div className={styles.name}>{item.name}</div>
+                        </div>
+                    ))
+                }
 
-			</div>
+            </div>
 
-		</div>
-	)
+        </div>
+    )
 }
 export default Recom;
