@@ -70,7 +70,9 @@ export const getFindIconNav = ({ dispatch } = {}) => {
 export const findRecomList = ({ dispatch } = {}) => {
     axiosGet({
         url: personalized,
-        prm: {}
+        prm: {
+            timestamp: moment().toDate().getTime(), // 加上时间戳接口缓存
+        }
     }).then((res) => {
         dispatch({ type: FIND_RECOM_LIST, recomList: (res && res.result) || [] })
 
