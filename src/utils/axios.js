@@ -32,7 +32,7 @@ axios.interceptors.response.use(
 )
 
 export const axiosGet = ({ url, params }) => {
-    const isCache = false
+    const isCache = true
     const newParams = {
         timestamp: (isCache && moment().toDate().getTime()) || '', // 加上时间戳接口缓存
         ...params,
