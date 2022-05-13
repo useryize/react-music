@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ]
+        },
+        "target": "es6",
+        "experimentalDecorators": true
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "include": [
+        "src/**/*"
+    ]
+}
