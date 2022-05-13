@@ -7,13 +7,13 @@ const Banner = lazy(() => import('./Banner')); // banner
 const Recom = lazy(() => import('./Recom')); // 推荐歌单
 const Iconnav = lazy(() => import('./Iconnav')); // icon导航
 
-const Find = () => {
+const Find = (props) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     return (
-        <createContextFind.Provider value={{ state, dispatch }}>
+        <createContextFind.Provider value={{ state, dispatch, props }}>
             <Header />
             <Banner />
-			<Iconnav />
+            <Iconnav />
             <Recom />
         </createContextFind.Provider>
     )
