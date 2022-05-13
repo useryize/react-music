@@ -7,7 +7,7 @@ import createContextFind from '../../../hooks/Find/createContextFind';
 const {
     useContext,
     useEffect,
-    useState,
+    // useState,
 } = React;
 const Recom = () => {
     const {
@@ -18,7 +18,7 @@ const Recom = () => {
         } = {},
         dispatch
     } = useContext(createContextFind);
-    const [list] = useState(Array.from({ length: 20 }).map(item => ({ picUrl: '', name: 'XXX' })))
+    // const [list] = useState(Array.from({ length: 20 }).map(item => ({ picUrl: '', name: 'XXX' })))
     useEffect(() => {
         findRecomList({ dispatch });
     }, []);
@@ -37,7 +37,7 @@ const Recom = () => {
             <div className={styles.title}>推荐歌单</div>
             <div className={styles.itemBox}>
                 {
-                    list.map((item, index) => (
+                    playlists.map((item, index) => (
                         <div className={styles.item} key={index}>
                             <div className={styles.pic}>
                                 <img src={item.picUrl} alt="" />
