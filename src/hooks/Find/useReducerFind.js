@@ -52,17 +52,6 @@ export const findBannerList = ({ dispatch } = {}) => {
     return axiosRes
 };
 
-// 推荐歌单
-export const findRecomList = ({ dispatch } = {}) => {
-    axiosGet({
-        url: personalized,
-        prm: {}
-    }).then((res) => {
-        dispatch({ type: FIND_RECOM_LIST, recomList: res })
-
-    })
-}
-
 // 圆形图标入口列表
 export const getFindIconNav = ({ dispatch } = {}) => {
     const axiosRes = axiosGet({
@@ -75,4 +64,15 @@ export const getFindIconNav = ({ dispatch } = {}) => {
         dispatch({ type: HOME_PAGE_DRAGON_BALL, iconNavList: (res && res.data) || [] })
     })
     return axiosRes
+}
+
+// 推荐歌单
+export const findRecomList = ({ dispatch } = {}) => {
+    axiosGet({
+        url: personalized,
+        prm: {}
+    }).then((res) => {
+        dispatch({ type: FIND_RECOM_LIST, recomList: (res && res.result) || [] })
+
+    })
 }
