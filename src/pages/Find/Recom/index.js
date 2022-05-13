@@ -22,7 +22,6 @@ const Recom = () => {
     useEffect(() => {
         findRecomList({ dispatch });
     }, []);
-    console.error(list);
     // useEffect(() => {
     //     let swiper = new Swiper('.swiper-container-recom', {
     //         slidesPerView: 3,
