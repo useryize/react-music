@@ -7,7 +7,7 @@ const HOME_PAGE_DRAGON_BALL = 'HOME_PAGE_DRAGON_BALL';
 
 export const initialState = {
     bannerList: {},
-    recomList: {},
+    recomList: [],
     iconNavList: []
 }
 
