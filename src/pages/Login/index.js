@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import styles from './index.module.less'
-import { Input, Button } from 'antd-mobile'
+import { Input, Button, List } from 'antd-mobile'
 const style = {
 	'--font-size': '.2rem',
 	'--color': '#333333',
-	'--placeholder-color': '#666666'
+	'--placeholder-color': '#666666',
+	'--border': '#solid 1px red'
 }
 const Login = () => {
 	const [phone, setPhone] = useState('')
@@ -12,47 +13,45 @@ const Login = () => {
 	return (
 		<div className={styles.loginBox}>
 			<div className={styles.tab}>
-				<div className={styles.item}>手机登录</div>
+				<div className={`${styles.item} ${styles.focu}`}>手机登录</div>
 				<div className={styles.item}>账号登录</div>
 			</div>
-			<div className={styles.userBox}>
-				<div className={styles.phone}>
+			<List mode="default"
+				style={{
+					'--border-bottom': 'none'
+				}}
+			>
+				<List.Item>
 					<Input
 						value={phone}
 						onChange={(val) => {
 							setPhone(val)
-						}} placeholder='请输入用户名' clearable style={{ ...style }} />
-				</div>
-				<div className={styles.password}>
+						}}
+						placeholder='请输入用户名'
+						clearable style={{ ...style }}
+					/>
+				</List.Item>
+				<List.Item>
 					<Input
+						clearable
 						value={pass}
 						onChange={(val) => {
 							setPass(val)
 						}}
-						placeholder='请输入密码' clearable type='password' style={{ ...style }} />
-				</div>
-				<Button
-					onClick={() => {
-						console.error(phone, pass);
-					}}
-					block type='submit' color="primary" size='large'>
-					提交
-				</Button>
-				{/* https://useryize.vercel.app/login/cellphone?phone=18824650476&password=yize@@.1 */}
-				{/* <Form
-					layout='horizontal'
-					footer={
-						
-					}
-				>
-					<Form.Item label='用户名' name='username'>
-						
-					</Form.Item>
-					<Form.Item label='密码' name='password'>
-						
-					</Form.Item>
-				</Form> */}
-			</div>
+						placeholder='请输入密码'
+						type='password'
+						style={{ ...style }} />
+				</List.Item>
+				<List.Item>
+					<Button
+						onClick={() => {
+							console.error(phone, pass);
+						}}
+						block type='submit' color="primary" size='large'>
+						提交
+					</Button>
+				</List.Item>
+			</List>
 		</div>
 	)
 }
