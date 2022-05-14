@@ -1,6 +1,7 @@
 import React, { useState, Fragment, useContext, useEffect } from 'react';
 import createContextFind from '../../hooks/Find/createContextFind';
-import { Popup, Avatar } from 'antd-mobile';
+import { Popup, Avatar, Button } from 'antd-mobile';
+import { SearchOutline } from 'antd-mobile-icons'
 import styles from './index.module.less';
 const Headers = () => {
     const { props } = useContext(createContextFind)
@@ -21,8 +22,7 @@ const Headers = () => {
     return (
         <Fragment>
             <div className={styles.headBox}>
-                <div className={styles.left}>
-                    {/* <div className={styles.more} onClick={() => drawerShowFun(!drawerShow)}></div> */}
+                <div className={styles.left} onClick={() => drawerShowFun(!drawerShow)}>
                     <Avatar
                         src={userData.avatarUrl}
                         fit='cover'
@@ -34,7 +34,9 @@ const Headers = () => {
                     <div className={styles.name}>{userData.nickname}</div>
                 </div>
                 {/* <div className={styles.center}>{searchTitle}</div> */}
-                <div className={styles.right} onClick={toLogin}>立即登录</div>
+                <div className={styles.right}>
+                    <SearchOutline fontSize='.3rem' color="#333333" />
+                </div>
             </div>
             <Popup
                 position="left"
@@ -42,7 +44,9 @@ const Headers = () => {
                 onMaskClick={() => drawerShowFun(false)}
                 bodyStyle={{ width: '60vw' }}
             >
-                <div>个人中心</div>
+                <div style={{ padding: '.2rem' }}>
+                    <Button block size='large' onClick={toLogin}>登录</Button>
+                </div>
             </Popup>
         </Fragment>
 
