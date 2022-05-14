@@ -11,19 +11,19 @@ export const initialState = {
 }
 
 export const reducer = (state = initialState, action) => {
-    if (action.type === 'FIND_BANNER_LIST') {
+    if (action.type === FIND_BANNER_LIST) {
         return {
             ...state,
             bannerList: action.bannerList,
         }
     }
-    if (action.type === 'FIND_RECOM_LIST') {
+    if (action.type === FIND_RECOM_LIST) {
         return {
             ...state,
             recomList: action.recomList,
         }
     }
-    if (action.type === 'HOME_PAGE_DRAGON_BALL') {
+    if (action.type === HOME_PAGE_DRAGON_BALL) {
         return {
             ...state,
             iconNavList: action.iconNavList,
