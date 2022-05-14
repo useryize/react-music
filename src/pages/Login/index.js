@@ -52,7 +52,7 @@ const Login = () => {
                                 url: loginCellphone,
                                 params: {
                                     phone: phone,
-                                    password: decodeURIComponent(pass),
+                                    password: encodeURIComponent(pass),
                                 }
                             })
                             if (+res.code === 200) {
