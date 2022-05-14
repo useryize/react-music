@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from './index.module.less'
-import { Input, Button, List } from 'antd-mobile'
+import { Input, Button, List, Toast } from 'antd-mobile'
 import { axiosGet } from '@/utils/axios'
-import { loginCellphone } from '@/utils/apis'
+import { loginCellphone, exitLogin, loginStatus } from '@/utils/apis'
 import history from '@/utils/history'
 const style = {
     '--font-size': '.2rem',
@@ -48,20 +48,52 @@ const Login = () => {
                 <List.Item>
                     <Button
                         onClick={async () => {
-                            const res = await axiosGet({
-                                url: loginCellphone,
-                                params: {
-                                    phone: phone,
-                                    password: encodeURIComponent(pass),
-                                }
+
+                            const resStatus = await axiosGet({
+                                url: loginStatus,
                             })
-                            if (+res.code === 200) {
-                                history.goBack()
+
+                            if (!resStatus.data.account) {
+                                const res = await axiosGet({
+                                    url: loginCellphone,
+                                    params: {
+                                        phone: phone,
+                                        password: decodeURIComponent(pass),
+                                    }
+                                })
+                                if (+res.code === 200) {
+                                    history.goBack()
+                                }
+                            } else {
+                                Toast.show({
+                                    duration: '5000',
+                                    content: '已经登录，请勿重新登录, 5S后返回上一页',
+                                    position: 'top',
+                                    afterClose: () => {
+                                        history.goBack()
+                                    },
+                                })
                             }
+
                         }}
                         block type='submit' color="primary" size='large'>
                         提交
                     </Button>
+                    <Button style={{ marginTop: '.2rem' }} color="primary" block size='large' onClick={async () => {
+                        const res = await axiosGet({
+                            url: exitLogin,
+                        })
+                        if (+res.code === 200) {
+                            Toast.show({
+                                duration: '3000',
+                                content: '退出成功',
+                                position: 'top',
+                                afterClose: () => {
+                                    history.goBack()
+                                },
+                            })
+                        }
+                    }}>退出登录</Button>
                 </List.Item>
             </List>
         </div>

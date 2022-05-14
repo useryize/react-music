@@ -35,6 +35,7 @@ export const axiosGet = ({ url, params }) => {
     const isCache = true
     const newParams = {
         timestamp: (isCache && moment().toDate().getTime()) || '', // 加上时间戳接口缓存
+        realIP: '116.25.146.177',
         ...params,
 
     }
