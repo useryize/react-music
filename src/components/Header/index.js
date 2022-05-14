@@ -4,7 +4,7 @@ import { Popup, Avatar } from 'antd-mobile';
 import styles from './index.module.less';
 const Headers = () => {
     const { props } = useContext(createContextFind)
-    let [searchTitle] = useState('hooks');
+    // let [searchTitle] = useState('hooks');
     let [drawerShow, drawerShowFun] = useState(false);
     let [userData, setUserData] = useState({});
     const toLogin = () => {
@@ -16,7 +16,7 @@ const Headers = () => {
     }
     useEffect(() => {
         let userData = JSON.parse(window.localStorage.getItem('userData'))
-        setUserData(userData.user || {})
+        setUserData((userData && userData.user) || {})
     }, [])
     return (
         <Fragment>
