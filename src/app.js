@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 
 const { lazy, Suspense } = React;
 const Find = lazy(() => import('./pages/Find'));
@@ -8,7 +8,7 @@ const Login = lazy(() => import('./pages/Login'));
 const SongSheetDetails = lazy(() => import('./pages/SongSheetDetails'));
 
 const App = () => (
-    <BrowserRouter>
+    <HashRouter>
         <Suspense fallback={null}>
             <Switch>
                 <Route path="/find" component={Find} />
@@ -19,7 +19,7 @@ const App = () => (
                 {/* <Redirect from='/' to='/find' /> */}
             </Switch>
         </Suspense>
-    </BrowserRouter>
+    </HashRouter>
 )
 
 export default App;
