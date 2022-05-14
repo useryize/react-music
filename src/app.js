@@ -1,5 +1,6 @@
 import React from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
+import history from './utils/history';
 
 const { lazy, Suspense } = React;
 const Find = lazy(() => import('./pages/Find'));
@@ -8,7 +9,7 @@ const Login = lazy(() => import('./pages/Login'));
 const SongSheetDetails = lazy(() => import('./pages/SongSheetDetails'));
 
 const App = () => (
-    <HashRouter>
+    <HashRouter history={history}>
         <Suspense fallback={null}>
             <Switch>
                 <Route path="/find" component={Find} />

@@ -2,8 +2,9 @@ import React from 'react';
 // import Swiper from 'swiper';
 import styles from './index.module.less';
 import { findRecomList } from '../../../hooks/Find/useReducerFind';
-
 import createContextFind from '../../../hooks/Find/createContextFind';
+import history from '@/utils/history';
+
 const {
     useContext,
     useEffect,
@@ -15,7 +16,7 @@ const Recom = () => {
             recomList = []
         } = {},
         dispatch,
-        props
+        // props
     } = useContext(createContextFind);
     // const [list] = useState(Array.from({ length: 20 }).map(item => ({ picUrl: '', name: 'XXX' })))
     useEffect(() => {
@@ -31,7 +32,7 @@ const Recom = () => {
     //     }
     // }, [playlists]);
     const toSongSheetDetails = (item) => {
-        const { history } = props;
+        // const { history } = props;
         history.push({
             pathname: `/songSheetDetails/${item.id}`,
         });
