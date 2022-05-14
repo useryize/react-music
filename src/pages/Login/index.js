@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styles from './index.module.less'
 import { Input, Button, List } from 'antd-mobile'
+import { axiosGet } from '@/utils/axios'
+import { loginCellphone } from '@/utils/apis'
+import history from '@/utils/history'
 const style = {
     '--font-size': '.2rem',
     '--color': '#333333',
@@ -44,8 +47,17 @@ const Login = () => {
                 </List.Item>
                 <List.Item>
                     <Button
-                        onClick={() => {
-                            console.error(phone, pass);
+                        onClick={async () => {
+                            const res = await axiosGet({
+                                url: loginCellphone,
+                                params: {
+                                    phone: phone,
+                                    password: decodeURIComponent(pass),
+                                }
+                            })
+                            if (+res.code === 200) {
+                                history.goBack()
+                            }
                         }}
                         block type='submit' color="primary" size='large'>
                         提交
