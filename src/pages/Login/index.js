@@ -48,7 +48,7 @@ const Login = () => {
                 <List.Item>
                     <Button
                         onClick={async () => {
-
+                            // 查询登录状态
                             const resStatus = await axiosGet({
                                 url: loginStatus,
                             })
@@ -61,7 +61,15 @@ const Login = () => {
                                         password: decodeURIComponent(pass),
                                     }
                                 })
+
                                 if (+res.code === 200) {
+                                    const userData = {
+                                        loginType: true,
+                                        user: {
+                                            ...res.profile
+                                        }
+                                    }
+                                    window.localStorage.setItem('userData', JSON.stringify(userData))
                                     history.goBack()
                                 }
                             } else {
@@ -84,6 +92,10 @@ const Login = () => {
                             url: exitLogin,
                         })
                         if (+res.code === 200) {
+                            window.localStorage.setItem('userData', JSON.stringify({
+                                loginType: false,
+                                user: null
+                            }))
                             Toast.show({
                                 duration: '3000',
                                 content: '退出成功',
