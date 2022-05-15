@@ -21,12 +21,12 @@ export const tabsJson = [
     {
         key: 1000,
         name: '歌单',
-        disabled: true
+        disabled: false
     },
     {
         key: 10,
         name: '专辑',
-        disabled: true
+        disabled: false
     },
     {
         key: 100,

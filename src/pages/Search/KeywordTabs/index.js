@@ -22,7 +22,7 @@ const KeywordTabs = () => {
             }}>
                 {
                     tabsJson.map((item, index) => {
-                        return <Tabs.Tab title={item.name} key={index} disabled={false} />
+                        return <Tabs.Tab title={item.name} key={index} disabled={item.disabled} />
                     })
                 }
             </Tabs>
