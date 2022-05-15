@@ -1,9 +1,14 @@
-import React, { useState, Fragment, useContext, useEffect } from 'react';
+import React from 'react';
 // import createContextFind from '../../hooks/Find/createContextFind';
 import { Popup, Avatar, Button } from 'antd-mobile';
 import { SearchOutline } from 'antd-mobile-icons'
 import history from '../../utils/history'
 import styles from './index.module.less';
+const {
+    useState, Fragment,
+    // useContext,
+    useEffect
+} = React
 const Headers = () => {
     // const { props } = useContext(createContextFind)
     // let [searchTitle] = useState('hooks');
@@ -35,7 +40,7 @@ const Headers = () => {
                 </div>
                 {/* <div className={styles.center}>{searchTitle}</div> */}
                 <div className={styles.right} onClick={() => {
-                     history.push({
+                    history.push({
                         pathname: "/search",
                     });
                 }}>

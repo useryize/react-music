@@ -12,7 +12,7 @@
 // 1014: 视频, 
 // 1018:综合, 
 // 2000:声音(搜索声音返回字段格式会不一样)
-export const tabs = [
+export const tabsJson = [
     {
         key: 1,
         name: '单曲',
