@@ -1,15 +1,15 @@
 import React, { useState, Fragment, useContext, useEffect } from 'react';
-import createContextFind from '../../hooks/Find/createContextFind';
+// import createContextFind from '../../hooks/Find/createContextFind';
 import { Popup, Avatar, Button } from 'antd-mobile';
 import { SearchOutline } from 'antd-mobile-icons'
+import history from '../../utils/history'
 import styles from './index.module.less';
 const Headers = () => {
-    const { props } = useContext(createContextFind)
+    // const { props } = useContext(createContextFind)
     // let [searchTitle] = useState('hooks');
     let [drawerShow, drawerShowFun] = useState(false);
     let [userData, setUserData] = useState({});
     const toLogin = () => {
-        const { history } = props;
         history.push({
             pathname: "/login",
         });
@@ -34,7 +34,11 @@ const Headers = () => {
                     <div className={styles.name}>{userData.nickname}</div>
                 </div>
                 {/* <div className={styles.center}>{searchTitle}</div> */}
-                <div className={styles.right}>
+                <div className={styles.right} onClick={() => {
+                     history.push({
+                        pathname: "/search",
+                    });
+                }}>
                     <SearchOutline fontSize='.4rem' color="#333333" />
                 </div>
             </div>

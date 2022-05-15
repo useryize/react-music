@@ -5,7 +5,7 @@ const Search = (props) => {
     const [state, dispatch] = useReducer(reducer, initialState)
     return (
         <createContextSearch.Provider value={{ state, dispatch, props }}>
-
+            <div>search</div>
         </createContextSearch.Provider>
     )
 }
