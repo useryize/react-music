@@ -40,10 +40,10 @@ const Headers = () => {
                             heigth='0.8rem'
                             fit="cover"
                             lazy={true}
-                            src={songInfo.al && songInfo.al.picUrl}
+                            src={songInfo && songInfo.al && songInfo.al.picUrl}
                         ></Image>
                     </div>
-                    <div className={styles.name}>{songInfo.name}</div>
+                    <div className={styles.name}>{songInfo && songInfo.name}</div>
                 </div>
 
             </div>
