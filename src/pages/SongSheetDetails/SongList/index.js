@@ -4,6 +4,7 @@ import { getPlaylistDetail } from '@/hooks/SongSheetDetails/useReducerSong'
 import createContextApp from '../../../hooks/App/createContextApp'
 import { getSongUrl } from '../../../hooks/App/useReducerApp'
 import { List, Image } from "antd-mobile";
+import { songInfoLocalStorage } from '../../../utils/utils'
 const {
     useContext,
     useEffect,
@@ -38,6 +39,7 @@ const SongList = () => {
             {
                 tracks.map(item => (
                     <List.Item key={item.id} onClick={async () => {
+                        songInfoLocalStorage(item)
                         await getSongUrl({ dispatch: dispatchApp, params: { id: item.id } })
                     }}>
                         <Image
