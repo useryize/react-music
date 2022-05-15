@@ -4,7 +4,8 @@ import styles from './index.module.less';
 import { findRecomList } from '../../../hooks/Find/useReducerFind';
 import createContextFind from '../../../hooks/Find/createContextFind';
 import history from '@/utils/history';
-
+import { formatNumber } from '@/utils/utils'
+import { PlayOutline } from 'antd-mobile-icons'
 const {
     useContext,
     useEffect,
@@ -48,6 +49,10 @@ const Recom = () => {
                         }}>
                             <div className={styles.pic}>
                                 <img src={item.picUrl} alt="" />
+                                <div className={styles.playCount}>
+                                    <PlayOutline />
+                                    <span>{formatNumber(item.playCount)}</span>
+                                </div>
                             </div>
                             <div className={styles.name}>{item.name}</div>
                         </div>

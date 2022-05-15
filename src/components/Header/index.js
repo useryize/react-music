@@ -35,7 +35,7 @@ const Headers = () => {
                 </div>
                 {/* <div className={styles.center}>{searchTitle}</div> */}
                 <div className={styles.right}>
-                    <SearchOutline fontSize='.3rem' color="#333333" />
+                    <SearchOutline fontSize='.4rem' color="#333333" />
                 </div>
             </div>
             <Popup
