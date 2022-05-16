@@ -14,16 +14,15 @@ export const songInfoLocalStorage = (info = {}) => {
 
     const originStorage = window.localStorage;
     const storage = {
-        setItem: function (key, value) {
+        setItem: function () {
             let setItemEvent = new Event('songInfoSetItemEvent');
-            setItemEvent.key = key;
+            setItemEvent.key = 'songData';
             window.dispatchEvent(setItemEvent);
-            originStorage.setItem(key, value);
+            storage.setItem('songData', JSON.stringify(info))
         },
-        getItem: function (key) {
-            return JSON.parse(originStorage.getItem(key));
+        getItem: function () {
+            return JSON.parse(originStorage.getItem('songData'));
         }
     }
-    storage.setItem('songData', JSON.stringify(info))
     return storage
 } 
