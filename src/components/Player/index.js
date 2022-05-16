@@ -1,45 +1,44 @@
 import React from 'react';
-import createContextApp from '../../hooks/App/createContextApp';
 import styles from './index.module.less';
 import { PlayOutline } from 'antd-mobile-icons'
+import { songInfoLocalStorage } from '../../utils/utils'
 const {
     useState,
-    useContext,
+    // useContext,
     useEffect,
     useRef
 } = React
 const Headers = () => {
     const audioRef = useRef(null)
-    const { state: {
-        songComplete
-    } = {} } = useContext(createContextApp)
-    const { data: [audioObj = {}] = [] } = songComplete
+    const [songData, setSongInfo] = useState({})
 
-    const [songInfo, setSongInfo] = useState({})
     useEffect(() => {
-        const getInfo = JSON.parse(window.localStorage.getItem('songData'))
-        setSongInfo(getInfo)
-        playSongs()
-    }, [songComplete])
-
+        setSongInfo(songInfoLocalStorage.getItem('songData') || {})
+        console.log('初始化songData======', songInfoLocalStorage.getItem('songData') || {});
+        window.addEventListener('songInfoSetItemEvent', function (e) {
+            setSongInfo(songInfoLocalStorage.getItem('songData') || {})
+            console.log('监听songData======', songInfoLocalStorage.getItem('songData') || {});
+        });
+    }, [])
+    
     // 暂停/播放
     const playSongs = () => {
-        if (!audioObj.url) return
+        if (!songData.mp3Url) return
         audioRef.current.paused ? audioRef.current.play() : audioRef.current.pause()
     }
 
     return (
         <>
-            <audio ref={audioRef} src={audioObj.url} controls />
+            <audio ref={audioRef} src={songData.mp3Url} controls />
             <div className={styles.playerBox}>
                 <div className={styles.playerFixed} onClick={() => {
                     playSongs()
                 }}>
                     <div className={styles.imgBox} >
                         <div className={styles.img}>
-                            <img src={songInfo && songInfo.al && songInfo.al.picUrl} alt='' />
+                            <img src={songData.mp3Pic} alt='' />
                         </div>
-                        <div className={styles.name}>{songInfo && songInfo.name}</div>
+                        <div className={styles.name}>{songData && songData.mp3Name}</div>
                     </div>
                     <div className={styles.player}>
                         <PlayOutline fontSize='.4rem' />
