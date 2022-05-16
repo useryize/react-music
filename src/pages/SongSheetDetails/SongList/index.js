@@ -46,7 +46,7 @@ const SongList = () => {
                             mp3Pic: (item && item.al && item.al.picUrl) || '',
                             mp3Name: item.name
                         }
-                        songInfoLocalStorage(songObj) // 缓存音乐信息
+                        songInfoLocalStorage(songObj).setItem() // 缓存音乐信息
                     }}>
                         <Image
                             width='0.8rem'
