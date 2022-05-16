@@ -20,10 +20,13 @@ const Headers = () => {
             console.log('监听songData======', e.info);
         });
         return () => {
-            removeEventListener('songInfoSetItemEvent')
+            window.removeEventListener('songInfoSetItemEvent')
         }
     }, [])
 
+    useEffect(() => {
+        playSongs()
+    }, [songData])
     // 暂停/播放
     const playSongs = () => {
         if (!songData.mp3Url) return
