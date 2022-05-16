@@ -40,7 +40,7 @@ const Headers = () => {
                         </div>
                         <div className={styles.name}>{songInfo && songInfo.name}</div>
                     </div>
-                    <div className={styles.palyer}>
+                    <div className={styles.player}>
                         <PlayOutline fontSize='.8rem' />
                     </div>
                 </div>
