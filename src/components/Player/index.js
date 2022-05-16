@@ -21,22 +21,23 @@ const Headers = () => {
         setSongInfo(getInfo)
         playSongs()
     }, [songComplete])
+
+    // 暂停/播放
     const playSongs = () => {
-        audioObj.url && audioRef.current.play()
+        if (!audioObj.url) return
+        audioRef.current.paused ? audioRef.current.play() : audioRef.current.pause()
     }
-    const pauseSongs = () => {
-        audioObj.url && audioRef.current.pause()
-    }
+
     return (
         <>
             <audio ref={audioRef} src={audioObj.url} controls />
             <div className={styles.playerBox}>
                 <div className={styles.playerFixed} onClick={() => {
-                    pauseSongs()
+                    playSongs()
                 }}>
                     <div className={styles.imgBox} >
                         <div className={styles.img}>
-                            <image src={songInfo && songInfo.al && songInfo.al.picUrl} alt=''/>
+                            <img src={songInfo && songInfo.al && songInfo.al.picUrl} alt='' />
                         </div>
                         <div className={styles.name}>{songInfo && songInfo.name}</div>
                     </div>
