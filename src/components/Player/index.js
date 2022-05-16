@@ -36,12 +36,12 @@ const Headers = () => {
                 }}>
                     <div className={styles.imgBox} >
                         <div className={styles.img}>
-                            <image src={songInfo && songInfo.al && songInfo.al.picUrl} />
+                            <image src={songInfo && songInfo.al && songInfo.al.picUrl} alt=''/>
                         </div>
                         <div className={styles.name}>{songInfo && songInfo.name}</div>
                     </div>
                     <div className={styles.player}>
-                        <PlayOutline fontSize='.8rem' />
+                        <PlayOutline fontSize='.4rem' />
                     </div>
                 </div>
 
