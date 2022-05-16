@@ -1,14 +1,36 @@
 .playerBox {
     width: 100%;
-    height: 1.5rem;
-    background-color: #dbdbdb;
-    .play {
-        background-color: #dbdbdb;
+    height: 1rem;
+
+    .playerFixed {
+        background-color: #ffffff;
         width: 100%;
         height: 1rem;
         position: fixed;
         bottom: 0;
         left: 0;
         display: flex;
+        justify-content: space-between;
+
+        .imgBox {
+            display: flex;
+            align-items: center;
+			margin-left: .2rem;
+            .img {
+                width: .8rem;
+                height: .8rem;
+                border-radius: 50%;
+                overflow: hidden;
+                border: #ffffff solid .03rem;
+                margin-right: .1rem;
+            }
+
+            .name {
+                font-size: .24rem;
+            }
+        }
+		.palyer {
+			margin-right: .2rem;
+		}
     }
 }
