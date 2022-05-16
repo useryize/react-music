@@ -1,7 +1,7 @@
 import React from 'react';
 import createContextApp from '../../hooks/App/createContextApp';
 import styles from './index.module.less';
-import { Image } from 'antd-mobile'
+import { PlayOutline } from 'antd-mobile-icons'
 const {
     useState,
     useContext,
@@ -31,19 +31,18 @@ const Headers = () => {
         <>
             <audio ref={audioRef} src={audioObj.url} controls />
             <div className={styles.playerBox}>
-                <div className={styles.play} onClick={() => {
+                <div className={styles.playerFixed} onClick={() => {
                     pauseSongs()
                 }}>
                     <div className={styles.imgBox} >
-                        <Image
-                            width='0.8rem'
-                            heigth='0.8rem'
-                            fit="cover"
-                            lazy={true}
-                            src={songInfo && songInfo.al && songInfo.al.picUrl}
-                        ></Image>
+                        <div className={styles.img}>
+                            <image src={songInfo && songInfo.al && songInfo.al.picUrl} />
+                        </div>
+                        <div className={styles.name}>{songInfo && songInfo.name}</div>
                     </div>
-                    <div className={styles.name}>{songInfo && songInfo.name}</div>
+                    <div className={styles.palyer}>
+                        <PlayOutline fontSize='.8rem' />
+                    </div>
                 </div>
 
             </div>
