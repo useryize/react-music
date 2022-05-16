@@ -16,8 +16,8 @@ const Headers = () => {
         setSongInfo(songInfoLocalStorage().getItem() || {})
         console.log('初始化songData======', songInfoLocalStorage().getItem() || {});
         window.addEventListener('songInfoSetItemEvent', function (e) {
-            setSongInfo(songInfoLocalStorage().getItem() || {})
-            console.log('监听songData======', songInfoLocalStorage().getItem() || {});
+            setSongInfo(e.info || {})
+            console.log('监听songData======', e.info);
         });
     }, [])
 
