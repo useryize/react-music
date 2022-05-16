@@ -13,14 +13,14 @@ const Headers = () => {
     const [songData, setSongInfo] = useState({})
 
     useEffect(() => {
-        setSongInfo(songInfoLocalStorage.getItem('songData') || {})
-        console.log('初始化songData======', songInfoLocalStorage.getItem('songData') || {});
+        setSongInfo(songInfoLocalStorage().getItem() || {})
+        console.log('初始化songData======', songInfoLocalStorage().getItem() || {});
         window.addEventListener('songInfoSetItemEvent', function (e) {
-            setSongInfo(songInfoLocalStorage.getItem('songData') || {})
-            console.log('监听songData======', songInfoLocalStorage.getItem('songData') || {});
+            setSongInfo(songInfoLocalStorage().getItem() || {})
+            console.log('监听songData======', songInfoLocalStorage().getItem() || {});
         });
     }, [])
-    
+
     // 暂停/播放
     const playSongs = () => {
         if (!songData.mp3Url) return
