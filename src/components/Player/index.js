@@ -19,6 +19,9 @@ const Headers = () => {
             setSongInfo(e.info || {})
             console.log('监听songData======', e.info);
         });
+        return () => {
+            removeEventListener('songInfoSetItemEvent')
+        }
     }, [])
 
     // 暂停/播放
