@@ -39,8 +39,14 @@ const SongList = () => {
             {
                 tracks.map(item => (
                     <List.Item key={item.id} onClick={async () => {
-                        songInfoLocalStorage(item)
-                        await getSongUrl({ dispatch: dispatchApp, params: { id: item.id } })
+                        const res = await getSongUrl({ dispatch: dispatchApp, params: { id: item.id } }) // 获取音乐id
+                        const { data: [obj = {}] = [] } = res || {}
+                        const songObj = {
+                            mp3Url: obj && obj.url,
+                            mp3Pic: (item && item.al && item.al.picUrl) || '',
+                            mp3Name: item.name
+                        }
+                        songInfoLocalStorage(songObj) // 缓存音乐信息
                     }}>
                         <Image
                             width='0.8rem'
