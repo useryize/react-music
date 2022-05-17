@@ -2,9 +2,8 @@ import React from "react";
 import createContextSong from '@/hooks/SongSheetDetails/createContextSong'
 import { getPlaylistDetail } from '@/hooks/SongSheetDetails/useReducerSong'
 import createContextApp from '../../../hooks/App/createContextApp'
-import { getSongUrl } from '../../../hooks/App/useReducerApp'
+import { getSongUrl, singleInfoFunction } from '../../../hooks/App/useReducerApp'
 import { List, Image } from "antd-mobile";
-import { songInfoLocalStorage } from '../../../utils/utils'
 const {
     useContext,
     useEffect,
@@ -46,7 +45,8 @@ const SongList = () => {
                             mp3Pic: (item && item.al && item.al.picUrl) || '',
                             mp3Name: item.name
                         }
-                        songInfoLocalStorage(songObj).setItem() // 缓存音乐信息
+                        singleInfoFunction({ dispatch: dispatchApp, params: songObj })
+                        // songInfoLocalStorage(songObj).setItem() // 缓存音乐信息
                     }}>
                         <Image
                             width='0.8rem'

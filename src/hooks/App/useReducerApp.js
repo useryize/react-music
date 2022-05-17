@@ -1,22 +1,22 @@
 import { axiosGet } from '../../utils/axios';
 import { songUrl } from '../../utils/apis';
-const SONG_URL = 'SONG_URL';
+const SINGLE_INFO_FUNCTION = 'SINGLE_INFO_FUNCTION';
 export const initialState = {
-    songComplete: {},
+    singleInfo: {},
 }
 
 export const reducer = (state = initialState, action) => {
-    if (action.type === SONG_URL) {
+    if (action.type === SINGLE_INFO_FUNCTION) {
         return {
             ...state,
-            songComplete: action.songComplete,
+            singleInfo: action.singleInfo,
         }
     }
     return state;
 }
 
 
-// 歌曲详情
+// 获取歌曲url
 export const getSongUrl = ({ dispatch, params } = {}) => {
     const axiosRes = axiosGet({
         url: songUrl,
@@ -24,11 +24,9 @@ export const getSongUrl = ({ dispatch, params } = {}) => {
             ...params
         }
     })
-    axiosRes.then((res) => {
-        dispatch({
-            type: SONG_URL,
-            songComplete: res || {}
-        })
-    })
     return axiosRes
 };
+
+export const singleInfoFunction = ({ dispatch, params }) => {
+    dispatch({ type: SINGLE_INFO_FUNCTION, singleInfo: params })
+}
