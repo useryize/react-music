@@ -12,7 +12,7 @@ const KeywordTabs = () => {
     useEffect(async () => {
         const res = await getSearchDefault({ dispatch })
         const { data: { showKeyword = '' } = {} } = res
-        searchInputTextFunction({ dispatch, params: showKeyword })
+        searchInputTextFunction({ dispatch, params: '许嵩' || showKeyword })
         setSearchDefault(showKeyword)
 
     }, [])
