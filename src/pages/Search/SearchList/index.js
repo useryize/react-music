@@ -1,7 +1,9 @@
 import React from 'react'
 import createContextSearch from '../../../hooks/Search/createContextSearch'
 import { getSearch } from '../../../hooks/Search/useReducerSearch'
-import { Image } from 'antd-mobile'
+import createContextApp from '../../../hooks/App/createContextApp'
+import { getSongUrl, singleInfoFunction } from '../../../hooks/App/useReducerApp'
+import { Image, List } from 'antd-mobile'
 import history from '../../../utils/history'
 import styles from './index.module.less'
 import { PlayOutline } from 'antd-mobile-icons'
@@ -17,12 +19,20 @@ const KeywordTabs = () => {
             srarchType,
             searchInput,
             searchList: {
-                playlists = []
+                playlists = [],
+                songs = []
             } = {}
         } = {},
         dispatch
     } = useContext(createContextSearch)
+
+    // app数据
+    const {
+        dispatch: dispatchApp
+    } = useContext(createContextApp)
+
     useEffect(() => {
+        console.error(srarchType);
         getSearch({ dispatch, params: { type: srarchType, keywords: searchInput } })
     }, [srarchType, searchInput])
     const toSongSheetDetails = (item) => {
@@ -50,8 +60,32 @@ const KeywordTabs = () => {
         //     }
         // </List>
         <div className={styles.listBox}>
+
             {
-                playlists.map((item, index) => (
+                srarchType === 1 && <List>
+                    {
+                        songs.map(item => (
+                            <List.Item key={item.id} onClick={async () => {
+                                const res = await getSongUrl({ dispatch: dispatchApp, params: { id: item.id } }) // 获取音乐id
+                                const { data: [obj = {}] = [] } = res || {}
+                                const songObj = {
+                                    mp3Url: obj && obj.url,
+                                    mp3Pic: '',
+                                    mp3Name: item.name
+                                }
+                                singleInfoFunction({ dispatch: dispatchApp, params: songObj })
+                            }}>
+                                <div>{item.name}</div>
+                                <div>{item.name}</div>
+                            </List.Item>
+                        ))
+                    }
+                </List>
+            }
+
+
+            {
+                srarchType === 1000 && playlists.map((item, index) => (
                     <div className={styles.item} key={index} onClick={() => {
                         toSongSheetDetails(item)
                     }}>

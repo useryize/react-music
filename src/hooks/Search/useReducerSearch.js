@@ -50,7 +50,9 @@ export const getSearchDefault = ({ dispatch = h => h, params = {} }) => {
 export const getSearch = ({ dispatch = h => h, params = {} }) => {
     const axiosRes = axiosGet({
         url: search,
-        params
+        params: {
+            ...params
+        }
     })
     axiosRes.then((res) => {
         dispatch({ type: SEARCH_LIST_DETALIS, searchList: (res && res.result) || {} })

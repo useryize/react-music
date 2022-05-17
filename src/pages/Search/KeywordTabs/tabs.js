@@ -16,7 +16,7 @@ export const tabsJson = [
     {
         key: 1,
         name: '单曲',
-        disabled: true
+        disabled: false
     },
     {
         key: 1000,
