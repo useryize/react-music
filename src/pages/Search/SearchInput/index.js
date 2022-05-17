@@ -17,7 +17,7 @@ const KeywordTabs = () => {
 
     }, [])
     return (
-        <SearchBar placeholder={searchDefault} onSearch={(val) => {
+        <SearchBar placeholder={'许嵩' || searchDefault} onSearch={(val) => {
             searchInputTextFunction({ dispatch, params: val })
         }} />
     )
