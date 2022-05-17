@@ -61,7 +61,7 @@ const Headers = () => {
 
     //     // 当媒体文件可以播放的时候会触发canplay事件
     //     audio.addEventListener("canplay", function () {
-    //         // console.log('当媒体文件可以播放的时候会触发canplay事件');
+    //         //  console.log('当媒体文件可以播放的时候会触发canplay事件');
     //     });
     // }, [])
     if (!singleInfo.mp3Url) {
