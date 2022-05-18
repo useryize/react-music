@@ -27,6 +27,7 @@ export const getSongUrl = ({ dispatch, params } = {}) => {
     return axiosRes
 };
 
+// 获取音乐id
 export const singleInfoFunction = ({ dispatch, params }) => {
     dispatch({ type: SINGLE_INFO_FUNCTION, singleInfo: params })
 }
