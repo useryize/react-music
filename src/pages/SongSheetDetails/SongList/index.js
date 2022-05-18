@@ -4,6 +4,7 @@ import { getPlaylistDetail } from '@/hooks/SongSheetDetails/useReducerSong'
 import createContextApp from '../../../hooks/App/createContextApp'
 import { getSongUrl, singleInfoFunction } from '../../../hooks/App/useReducerApp'
 import { List, Image } from "antd-mobile";
+import SongListPublic from '../../../components/SongListPublic'
 import styles from './index.module.less'
 const {
     useContext,
@@ -37,7 +38,8 @@ const SongListCom = () => {
 
     return (
         <>
-            <div className={styles.sonPic} style={{backgroundImage: `url(${playlist.coverImgUrl})`}}>
+            <SongListPublic dataInfo={tracks} />
+            <div className={styles.sonPic} style={{ backgroundImage: `url(${playlist.coverImgUrl})` }}>
             </div>
             <List>
                 {
