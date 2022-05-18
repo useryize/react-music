@@ -32,7 +32,7 @@ const Headers = () => {
                         src={userData.avatarUrl}
                         fit='cover'
                         style={{
-                            '--size': '0.4rem',
+                            '--size': '0.2rem',
                             '--border-radius': '50%'
                         }}
                     />
@@ -44,7 +44,7 @@ const Headers = () => {
                         pathname: "/search",
                     });
                 }}>
-                    <SearchOutline fontSize='.4rem' color="#333333" />
+                    <SearchOutline fontSize='.14rem' color="#333333" />
                 </div>
             </div>
             <Popup
@@ -53,7 +53,7 @@ const Headers = () => {
                 onMaskClick={() => drawerShowFun(false)}
                 bodyStyle={{ width: '60vw' }}
             >
-                <div style={{ padding: '.2rem' }}>
+                <div style={{ padding: '.1rem' }}>
                     <Button block size='large' onClick={toLogin}>登录</Button>
                 </div>
             </Popup>
