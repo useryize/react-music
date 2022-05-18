@@ -43,4 +43,4 @@ const remInit = (prmWidth, defaWidth) => {
         }, false);
     }
 }
-remInit(720, 720);
+remInit(414, 720);
