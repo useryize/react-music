@@ -1,8 +1,8 @@
 import React from 'react';
 import createContextApp from '../../hooks/App/createContextApp'
 import { getSongUrl, singleInfoFunction } from '../../hooks/App/useReducerApp'
-import { List, Image } from "antd-mobile";
-import styles from 'index.module.less'
+// import { List, Image } from "antd-mobile";
+import styles from './index.module.less'
 import { PlayOutline } from 'antd-mobile-icons'
 const {
     useContext,
@@ -34,7 +34,7 @@ const SongListPublic = (_props) => {
                                 <div className={styles.doc}>
                                     <span className={styles.vip}>
                                         {
-                                            [1, 8].includes(+item.fee) && 'vip' || 'SQ'
+                                            ([1, 8].includes(+item.fee) && 'vip') || 'SQ'
                                         }
                                     </span>
                                     <span>{item.al.name}</span>
