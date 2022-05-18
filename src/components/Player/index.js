@@ -79,7 +79,7 @@ const Headers = () => {
                         <div className={styles.name}>{singleInfo && singleInfo.mp3Name}</div>
                     </div>
                     <div className={styles.player}>
-                        <PlayOutline fontSize='.4rem' />
+                        <PlayOutline fontSize='.2rem' />
                     </div>
                 </div>
             </div>
