@@ -38,7 +38,7 @@ const SongListPublic = (_props) => {
                                 <div className={styles.doc}>
                                     <span>
                                         {
-                                            { 8: 'SQ', 1: 'VIP' }[+item.fee]
+                                            { 8: 'SQ', 1: 'VIP' }[+item.fee] || '未知'
                                         }
                                     </span>
                                     <span>
