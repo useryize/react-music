@@ -51,7 +51,6 @@ const Headers = () => {
     }
     useEffect(() => {
         const audio = audioRef.current
-        console.error(audio);
         // // 当媒体文件可以播放的时候会触发canplay事件
         // audio.addEventListener("canplay", function (e) {
 
@@ -66,7 +65,7 @@ const Headers = () => {
         // 每次currentTime属性值发生变化的时候会触发timeupdate事件。
         // 实际开发的时候，这个事件每250毫秒出发一次。这个事件可用来实时显示播放进度。
         // 节流 频率改为1s
-        audio && audio.addEventListener("timeupdate", _.throttle((e) => {
+        audio.addEventListener("timeupdate", _.throttle((e) => {
             setSongTime(getTime(audio.currentTime)) // 当前播放时间 单位s
             setSongTimeRate((audio.currentTime / audio.duration) * 100)
         }, 1000))
@@ -74,37 +73,39 @@ const Headers = () => {
         // return () => {
         //     audio.removeEventListener('timeupdate')
         // }
-    }, [audioRef])
+    }, [])
 
-    if (!singleInfo.mp3Url) {
-        return <div></div>
-    }
+    // if (!singleInfo.mp3Url) {
+    //     return <div></div>
+    // }
 
     return (
         <>
             <audio ref={audioRef} src={singleInfo.mp3Url} controls={false} />
-            <div className={styles.playerBox}>
-                <div className={styles.playerFixed}>
-                    <div className={styles.imgBox} >
-                        <div className={styles.img}>
-                            <img src={singleInfo.mp3Pic} alt='' />
+            {
+                singleInfo.mp3Url && <div className={styles.playerBox}>
+                    <div className={styles.playerFixed}>
+                        <div className={styles.imgBox} >
+                            <div className={styles.img}>
+                                <img src={singleInfo.mp3Pic} alt='' />
+                            </div>
+                            {/* <div className={styles.name}>{singleInfo && singleInfo.mp3Name}</div> */}
                         </div>
-                        {/* <div className={styles.name}>{singleInfo && singleInfo.mp3Name}</div> */}
-                    </div>
-                    <div className={styles.timeBox}>
-                        <div className={styles.time}>{songTime}</div>
-                        <Slider
-                            min={0}
-                            max={100}
-                            style={{ '--fill-color': '#00b578' }}
-                            value={songTimeRate}
-                        />
-                    </div>
-                    <div className={styles.player}>
-                        <PlayOutline fontSize='.2rem' onClick={playSongs} />
+                        <div className={styles.timeBox}>
+                            <div className={styles.time}>{songTime}</div>
+                            <Slider
+                                min={0}
+                                max={100}
+                                style={{ '--fill-color': '#00b578' }}
+                                value={songTimeRate}
+                            />
+                        </div>
+                        <div className={styles.player}>
+                            <PlayOutline fontSize='.2rem' onClick={playSongs} />
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         </>
 
     )
