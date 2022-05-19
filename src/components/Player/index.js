@@ -82,7 +82,7 @@ const Headers = () => {
 
     return (
         <>
-            <audio ref={audioRef} src={singleInfo.mp3Url} controls={false} />
+            <audio ref={audioRef} src={singleInfo.mp3Url} controls={false} loop={true} />
             {
                 singleInfo.mp3Url && <div className={styles.playerBox}>
                     <div className={styles.playerFixed}>
@@ -93,7 +93,7 @@ const Headers = () => {
                             {/* <div className={styles.name}>{singleInfo && singleInfo.mp3Name}</div> */}
                         </div>
                         <div className={styles.timeBox}>
-                            <div className={styles.time}>{currentTime}:{durationTime}</div>
+                            <div className={styles.time}>{currentTime}/{durationTime} - {singleInfo && singleInfo.mp3Name}</div>
                             <Slider
                                 min={0}
                                 max={100}

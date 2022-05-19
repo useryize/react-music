@@ -6,10 +6,13 @@ import styles from './index.module.less'
 import { PlayOutline } from 'antd-mobile-icons'
 const {
     useContext,
+    useState
 } = React
 
 const SongListPublic = (_props) => {
     const { dataInfo = [] } = _props
+
+    const [songFocu, setSongFocu] = useState(null)
     // app数据
     const { dispatch } = useContext(createContextApp)
     return (
@@ -17,6 +20,7 @@ const SongListPublic = (_props) => {
             {
                 dataInfo.map((item, index) => (
                     <div className={styles.item} key={index} onClick={async () => {
+                        setSongFocu(index)
                         const res = await getSongUrl({ dispatch, params: { id: item.id } }) // 获取音乐id
                         const { data: [obj = {}] = [] } = res || {}
                         const songObj = {
@@ -28,16 +32,21 @@ const SongListPublic = (_props) => {
                         // songInfoLocalStorage(songObj).setItem() // 缓存音乐信息
                     }}>
                         <div className={styles.left}>
-                            <div className={styles.order}>{index + 1}</div>
+                            <div className={`${styles.order} ${index === songFocu ? styles.focu : ''}` }>{index + 1}</div>
                             <div className={styles.titleBox}>
                                 <div className={styles.title}>{item.name}</div>
                                 <div className={styles.doc}>
-                                    <span className={styles.vip}>
+                                    <span>
                                         {
-                                            ([1, 8].includes(+item.fee) && 'vip') || 'SQ'
+                                            { 8: 'SQ', 1: 'VIP' }[+item.fee]
                                         }
                                     </span>
-                                    <span>{item.al.name}</span>
+                                    <span>
+                                        {item.ar.map(itemName => (itemName.name)).join('/')}-
+                                        {
+                                            item && item.al && item.al.name
+                                        }
+                                    </span>
                                 </div>
                             </div>
                         </div>

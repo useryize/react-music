@@ -5,12 +5,20 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-		margin-top: .3rem;
+        margin-top: .3rem;
+
         .left {
-			display: flex;
+            display: flex;
+            align-items: center;
+
             .order {
+                width: .25rem;
                 font-size: .15rem;
                 color: #999;
+
+                &.focu {
+                    color: #FD3B3F;
+                }
             }
 
             .titleBox {
@@ -24,12 +32,21 @@
                     color: #999;
                     display: flex;
                     align-items: center;
+                    margin-top: .05rem;
+                    display: flex;
+                    align-items: center;
 
-                    .vip {
-                        border-radius: .03rem;
-                        border: red solid .01rem;
-                        padding: .02rem .05rem;
-                        color: red;
+                    span {
+                        font-size: .12rem;
+
+                        &:nth-child(1) {
+                            font-size: .1rem;
+                            margin-right: .05rem;
+                            border-radius: .03rem;
+                            border: #FD3B3F solid .01rem;
+                            padding: 0rem .01rem;
+                            color: #FD3B3F;
+                        }
                     }
                 }
             }
