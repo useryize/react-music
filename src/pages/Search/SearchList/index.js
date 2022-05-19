@@ -32,7 +32,6 @@ const KeywordTabs = () => {
     } = useContext(createContextApp)
 
     useEffect(() => {
-        console.error(srarchType);
         getSearch({ dispatch, params: { type: srarchType, keywords: searchInput } })
     }, [srarchType, searchInput])
     const toSongSheetDetails = (item) => {

@@ -2,6 +2,7 @@ import React from "react";
 import createContextSong from '@/hooks/SongSheetDetails/createContextSong'
 import { getPlaylistDetail } from '@/hooks/SongSheetDetails/useReducerSong'
 import SongListPublic from '../../../components/SongListPublic'
+import { Image } from 'antd-mobile'
 import styles from './index.module.less'
 const {
     useContext,
@@ -29,16 +30,29 @@ const SongListCom = () => {
     return (
         <>
             <div className={styles.songPicBox}>
-                <div className={styles.songBlur} style={{ backgroundImage: `url(${playlist.coverImgUrl})` }}></div>
-                <div className={styles.songpic}>
+                <div className={styles.songPic}>
                     <div className={styles.left}>
-                        <img src={playlist.coverImgUrl} alt="" />
+                        <Image lazy src={playlist.coverImgUrl} placeholder={null} />
                     </div>
                     <div className={styles.right}>
-                        <div className={styles.title}>{playlist.name}sadasdasdasd</div>
-                        <div className={styles.doc}>{playlist.description}asdasdasdasd</div>
+                        <div className={styles.title}>{playlist.name}</div>
+                        <div className={styles.creator}>
+                            <div className={styles.creatorImg}>
+                                <Image
+                                    className={styles.songImg}
+                                    lazy
+                                    src={playlist && playlist.creator && playlist.creator.avatarUrl}
+                                    placeholder={null}
+                                />
+                            </div>
+                            <div className={styles.creatorName}>
+                                {playlist && playlist.creator && playlist.creator.nickname}
+                            </div>
+                        </div>
+                        <div className={styles.doc}>{playlist.description}</div>
                     </div>
                 </div>
+
             </div>
             <SongListPublic dataInfo={tracks} />
         </>
