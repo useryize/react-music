@@ -15,8 +15,9 @@ const {
 const Headers = () => {
     const { state: { singleInfo = {} } = {} } = useContext(createContextApp)
     const audioRef = useRef(null)
-    const [songTime, setSongTime] = useState(null) // 当前播放时间
-    const [songTimeRate, setSongTimeRate] = useState(null) // 当前播放百分比
+    const [durationTime, setDurationTime] = useState('00:00') // 总时间
+    const [currentTime, setCurrentTime] = useState('00:00') // 当前播放时间
+    const [currentTimeRate, setCurrentTimeRate] = useState(null) // 当前播放百分比
     // useEffect(() => {
     //     setSongInfo(songInfoLocalStorage().getItem() || {})
     //     console.log('初始化songData======', songInfoLocalStorage().getItem() || {});
@@ -57,17 +58,17 @@ const Headers = () => {
         // });
 
         // 当准确时长返回时候，会触发durationchange
-        // audio.addEventListener("durationchange", function (e) {
-        //     console.error(audio.duration);
+        audio.addEventListener("durationchange", function (e) {
+            setDurationTime(getTime(audio.duration)) // 歌曲总时间
 
-        // });
+        });
 
         // 每次currentTime属性值发生变化的时候会触发timeupdate事件。
         // 实际开发的时候，这个事件每250毫秒出发一次。这个事件可用来实时显示播放进度。
         // 节流 频率改为1s
         audio.addEventListener("timeupdate", _.throttle((e) => {
-            setSongTime(getTime(audio.currentTime)) // 当前播放时间 单位s
-            setSongTimeRate((audio.currentTime / audio.duration) * 100)
+            setCurrentTime(getTime(audio.currentTime)) // 当前播放时间 单位s
+            setCurrentTimeRate((audio.currentTime / audio.duration) * 100)
         }, 1000))
 
         // return () => {
@@ -92,12 +93,12 @@ const Headers = () => {
                             {/* <div className={styles.name}>{singleInfo && singleInfo.mp3Name}</div> */}
                         </div>
                         <div className={styles.timeBox}>
-                            <div className={styles.time}>{songTime}</div>
+                            <div className={styles.time}>{currentTime}:{durationTime}</div>
                             <Slider
                                 min={0}
                                 max={100}
                                 style={{ '--fill-color': '#00b578' }}
-                                value={songTimeRate}
+                                value={currentTimeRate}
                             />
                         </div>
                         <div className={styles.player}>
