@@ -12,7 +12,7 @@ export const reducer = (state = initialState, action) => {
     if (action.type === GET_SONG_DETAIL_FUNCTION) {
         return {
             ...state,
-            songDetail: action.songDetailArr,
+            songDetailArr: action.songDetailArr,
         }
     }
     if (action.type === SONG_ID_FUNCTION) {
@@ -39,6 +39,7 @@ export const getSongDetailApp = ({ dispatch, params }) => {
     axiosRes.then((res) => {
         dispatch({ type: GET_SONG_DETAIL_FUNCTION, songDetailArr: (res && res.songs) || [] })
     })
+    return axiosRes
 }
 
 // 获取音乐id

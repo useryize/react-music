@@ -14,7 +14,7 @@ const {
     useState
 } = React
 const Headers = () => {
-    const { state: { songId = '', songDetailArr = [], songUrlArr = [] } = {}, dispatch } = useContext(createContextApp)
+    const { state: { songId = '' } = {}, dispatch } = useContext(createContextApp)
 
     const audioRef = useRef(null)
 
@@ -22,35 +22,35 @@ const Headers = () => {
     const [currentTime, setCurrentTime] = useState('00:00') // 当前播放时间
     const [currentTimeRate, setCurrentTimeRate] = useState(null) // 当前播放百分比
 
-    const [songMp3Url, setSongMp3Url] = useState({}) // mp3信息汇总
     const [songMp3Info, setSongMp3Info] = useState({}) // mp3信息汇总
 
-    // 监听音乐id 获取音乐url
+    // 监听音乐id 获取音乐详情
     useEffect(() => {
-        getSongUrlApp({ dispatch, params: { id: songId } })
-        getSongDetailApp({ dispatch, params: { ids: songId } })
+        if (!songId) return
+        Promise.all([
+            getSongUrlApp({ dispatch, params: { id: songId } }),
+            getSongDetailApp({ dispatch, params: { ids: songId } })
+        ]).then(res => {
+            const [urlObj = {}, detaileObj = {}] = res
+
+            const [urlData] = (urlObj && urlObj.data) || {}
+            const { url: mp3Url = '' } = urlData
+
+            const [detaileSongs] = (detaileObj && detaileObj.songs) || {}
+            const { al: { name: mp3Name = '', picUrl: mp3Pic = '' } = {} } = detaileSongs
+            setSongMp3Info({ mp3Name, mp3Pic, mp3Url })
+        })
     }, [songId])
-
-    // 获取音乐信息
-    useEffect(() => {
-        const [detailObj = {}] = songDetailArr
-        const { name = '', picUrl = '' } = detailObj
-        setSongMp3Info({ mp3Name: name, mp3Pic: picUrl })
-    }, [songDetailArr])
-
 
     // 监听音乐信息 播放暂停歌曲
     useEffect(() => {
-        const [urlObj = {}] = songUrlArr
-        const { url = '' } = urlObj
-        setSongMp3Url(url)
         playSongs()
-    }, [songUrlArr])
+    }, [songMp3Info])
 
 
     // 暂停/播放
     const playSongs = () => {
-        if (!songMp3Url) return
+        if (!songMp3Info.mp3Url) return
         audioRef.current.paused ? audioRef.current.play() : audioRef.current.pause()
     }
 
@@ -89,9 +89,9 @@ const Headers = () => {
 
     return (
         <>
-            <audio ref={audioRef} src={songMp3Url} controls={false} loop={true} />
+            <audio ref={audioRef} src={songMp3Info.mp3Url} controls={false} loop={true} />
             {
-                songMp3Url && <div className={styles.playerBox}>
+                songMp3Info.mp3Url && <div className={styles.playerBox}>
                     <div className={styles.playerFixed}>
                         <div className={styles.imgBox} >
                             <div className={styles.img}>
