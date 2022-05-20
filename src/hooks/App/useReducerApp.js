@@ -1,33 +1,61 @@
 import { axiosGet } from '../../utils/axios';
-import { songUrl } from '../../utils/apis';
-const SINGLE_INFO_FUNCTION = 'SINGLE_INFO_FUNCTION';
+import { songUrl, songtDetail } from '../../utils/apis';
+const GET_SONG_DETAIL_FUNCTION = 'GET_SONG_DETAIL_FUNCTION';
+const SONG_ID_FUNCTION = 'SONG_ID_FUNCTION';
+const SONG_URL_FUNCTION = 'SONG_URL_FUNCTION';
 export const initialState = {
-    singleInfo: {},
+    songDetailArr: [],
+    songId: null,
+    songUrlArr: [],
 }
-
 export const reducer = (state = initialState, action) => {
-    if (action.type === SINGLE_INFO_FUNCTION) {
+    if (action.type === GET_SONG_DETAIL_FUNCTION) {
         return {
             ...state,
-            singleInfo: action.singleInfo,
+            songDetail: action.songDetailArr,
+        }
+    }
+    if (action.type === SONG_ID_FUNCTION) {
+        return {
+            ...state,
+            songId: action.songId,
+        }
+    }
+    if (action.type === SONG_URL_FUNCTION) {
+        return {
+            ...state,
+            songUrlArr: action.songUrlArr,
         }
     }
     return state;
 }
 
+// 获取歌曲详情
+export const getSongDetailApp = ({ dispatch, params }) => {
+    const axiosRes = axiosGet({
+        url: songtDetail,
+        params
+    })
+    axiosRes.then((res) => {
+        dispatch({ type: GET_SONG_DETAIL_FUNCTION, songDetailArr: (res && res.songs) || [] })
+    })
+}
+
+// 获取音乐id
+export const getSongIdApp = ({ dispatch, params }) => {
+    dispatch({ type: SONG_ID_FUNCTION, songId: params })
+}
 
 // 获取歌曲url
-export const getSongUrl = ({ dispatch, params } = {}) => {
+export const getSongUrlApp = ({ dispatch, params } = {}) => {
     const axiosRes = axiosGet({
         url: songUrl,
         params: {
             ...params
         }
     })
+    axiosRes.then((res) => {
+        dispatch({ type: SONG_URL_FUNCTION, songUrlArr: (res && res.data) || [] })
+    })
     return axiosRes
 };
-
-// 获取音乐id
-export const singleInfoFunction = ({ dispatch, params }) => {
-    dispatch({ type: SINGLE_INFO_FUNCTION, singleInfo: params })
-}
