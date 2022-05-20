@@ -27,7 +27,7 @@ const Headers = () => {
     // 监听音乐id 获取音乐url
     useEffect(() => {
         getSongUrlApp({ dispatch, params: { id: songId } })
-        getSongDetailApp({ dispatch, params: { id: songId } })
+        getSongDetailApp({ dispatch, params: { ids: songId } })
     }, [songId])
 
     // 获取音乐信息
@@ -42,6 +42,7 @@ const Headers = () => {
 
     // 监听音乐信息 播放暂停歌曲
     useEffect(() => {
+		console.error('songMp3Info', songMp3Info);
         playSongs()
     }, [songMp3Info])
 
