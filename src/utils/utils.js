@@ -56,3 +56,29 @@ export const colorRgb = (sColor, opacity) => {
     }
     return sColor;
 }
+
+
+/**
+ * 秒格式化
+ *
+ * @param {*} time 单位秒
+ * @param {*} type  s ms hms dhms
+ * @returns 
+ */
+
+export const getTime = (time, type = 'ms') => {
+    let d = parseInt(time / 60 / 60 / 24)
+    d = d < 10 ? `0${d}` : d
+    let h = parseInt(time / 60 / 60 % 24)
+    h = h < 10 ? `0${h}` : h
+    let m = parseInt(time / 60 % 60)
+    m = m < 10 ? `0${m}` : m
+    let s = parseInt(time % 60)
+    s = s < 10 ? `0${s}` : s
+    const typeObj = {
+        ms: [m, s].join(':'),
+        hms: [h, m, s].join(':'),
+        dhms: `${d}天 ${[h, m, s].join(':')}`,
+    }
+    return typeObj[type]
+}
