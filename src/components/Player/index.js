@@ -3,6 +3,7 @@ import styles from './index.module.less';
 import { Slider } from 'antd-mobile'
 import { PlayOutline } from 'antd-mobile-icons'
 import createContextApp from '../../hooks/App/createContextApp'
+import { getSongUrlApp, getSongDetailApp } from '../../hooks/App/useReducerApp'
 import _ from 'lodash'
 // import mp3 from './index.mp3'
 // import { songInfoLocalStorage } from '../../utils/utils'
@@ -13,43 +14,54 @@ const {
     useState
 } = React
 const Headers = () => {
-    const { state: { singleInfo = {} } = {} } = useContext(createContextApp)
+    const { state: { songId = '', songDetailArr = [], songUrlArr = [] } = {}, dispatch } = useContext(createContextApp)
+
     const audioRef = useRef(null)
+
     const [durationTime, setDurationTime] = useState('00:00') // 总时间
     const [currentTime, setCurrentTime] = useState('00:00') // 当前播放时间
     const [currentTimeRate, setCurrentTimeRate] = useState(null) // 当前播放百分比
-    // useEffect(() => {
-    //     setSongInfo(songInfoLocalStorage().getItem() || {})
-    //     console.log('初始化songData======', songInfoLocalStorage().getItem() || {});
-    //     window.addEventListener('songInfoSetItemEvent', function (e) {
-    //         setSongInfo(e.info || {})
-    //         console.log('监听songData======', e.info);
-    //     });
-    //     return () => {
-    //         window.removeEventListener('songInfoSetItemEvent')
-    //     }
-    // }, [])
+
+    const [songMp3Info, setSongMp3Info] = useState({}) // mp3信息汇总
+
+    // 监听音乐id 获取音乐url
+    useEffect(() => {
+        getSongUrlApp({ dispatch, params: { id: songId } })
+        getSongDetailApp({ dispatch, params: { id: songId } })
+    }, [songId])
+
+    // 获取音乐信息
+    useEffect(() => {
+        const [urlObj = {}] = songUrlArr
+        const { url = '' } = urlObj
+        const [detailObj = {}] = songDetailArr
+        const { name = '', picUrl = '' } = detailObj
+        setSongMp3Info({ mp3Name: name, mp3Pic: picUrl, mp3Url: url })
+    }, [songDetailArr, songUrlArr])
 
 
+    // 监听音乐信息 播放暂停歌曲
     useEffect(() => {
         playSongs()
-    }, [singleInfo])
+    }, [songMp3Info])
+
+
     // 暂停/播放
     const playSongs = () => {
-        if (!singleInfo.mp3Url) return
+        if (!songMp3Info.mp3Url) return
         audioRef.current.paused ? audioRef.current.play() : audioRef.current.pause()
     }
+
+
     // 转换为时分秒
     const getTime = (time) => {
-
-        // let h = parseInt(time / 60 / 60 % 24)
-        // h = h < 10 ? '0' + h : h
         let m = parseInt(time / 60 % 60)
         m = m < 10 ? '0' + m : m
         let s = parseInt(time % 60)
         s = s < 10 ? '0' + s : s
         return [m, s].join(":")
     }
+
     useEffect(() => {
         const audio = audioRef.current
         // // 当媒体文件可以播放的时候会触发canplay事件
@@ -71,29 +83,22 @@ const Headers = () => {
             setCurrentTimeRate((audio.currentTime / audio.duration) * 100)
         }, 1000))
 
-        // return () => {
-        //     audio.removeEventListener('timeupdate')
-        // }
     }, [])
-
-    // if (!singleInfo.mp3Url) {
-    //     return <div></div>
-    // }
 
     return (
         <>
-            <audio ref={audioRef} src={singleInfo.mp3Url} controls={false} loop={true} />
+            <audio ref={audioRef} src={songMp3Info.mp3Url} controls={false} loop={true} />
             {
-                singleInfo.mp3Url && <div className={styles.playerBox}>
+                songMp3Info.mp3Url && <div className={styles.playerBox}>
                     <div className={styles.playerFixed}>
                         <div className={styles.imgBox} >
                             <div className={styles.img}>
-                                <img src={singleInfo.mp3Pic} alt='' />
+                                <img src={songMp3Info.mp3Pic} alt='' />
                             </div>
                             {/* <div className={styles.name}>{singleInfo && singleInfo.mp3Name}</div> */}
                         </div>
                         <div className={styles.timeBox}>
-                            <div className={styles.time}>{currentTime}/{durationTime} - {singleInfo && singleInfo.mp3Name}</div>
+                            <div className={styles.time}>{currentTime}/{durationTime} - {songMp3Info && songMp3Info.mp3Name}</div>
                             <Slider
                                 min={0}
                                 max={100}
