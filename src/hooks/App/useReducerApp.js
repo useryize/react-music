@@ -5,7 +5,7 @@ const SONG_ID_FUNCTION = 'SONG_ID_FUNCTION';
 const SONG_URL_FUNCTION = 'SONG_URL_FUNCTION';
 export const initialState = {
     songDetailArr: [],
-    songId: null,
+    songId: '',
     songUrlArr: [],
 }
 export const reducer = (state = initialState, action) => {
