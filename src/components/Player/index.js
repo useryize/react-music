@@ -22,6 +22,7 @@ const Headers = () => {
     const [currentTime, setCurrentTime] = useState('00:00') // 当前播放时间
     const [currentTimeRate, setCurrentTimeRate] = useState(null) // 当前播放百分比
 
+    const [songMp3Url, setSongMp3Url] = useState({}) // mp3信息汇总
     const [songMp3Info, setSongMp3Info] = useState({}) // mp3信息汇总
 
     // 监听音乐id 获取音乐url
@@ -32,24 +33,24 @@ const Headers = () => {
 
     // 获取音乐信息
     useEffect(() => {
-        const [urlObj = {}] = songUrlArr
-        const { url = '' } = urlObj
         const [detailObj = {}] = songDetailArr
         const { name = '', picUrl = '' } = detailObj
-        setSongMp3Info({ mp3Name: name, mp3Pic: picUrl, mp3Url: url })
-    }, [songDetailArr, songUrlArr])
+        setSongMp3Info({ mp3Name: name, mp3Pic: picUrl })
+    }, [songDetailArr])
 
 
     // 监听音乐信息 播放暂停歌曲
     useEffect(() => {
-		console.error('songMp3Info', songMp3Info);
+        const [urlObj = {}] = songUrlArr
+        const { url = '' } = urlObj
+        setSongMp3Url(url)
         playSongs()
-    }, [songMp3Info])
+    }, [songUrlArr])
 
 
     // 暂停/播放
     const playSongs = () => {
-        if (!songMp3Info.mp3Url) return
+        if (!songMp3Url) return
         audioRef.current.paused ? audioRef.current.play() : audioRef.current.pause()
     }
 
@@ -88,9 +89,9 @@ const Headers = () => {
 
     return (
         <>
-            <audio ref={audioRef} src={songMp3Info.mp3Url} controls={false} loop={true} />
+            <audio ref={audioRef} src={songMp3Url} controls={false} loop={true} />
             {
-                songMp3Info.mp3Url && <div className={styles.playerBox}>
+                songMp3Url && <div className={styles.playerBox}>
                     <div className={styles.playerFixed}>
                         <div className={styles.imgBox} >
                             <div className={styles.img}>
