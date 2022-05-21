@@ -23,8 +23,12 @@
 
             .titleBox {
                 .title {
+                    width: 70vw;
                     font-size: .14rem;
                     color: #333;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
                 }
 
                 .doc {
@@ -46,6 +50,13 @@
                             border: #FD3B3F solid .01rem;
                             padding: 0rem .01rem;
                             color: #FD3B3F;
+                        }
+
+                        &:nth-child(2) {
+                            width: 70vw;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
                         }
                     }
                 }
