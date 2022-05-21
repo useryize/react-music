@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.module.less';
-import { Slider } from 'antd-mobile'
+import { Slider, ProgressCircle } from 'antd-mobile'
 import { PlayOutline } from 'antd-mobile-icons'
 import createContextApp from '../../hooks/App/createContextApp'
 import { getSongUrlApp, getSongDetailApp } from '../../hooks/App/useReducerApp'
@@ -20,7 +20,7 @@ const Headers = () => {
 
     const [durationTime, setDurationTime] = useState('00:00') // 总时间
     const [currentTime, setCurrentTime] = useState('00:00') // 当前播放时间
-    const [currentTimeRate, setCurrentTimeRate] = useState(null) // 当前播放百分比
+    const [currentTimeRate, setCurrentTimeRate] = useState(0) // 当前播放百分比
 
     const [songMp3Info, setSongMp3Info] = useState({}) // mp3信息汇总
 
@@ -95,9 +95,14 @@ const Headers = () => {
                     <div className={styles.playerFixed}>
                         <div className={styles.imgBox} >
                             <div className={styles.img}>
-                                <img src={songMp3Info.mp3Pic} alt='' />
+
+                                <ProgressCircle
+                                    percent={currentTimeRate}
+                                >
+                                    <img src={songMp3Info.mp3Pic} alt='' />
+                                </ProgressCircle>
                             </div>
-                            {/* <div className={styles.name}>{singleInfo && singleInfo.mp3Name}</div> */}
+                            <div className={styles.name}>{songMp3Info && songMp3Info.mp3Name}</div>
                         </div>
                         <div className={styles.timeBox}>
                             <div className={styles.time}>{currentTime}/{durationTime} - {songMp3Info && songMp3Info.mp3Name}</div>
