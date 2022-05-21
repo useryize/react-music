@@ -1,5 +1,12 @@
 export const formatNumber = (number) => {
-    return (number / 10000).toFixed(2) + '万';
+    const num = 100000000
+    if (number < num) {
+        number = (number / 10000).toFixed(2) + '万';
+    }
+    if (number >= num) {
+        number = (number / num).toFixed(2) + '亿';
+    }
+    return number
 }
 
 /**发布-订阅 监听缓存

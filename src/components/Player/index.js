@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.module.less';
-import { Slider, ProgressCircle } from 'antd-mobile'
-import { PlayOutline } from 'antd-mobile-icons'
+import { Slider, ProgressCircle, Popup, Image } from 'antd-mobile'
+import { PlayOutline, DownOutline } from 'antd-mobile-icons'
 import createContextApp from '../../hooks/App/createContextApp'
 import { getSongUrlApp, getSongDetailApp } from '../../hooks/App/useReducerApp'
 import _ from 'lodash'
@@ -23,6 +23,7 @@ const Headers = () => {
     const [currentTimeRate, setCurrentTimeRate] = useState(0) // 当前播放百分比
 
     const [songMp3Info, setSongMp3Info] = useState({}) // mp3信息汇总
+    let [drawerShow, drawerShowFun] = useState(false);
 
     // 监听音乐id 获取音乐详情
     useEffect(() => {
@@ -37,8 +38,9 @@ const Headers = () => {
             const { url: mp3Url = '' } = urlData
 
             const [detaileSongs] = (detaileObj && detaileObj.songs) || {}
-            const { al: { name: mp3Name = '', picUrl: mp3Pic = '' } = {} } = detaileSongs
-            setSongMp3Info({ mp3Name, mp3Pic, mp3Url })
+            const { al: { name: mp3Name = '', picUrl: mp3Pic = '' } = {}, ar: author = [] } = detaileSongs
+            setSongMp3Info({ mp3Name, mp3Pic, mp3Url, author })
+            drawerShowFun(true)
         })
     }, [songId])
 
@@ -86,7 +88,6 @@ const Headers = () => {
         }, 1000))
 
     }, [])
-
     return (
         <>
             <audio ref={audioRef} src={songMp3Info.mp3Url} controls={false} loop={true} />
@@ -94,7 +95,7 @@ const Headers = () => {
                 songMp3Info.mp3Url && <div className={styles.playerBox}>
                     <div className={styles.playerFixed}>
                         <div className={styles.imgBox} >
-                            <div className={styles.img}>
+                            <div className={styles.img} onClick={() => drawerShowFun(!drawerShow)}>
 
                                 <ProgressCircle
                                     percent={currentTimeRate}
@@ -119,6 +120,33 @@ const Headers = () => {
                     </div>
                 </div>
             }
+            <Popup
+                position="bottom"
+                visible={drawerShow}
+                onMaskClick={() => drawerShowFun(false)}
+                bodyStyle={{ width: '100vw', height: '100vh' }}
+            >
+                <div className={styles.jukebox}>
+                    <div className={styles.backPic} style={{ backgroundImage: `url(${songMp3Info.mp3Pic})` }}></div>
+                    <div className={styles.jukeboxDetaile}>
+                        <div className={styles.clonePop}>
+                            <DownOutline onClick={() => drawerShowFun(false)} />
+                        </div>
+                        <div className={styles.songName}>
+                            <div className={styles.title}>{songMp3Info && songMp3Info.mp3Name}</div>
+                            <div className={styles.author}>
+                                {songMp3Info && songMp3Info.author && songMp3Info.author.map(item => item.name).join('/')}
+                            </div>
+                        </div>
+                        <div className={styles.songPay}>
+                            <div className={styles.mp3Pic}>
+                                <Image src={songMp3Info.mp3Pic} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </Popup>
         </>
 
     )

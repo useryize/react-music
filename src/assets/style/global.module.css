@@ -23,3 +23,7 @@ body {
         helvetica, segoe ui, arial, roboto, 'PingFang SC', 'miui',
         'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
 }
+
+body iframe {
+    display: none;
+}
