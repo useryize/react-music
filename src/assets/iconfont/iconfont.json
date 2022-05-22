@@ -1,0 +1,37 @@
+{
+  "id": "3420473",
+  "name": "cloudmusic",
+  "font_family": "iconfont",
+  "css_prefix_text": "",
+  "description": "cloudmusic",
+  "glyphs": [
+    {
+      "icon_id": "29885012",
+      "name": "暂停",
+      "font_class": "suspend",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "29884975",
+      "name": "上一首",
+      "font_class": "lastsong",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "29884976",
+      "name": "下一首",
+      "font_class": "nextsong",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "29884977",
+      "name": "播放",
+      "font_class": "play",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    }
+  ]
+}

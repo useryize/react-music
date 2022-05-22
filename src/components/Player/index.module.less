@@ -49,12 +49,14 @@
 
             .name {
                 font-size: .14rem;
+                margin-left: .1rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                width: 70vw;
             }
         }
 
-        .timeBox {
-            width: 50vw;
-        }
 
         .player {
             margin-right: .2rem;
@@ -143,17 +145,32 @@
         }
 
         .controlBox {
+            width: 100%;
+            position: absolute;
+            bottom: .2rem;
+            left: 0;
+
             .progress {
                 display: flex;
                 align-items: center;
+                padding: 0 .15rem;
 
                 .timeLeft,
                 .timeRight {
-                    width: .5rem;
+                    font-size: .12rem;
+                }
+
+                .timeLeft {
+                    color: #BDBABE;
+                }
+
+                .timeRight {
+                    color: #555155;
                 }
 
                 .timecen {
                     flex: 1;
+                    margin: 0 .08rem;
                 }
 
                 // 滑块
@@ -186,6 +203,42 @@
                         }
                     }
                 }
+            }
+
+            .buttonBox {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: .1rem;
+
+                .le,
+                .ri,
+                .cen {
+                    font-size: .22rem;
+                    color: #FEFEFE;
+                }
+
+                .cen {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: .4rem;
+                    height: .4rem;
+                    margin: 0 .3rem;
+                    border: #FEFEFE solid .01rem;
+                    border-radius: 50%;
+                    font-size: .18rem;
+
+
+
+                }
+
+                :global {
+                    .play::before {
+                        transform: translate(.02rem, 0);
+                    }
+                }
+
             }
         }
     }

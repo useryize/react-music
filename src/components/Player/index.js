@@ -4,6 +4,7 @@ import { Slider, ProgressCircle, Popup, Image } from 'antd-mobile'
 import { PlayOutline, DownOutline } from 'antd-mobile-icons'
 import createContextApp from '../../hooks/App/createContextApp'
 import { getSongUrlApp, getSongDetailApp } from '../../hooks/App/useReducerApp'
+import '../../assets/iconfont/iconfont.css'
 import _ from 'lodash'
 // import mp3 from './index.mp3'
 // import { songInfoLocalStorage } from '../../utils/utils'
@@ -105,10 +106,6 @@ const Headers = () => {
                             </div>
                             <div className={styles.name}>{songMp3Info && songMp3Info.mp3Name}</div>
                         </div>
-                        <div className={styles.timeBox}>
-                            <div className={styles.time}></div>
-
-                        </div>
                         <div className={styles.player}>
                             <PlayOutline fontSize='.2rem' onClick={playSongs} />
                         </div>
@@ -147,12 +144,17 @@ const Headers = () => {
                                         max={100}
                                         value={currentTimeRate}
                                         onAfterChange={(val) => {
-                                            const time = +val/100 * +audioRef.current.duration
+                                            const time = +val / 100 * +audioRef.current.duration
                                             audioRef.current.currentTime = time
                                         }}
                                     />
                                 </div>
                                 <div className={styles.timeRight}>{durationTime}</div>
+                            </div>
+                            <div className={styles.buttonBox}>
+                                <div className={`iconfont lastsong ${styles.le}`}></div>
+                                <div className={`iconfont  ${audioRef.current && audioRef.current.paused ? 'play' : 'suspend'} ${styles.cen}`} onClick={playSongs}></div>
+                                <div className={`iconfont nextsong ${styles.ri}`}></div>
                             </div>
                         </div>
                     </div>
