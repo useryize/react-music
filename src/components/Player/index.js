@@ -106,13 +106,8 @@ const Headers = () => {
                             <div className={styles.name}>{songMp3Info && songMp3Info.mp3Name}</div>
                         </div>
                         <div className={styles.timeBox}>
-                            <div className={styles.time}>{currentTime}/{durationTime} - {songMp3Info && songMp3Info.mp3Name}</div>
-                            <Slider
-                                min={0}
-                                max={100}
-                                style={{ '--fill-color': '#00b578' }}
-                                value={currentTimeRate}
-                            />
+                            <div className={styles.time}></div>
+
                         </div>
                         <div className={styles.player}>
                             <PlayOutline fontSize='.2rem' onClick={playSongs} />
@@ -141,6 +136,23 @@ const Headers = () => {
                         <div className={styles.songPay}>
                             <div className={styles.mp3Pic}>
                                 <Image src={songMp3Info.mp3Pic} />
+                            </div>
+                        </div>
+                        <div className={styles.controlBox}>
+                            <div className={styles.progress}>
+                                <div className={styles.timeLeft}>{currentTime}</div>
+                                <div className={styles.timecen}>
+                                    <Slider
+                                        min={0}
+                                        max={100}
+                                        value={currentTimeRate}
+                                        onAfterChange={(val) => {
+                                            const time = +val/100 * +audioRef.current.duration
+                                            audioRef.current.currentTime = time
+                                        }}
+                                    />
+                                </div>
+                                <div className={styles.timeRight}>{durationTime}</div>
                             </div>
                         </div>
                     </div>

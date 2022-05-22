@@ -80,7 +80,7 @@
         background-size: 100% 100%;
         background-repeat: no-repeat;
         filter: blur(50px);
-        transform: scale(3);
+        transform: scale(5);
         overflow: hidden;
     }
 
@@ -111,10 +111,12 @@
             left: 0;
             top: .1rem;
             text-align: center;
+
             .title {
                 font-size: .15rem;
                 color: #FFFCF3;
             }
+
             .author {
                 font-size: .13rem;
                 color: #C6BBAF;
@@ -136,6 +138,53 @@
                     height: 2rem;
                     border-radius: 50%;
                     animation: rotate 10s linear infinite;
+                }
+            }
+        }
+
+        .controlBox {
+            .progress {
+                display: flex;
+                align-items: center;
+
+                .timeLeft,
+                .timeRight {
+                    width: .5rem;
+                }
+
+                .timecen {
+                    flex: 1;
+                }
+
+                // 滑块
+                :global {
+
+                    .adm-slider,
+                    .adm-slider-track-container {
+                        padding: 0;
+                    }
+
+                    // 轨道
+                    .adm-slider-track {
+                        height: .02rem;
+                        background-color: #5E5C60;
+                    }
+
+                    // 选中长度
+                    .adm-slider-fill {
+                        height: .02rem;
+                        background-color: #B5B0B5;
+                    }
+
+                    .adm-slider-thumb-container {
+                        background-color: #FFFEFC;
+                        width: .06rem;
+                        height: .06rem;
+
+                        .adm-slider-thumb {
+                            display: none;
+                        }
+                    }
                 }
             }
         }
