@@ -4,17 +4,20 @@ import createContextFind from './hooks/App/createContextApp'
 import { reducer, initialState } from './hooks/App/useReducerApp'
 import history from './utils/history';
 import routes from './routes'
-const { lazy, Suspense, useReducer } = React;
+const { lazy, Suspense, useReducer, useState } = React;
 const Player = lazy(() => import('./components/Player'));
+const Header = lazy(() => import('./components/Header/header'));
 
 const App = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
+    const [heaterTitle, setHeaterTitle] = useState(null)
     return (
         <createContextFind.Provider value={{ state, dispatch }}>
             <Suspense fallback={
                 null
                 // <div>Loading...</div> 
             }>
+                <Header heaterTitle={heaterTitle} />
                 <HashRouter history={history}>
 
                     <Switch>
@@ -25,9 +28,12 @@ const App = () => {
                                     key={path}
                                     path={path}
                                     exact={exact}
+                                    // component={C}
                                     render={(props) => {
-                                        props.history.title = item.title
-                                        return <C {...props} title={item.title} />
+                                        // props.history.title = item.title
+                                        // window.reactMusicTitle = item.title
+                                        setHeaterTitle(item)
+                                        return <C {...props} key={item.title} title={item.title} />
                                     }}
                                 />
                             })
