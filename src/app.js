@@ -3,14 +3,9 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import createContextFind from './hooks/App/createContextApp'
 import { reducer, initialState } from './hooks/App/useReducerApp'
 import history from './utils/history';
-
+import routes from './routes'
 const { lazy, Suspense, useReducer } = React;
 const Player = lazy(() => import('./components/Player'));
-const Find = lazy(() => import('./pages/Find'));
-const Home = lazy(() => import('./pages/Home'));
-const Login = lazy(() => import('./pages/Login'));
-const SongSheetDetails = lazy(() => import('./pages/SongSheetDetails'));
-const Search = lazy(() => import('./pages/Search'));
 
 const App = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
@@ -23,12 +18,23 @@ const App = () => {
                 <HashRouter history={history}>
 
                     <Switch>
-                        <Route path="/find" component={Find} />
-                        <Route path="/home" component={Home} />
-                        <Route path="/login" component={Login} />
-                        <Route path="/songSheetDetails/:id" component={SongSheetDetails} />
-                        <Route path="/search" component={Search} />
-                        <Route path="/" component={Find} />
+                        {
+                            routes.map(item => {
+                                const { path, exact = true, component: C } = item;
+                                return <Route
+                                    key={path}
+                                    path={path}
+                                    exact={exact}
+                                    render={(props) => {
+                                        props.history.title = item.title
+                                        return <C {...props} title={item.title} />
+                                    }}
+                                />
+                            })
+                        }
+                        <Route path="*" render={(props) => {
+                            props.history.push({ pathname: "/find", })
+                        }} />
                     </Switch>
                 </HashRouter>
                 <Player />
