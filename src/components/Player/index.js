@@ -116,7 +116,6 @@ const Headers = () => {
                 position="bottom"
                 visible={drawerShow}
                 onMaskClick={() => drawerShowFun(false)}
-                bodyStyle={{ width: '100vw', height: '100vh' }}
             >
                 <div className={styles.jukebox}>
                     <div className={styles.backPic} style={{ backgroundImage: `url(${songMp3Info.mp3Pic})` }}></div>
