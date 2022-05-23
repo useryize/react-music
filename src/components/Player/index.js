@@ -76,7 +76,6 @@ const Headers = () => {
         // 当准确时长返回时候，会触发durationchange
         audio.addEventListener("durationchange", function (e) {
             setDurationTime(getTime(audio.duration)) // 歌曲总时间
-
         });
 
         // 每次currentTime属性值发生变化的时候会触发timeupdate事件。

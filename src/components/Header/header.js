@@ -9,7 +9,6 @@ const {
 } = React
 
 const Header = (_props) => {
-    console.error(_props);
     const { heaterTitle = {} } = _props
     let [drawerShow, drawerShowFun] = useState(false);
     let [userData, setUserData] = useState({});
@@ -26,7 +25,6 @@ const Header = (_props) => {
         });
 
     }
-    console.error(history);
     const backArrow = () => {
         const pathType = heaterTitle.path === '/find'
         return <div className={`iconfont ${pathType ? 'more' : 'returnto'} ${styles.buttonLeft}`} onClick={() => {
