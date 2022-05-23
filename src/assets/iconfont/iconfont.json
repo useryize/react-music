@@ -6,6 +6,27 @@
   "description": "cloudmusic",
   "glyphs": [
     {
+      "icon_id": "4608980",
+      "name": "更多",
+      "font_class": "more",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "1304890",
+      "name": "搜索",
+      "font_class": "search",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "1718321",
+      "name": "返回",
+      "font_class": "returnto",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
       "icon_id": "29885012",
       "name": "暂停",
       "font_class": "suspend",

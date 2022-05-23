@@ -4,9 +4,8 @@ import { Slider, ProgressCircle, Popup, Image } from 'antd-mobile'
 import { PlayOutline, DownOutline } from 'antd-mobile-icons'
 import createContextApp from '../../hooks/App/createContextApp'
 import { getSongUrlApp, getSongDetailApp } from '../../hooks/App/useReducerApp'
-import '../../assets/iconfont/iconfont.css'
 import _ from 'lodash'
-import history from '../../utils/history'
+// import history from '../../utils/history'
 // import mp3 from './index.mp3'
 // import { songInfoLocalStorage } from '../../utils/utils'
 const {
@@ -26,7 +25,6 @@ const Headers = () => {
 
     const [songMp3Info, setSongMp3Info] = useState({}) // mp3信息汇总
     let [drawerShow, drawerShowFun] = useState(false);
-    console.error('history', history);
     // 监听音乐id 获取音乐详情
     useEffect(() => {
         if (!songId) return
