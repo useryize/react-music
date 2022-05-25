@@ -14,7 +14,6 @@ const Header = (_props) => {
     const { heaterTitle = {} } = _props
     let [drawerShow, drawerShowFun] = useState(false);
     let [userData, setUserData] = useState({});
-
     const toLogin = () => {
         navigate('/login')
         // history.push({
@@ -29,28 +28,46 @@ const Header = (_props) => {
         // });
 
     }
+    // 左侧按钮
     const leftDom = () => {
-        const pathType = heaterTitle.path === '/find'
-        return <div className={`iconfont ${pathType ? 'more' : 'returnto'} ${styles.buttonLeftIcon}`} onClick={() => {
-            pathType ? drawerShowFun(true) : navigate(-1)
-        }}></div>
-    }
-    const leftTest = () => {
-        return <div className={styles.buttonLeftTest}>首页</div>
-    }
-    const childrenDom = () => {
-        return <div className={styles.childrenBox} onClick={toSearch}>
-            <div className={`iconfont search ${styles.childrenIcon}`}></div>
-            <div className={styles.childrenTest}>许嵩</div>
-        </div>
+        const { id } = heaterTitle
+        const pathType = id === 'find'
+        const click = () => {
+            return pathType ? drawerShowFun(true) : navigate(-1)
+        }
+        const classNameType = (
+            `iconfont ${pathType ? 'more' : 'returnto'} ${styles.buttonLeftIcon}`
+        )
+        return <div className={classNameType} onClick={click}></div>
     }
 
+    // 左侧文案
+    const leftTest = () => {
+        const { id } = heaterTitle
+        const pathType = id !== 'find'
+        return pathType ? <div className={styles.buttonLeftTest}>{heaterTitle.title}</div> : null
+    }
+
+    // 中间部分展示内容
+    const childrenDom = () => {
+        const { id } = heaterTitle
+        const pathType = id === 'find'
+        return pathType ? (
+            <div className={styles.childrenBox} onClick={toSearch}>
+                <div className={`iconfont search ${styles.childrenIcon}`}></div>
+                <div className={styles.childrenTest}>许嵩</div>
+            </div>
+        ) : null
+    }
+
+    // 右侧按钮
     const rightDom = () => {
         return <div className={`iconfont search ${styles.buttonRightIcon}`} onClick={toSearch}></div>
     }
 
 
     useEffect(() => {
+        // 获取用户信息
         let userData = JSON.parse(window.localStorage.getItem('userData'))
         setUserData((userData && userData.user) || {})
     }, [])
