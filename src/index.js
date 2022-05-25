@@ -8,6 +8,8 @@ import VConsole from 'vconsole';
 import 'antd-mobile/es/global'
 new VConsole();
 
+console.error(process, process.env);
+
 const Root = () => (
     <App />
 );
