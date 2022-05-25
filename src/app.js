@@ -7,15 +7,24 @@ import routesDom from './routes'
 const {
     lazy, Suspense,
     useReducer,
-    // useState
+    useState,
+    useEffect
 } = React;
 
 const Player = lazy(() => import('./components/Player'));
 const Header = lazy(() => import('./components/Header/header'));
 
+
+
 const App = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
-    // const [heaterTitle, setHeaterTitle] = useState(null)
+    const [heaterTitle, setHeaterTitle] = useState(null)
+    const ElementDOM = ({ item }) => {
+        useEffect(() => {
+            setHeaterTitle(item)
+        })
+        return <item.element />
+    }
     return (
 
         <createContextFind.Provider value={{ state, dispatch }}>
@@ -25,12 +34,12 @@ const App = () => {
             }>
 
                 <Router>
-                    <Header />
+                    <Header heaterTitle={heaterTitle} />
                     <Routes>
                         {
                             routesDom.map(item => {
-                                const { path, element: E } = item
-                                return <Route key={path} path={path} element={<E />}></Route>
+                                const { path } = item
+                                return <Route key={path} path={path} element={<ElementDOM item={item} />}></Route>
                             })
                         }
                         <Route path='*' element={<Navigate to="/find" />}></Route>
