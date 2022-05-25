@@ -17,6 +17,7 @@ const App = () => {
 		<Router>
 			<Routes>
 				<Route path='home' element={<Aaa></Aaa>}></Route>
+				<Route path='*' element={<Aaa></Aaa>}></Route>
 			</Routes>
 		</Router>
         // <createContextFind.Provider value={{ state, dispatch }}>
