@@ -1,19 +1,22 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 import createContextSearch from '../../../hooks/Search/createContextSearch'
 import { getSearch } from '../../../hooks/Search/useReducerSearch'
 // import createContextApp from '../../../hooks/App/createContextApp'
 // import { getSongUrlFunction } from '../../../hooks/App/useReducerApp'
 import { Image, List } from 'antd-mobile'
-import history from '../../../utils/history'
+// import history from '../../../utils/history'
 import styles from './index.module.less'
 import { PlayOutline } from 'antd-mobile-icons'
 import { formatNumber } from '@/utils/utils'
+
 const {
     useContext,
     useEffect
 } = React
 
 const KeywordTabs = () => {
+    const navigate = useNavigate()
     const {
         state: {
             srarchType,
@@ -35,9 +38,10 @@ const KeywordTabs = () => {
         getSearch({ dispatch, params: { type: srarchType, keywords: searchInput } })
     }, [srarchType, searchInput])
     const toSongSheetDetails = (item) => {
-        history.push({
-            pathname: `/songSheetDetails/${item.id}`,
-        });
+        navigate(`/songSheetDetails/${item.id}`)
+        // history.push({
+        //     pathname: `/songSheetDetails/${item.id}`,
+        // });
     }
     return (
         <div className={styles.listBox}>
