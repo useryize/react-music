@@ -1,7 +1,7 @@
 import React from 'react'
 // import history from '../../utils/history'
 import { useNavigate } from "react-router-dom";
-import { NavBar, Popup, Button, Avatar } from 'antd-mobile'
+import { NavBar, Popup, Button, Avatar, Input } from 'antd-mobile'
 import styles from './index.module.less'
 
 const {
@@ -29,15 +29,26 @@ const Header = (_props) => {
         // });
 
     }
-    const backArrow = () => {
+    const leftDom = () => {
         const pathType = heaterTitle.path === '/find'
-        return <div className={`iconfont ${pathType ? 'more' : 'returnto'} ${styles.buttonLeft}`} onClick={() => {
+        return <div className={`iconfont ${pathType ? 'more' : 'returnto'} ${styles.buttonLeftIcon}`} onClick={() => {
             pathType ? drawerShowFun(true) : navigate(-1)
         }}></div>
     }
-    const rightDom = (
-        <div className={`iconfont search ${styles.buttonRight}`} onClick={toSearch}></div>
-    )
+    const leftTest = () => {
+        return <div className={styles.buttonLeftTest}>首页</div>
+    }
+    const childrenDom = () => {
+        return <div className={styles.childrenBox} onClick={toSearch}>
+            <div className={`iconfont search ${styles.childrenIcon}`}></div>
+            <div className={styles.childrenTest}>许嵩</div>
+        </div>
+    }
+
+    const rightDom = () => {
+        return <div className={`iconfont search ${styles.buttonRightIcon}`} onClick={toSearch}></div>
+    }
+
 
     useEffect(() => {
         let userData = JSON.parse(window.localStorage.getItem('userData'))
@@ -48,7 +59,7 @@ const Header = (_props) => {
         <>
             <div className={styles.navbarBox}>
                 <div className={styles.navbar}>
-                    <NavBar backArrow={backArrow()} right={rightDom}>{heaterTitle.title}</NavBar>
+                    <NavBar backArrow={leftDom()} left={leftTest()} children={childrenDom()} right={rightDom()}></NavBar>
                 </div>
             </div>
             <Popup
