@@ -1,9 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'
 // import Swiper from 'swiper';
 import styles from './index.module.less';
 import { findRecomList } from '../../../hooks/Find/useReducerFind';
 import createContextFind from '../../../hooks/Find/createContextFind';
-import history from '@/utils/history';
+// import history from '@/utils/history';
 import { formatNumber } from '@/utils/utils'
 import { PlayOutline } from 'antd-mobile-icons'
 const {
@@ -12,6 +13,7 @@ const {
     // useState,
 } = React;
 const Recom = () => {
+    const navigate = useNavigate()
     const {
         state: {
             recomList = []
@@ -34,9 +36,10 @@ const Recom = () => {
     // }, [playlists]);
     const toSongSheetDetails = (item) => {
         // const { history } = props;
-        history.push({
-            pathname: `/songSheetDetails/${item.id}`,
-        });
+        // history.push({
+        //     pathname: `/songSheetDetails/${item.id}`,
+        // });
+        navigate(`/songSheetDetails/${item.id}`)
     }
     return (
         <div className={styles.recomBox}>
