@@ -9,27 +9,27 @@ const Search = lazy(() => import('../pages/Search'));
 const routes = [
     {
         path: '/find',
-        component: Find,
+        element: Find,
         title: '发现'
     },
     {
         path: '/home',
-        component: Home,
+        element: Home,
         title: '我的'
     },
     {
         path: '/login',
-        component: Login,
+        element: Login,
         title: '登录'
     },
     {
         path: '/songSheetDetails/:id',
-        component: SongSheetDetails,
+        element: SongSheetDetails,
         title: '歌单详情'
     },
     {
         path: '/search',
-        component: Search,
+        element: Search,
         title: '搜索'
     },
 
