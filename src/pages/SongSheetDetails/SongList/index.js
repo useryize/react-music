@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import createContextSong from '@/hooks/SongSheetDetails/createContextSong'
 import { getPlaylistDetail } from '@/hooks/SongSheetDetails/useReducerSong'
 import SongListPublic from '../../../components/SongListPublic'
@@ -9,7 +10,7 @@ const {
     useEffect,
 } = React
 const SongListCom = () => {
-
+    const useParamsRoute = useParams()
     const {
         state: {
             songList: {
@@ -18,12 +19,12 @@ const SongListCom = () => {
                 } = {},
                 playlist = {}
             } = {},
-        } = {}, dispatch, props
+        } = {}, dispatch
     } = useContext(createContextSong)
 
     useEffect(() => {
         // 歌单列表
-        const { match: { params: { id = '' } = {} } = {} } = props
+        const { id = '' } = useParamsRoute
         getPlaylistDetail({ dispatch, params: { id } })
     }, [])
 
