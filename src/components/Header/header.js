@@ -1,5 +1,6 @@
 import React from 'react'
-import history from '../../utils/history'
+// import history from '../../utils/history'
+import { useNavigate } from "react-router-dom";
 import { NavBar, Popup, Button, Avatar } from 'antd-mobile'
 import styles from './index.module.less'
 
@@ -9,26 +10,29 @@ const {
 } = React
 
 const Header = (_props) => {
+    const navigate = useNavigate();
     const { heaterTitle = {} } = _props
     let [drawerShow, drawerShowFun] = useState(false);
     let [userData, setUserData] = useState({});
 
     const toLogin = () => {
-        history.push({
-            pathname: "/login",
-        });
+        navigate('/login')
+        // history.push({
+        //     pathname: "/login",
+        // });
 
     }
     const toSearch = () => {
-        history.push({
-            pathname: "/search",
-        });
+        navigate('/search')
+        // history.push({
+        //     pathname: "/search",
+        // });
 
     }
     const backArrow = () => {
         const pathType = heaterTitle.path === '/find'
         return <div className={`iconfont ${pathType ? 'more' : 'returnto'} ${styles.buttonLeft}`} onClick={() => {
-            pathType ? drawerShowFun(true) : history.goBack()
+            pathType ? drawerShowFun(true) : navigate(-1)
         }}></div>
     }
     const rightDom = (
