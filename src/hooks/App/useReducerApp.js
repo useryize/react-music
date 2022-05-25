@@ -3,10 +3,15 @@ import { songUrl, songtDetail } from '../../utils/apis';
 const GET_SONG_DETAIL_FUNCTION = 'GET_SONG_DETAIL_FUNCTION';
 const SONG_ID_FUNCTION = 'SONG_ID_FUNCTION';
 const SONG_URL_FUNCTION = 'SONG_URL_FUNCTION';
+const HEADER_TITLE_INFO_FUNCTION = 'HEADER_TITLE_INFO_FUNCTION';
 export const initialState = {
     songDetailArr: [],
     songId: '',
     songUrlArr: [],
+    headerTitle: {
+        backgroundColor: '#ffffff',
+        textColor: '#333333'
+    }
 }
 export const reducer = (state = initialState, action) => {
     if (action.type === GET_SONG_DETAIL_FUNCTION) {
@@ -27,7 +32,17 @@ export const reducer = (state = initialState, action) => {
             songUrlArr: action.songUrlArr,
         }
     }
+    if (action.type === HEADER_TITLE_INFO_FUNCTION) {
+        return {
+            ...state,
+            headerTitle: action.headerTitle,
+        }
+    }
     return state;
+}
+// 设置头部信息
+export const setHeaderTitle = ({ dispatch, params }) => {
+    dispatch({ type: HEADER_TITLE_INFO_FUNCTION, headerTitle: params })
 }
 
 // 获取歌曲详情
