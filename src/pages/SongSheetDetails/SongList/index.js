@@ -8,7 +8,8 @@ import styles from './index.module.less'
 const {
     useContext,
     // useEffect,
-    useEffect
+    useEffect,
+    memo
 } = React
 const SongListCom = () => {
     const useParamsRoute = useParams()
@@ -62,4 +63,4 @@ const SongListCom = () => {
     )
 }
 
-export default SongListCom
+export default memo(SongListCom)
