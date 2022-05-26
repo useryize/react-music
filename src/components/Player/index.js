@@ -103,7 +103,7 @@ const Headers = () => {
                                 </ProgressCircle>
                             </div>
                             <div className={styles.name} onClick={() => {
-                                setHeaderTitle({ textColor: '#ffffff' })
+                                setHeaderTitle({ dispatch, params: { textColor: '#ffffff' } })
                             }}>{songMp3Info && songMp3Info.mp3Name}</div>
                         </div>
                         <div className={styles.player}>
