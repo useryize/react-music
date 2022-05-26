@@ -12,8 +12,8 @@ const {
 } = React
 const SongListCom = () => {
     const useParamsRoute = useParams()
-    const { id: SongListID = '' } = useParamsRoute
     const {
+        state,
         state: {
             songList: {
                 playlist: {
@@ -26,9 +26,10 @@ const SongListCom = () => {
 
     useMemo(() => {
         // 歌单列表
-        console.error(SongListID);
-        getPlaylistDetail({ dispatch, params: { id: SongListID } })
-    }, [SongListID])
+        const { id = '' } = useParamsRoute
+        console.error(id);
+        getPlaylistDetail({ dispatch, params: { id } })
+    }, [state])
 
     return (
         <>
