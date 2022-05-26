@@ -8,10 +8,11 @@ import styles from './index.module.less'
 const {
     useContext,
     // useEffect,
-	useMemo
+    useMemo
 } = React
 const SongListCom = () => {
     const useParamsRoute = useParams()
+    const { id: SongListID = '' } = useParamsRoute
     const {
         state: {
             songList: {
@@ -25,10 +26,9 @@ const SongListCom = () => {
 
     useMemo(() => {
         // 歌单列表
-        const { id = '' } = useParamsRoute
-        console.error(id);
-        getPlaylistDetail({ dispatch, params: { id } })
-    }, [])
+        console.error(SongListID);
+        getPlaylistDetail({ dispatch, params: { id: SongListID } })
+    }, [SongListID])
 
     return (
         <>
