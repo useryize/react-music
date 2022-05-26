@@ -25,6 +25,7 @@ const SongListCom = () => {
     useEffect(() => {
         // 歌单列表
         const { id = '' } = useParamsRoute
+        console.error(id);
         getPlaylistDetail({ dispatch, params: { id } })
     }, [])
 
