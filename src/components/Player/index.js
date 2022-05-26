@@ -3,7 +3,7 @@ import styles from './index.module.less';
 import { Slider, ProgressCircle, Popup, Image } from 'antd-mobile'
 import { PlayOutline, DownOutline } from 'antd-mobile-icons'
 import createContextApp from '../../hooks/App/createContextApp'
-import { getSongUrlApp, getSongDetailApp, setHeaderTitle } from '../../hooks/App/useReducerApp'
+import { getSongUrlApp, getSongDetailApp } from '../../hooks/App/useReducerApp'
 import _ from 'lodash'
 // import history from '../../utils/history'
 // import mp3 from './index.mp3'
@@ -102,9 +102,7 @@ const Headers = () => {
                                     <img src={songMp3Info.mp3Pic} alt='' />
                                 </ProgressCircle>
                             </div>
-                            <div className={styles.name} onClick={() => {
-                                setHeaderTitle({ dispatch, params: { textColor: '#ffffff' } })
-                            }}>{songMp3Info && songMp3Info.mp3Name}</div>
+                            <div className={styles.name}>{songMp3Info && songMp3Info.mp3Name}</div>
                         </div>
                         <div className={styles.player}>
                             <PlayOutline fontSize='.2rem' onClick={playSongs} />
