@@ -32,7 +32,6 @@ const App = () => {
                 null
                 // <div>Loading...</div> 
             }>
-
                 <Router>
                     <Header heaterTitle={heaterTitle} />
                     <Routes>
@@ -44,9 +43,10 @@ const App = () => {
                         }
                         <Route path='*' element={<Navigate to="/find" />}></Route>
                     </Routes>
+                    <Player />
                 </Router>
-                <Player />
             </Suspense>
+
         </createContextFind.Provider>
     )
 }
