@@ -8,12 +8,11 @@ import styles from './index.module.less'
 const {
     useContext,
     // useEffect,
-    useMemo
+    useEffect
 } = React
 const SongListCom = () => {
     const useParamsRoute = useParams()
     const {
-        state,
         state: {
             songList: {
                 playlist: {
@@ -24,12 +23,12 @@ const SongListCom = () => {
         } = {}, dispatch
     } = useContext(createContextSong)
 
-    useMemo(() => {
+    useEffect(() => {
         // 歌单列表
         const { id = '' } = useParamsRoute
         console.error(id);
         getPlaylistDetail({ dispatch, params: { id } })
-    }, [state])
+    }, [])
 
     return (
         <>
