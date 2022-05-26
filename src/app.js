@@ -23,7 +23,7 @@ const App = () => {
         useEffect(() => {
             setHeaterTitle(item)
         })
-        return <item.element />
+        return null
     }
     return (
 
@@ -38,7 +38,19 @@ const App = () => {
                         {
                             routesDom.map(item => {
                                 const { path } = item
-                                return <Route key={path} path={path} element={<item.element />}></Route>
+                                return (
+                                    <Route
+                                        key={path}
+                                        path={path}
+                                        element={
+                                            <>
+                                                <ElementDOM item={item} />
+                                                <item.element />
+                                            </>
+                                        }>
+
+                                    </Route>
+                                )
                             })
                         }
                         <Route path='*' element={<Navigate to="/find" />}></Route>
