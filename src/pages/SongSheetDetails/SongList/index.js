@@ -26,7 +26,7 @@ const SongListCom = () => {
         // 歌单列表
         const { id = '' } = useParamsRoute
         console.error(id);
-        getPlaylistDetail({ dispatch, params: { id } })
+        getPlaylistDetail({ dispatch, params: { id: 2244784586 } })
     }, [])
 
     return (
