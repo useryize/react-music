@@ -7,7 +7,8 @@ import { Image } from 'antd-mobile'
 import styles from './index.module.less'
 const {
     useContext,
-    useEffect,
+    // useEffect,
+	useMemo
 } = React
 const SongListCom = () => {
     const useParamsRoute = useParams()
@@ -22,11 +23,11 @@ const SongListCom = () => {
         } = {}, dispatch
     } = useContext(createContextSong)
 
-    useEffect(() => {
+    useMemo(() => {
         // 歌单列表
         const { id = '' } = useParamsRoute
         console.error(id);
-        getPlaylistDetail({ dispatch, params: { id: 2244784586 } })
+        getPlaylistDetail({ dispatch, params: { id } })
     }, [])
 
     return (
