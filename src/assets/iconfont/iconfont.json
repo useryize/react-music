@@ -6,6 +6,20 @@
   "description": "cloudmusic",
   "glyphs": [
     {
+      "icon_id": "814464",
+      "name": "向下 ",
+      "font_class": "takeback",
+      "unicode": "e6b2",
+      "unicode_decimal": 59058
+    },
+    {
+      "icon_id": "666893",
+      "name": "系统返回",
+      "font_class": "systemreturn",
+      "unicode": "e697",
+      "unicode_decimal": 59031
+    },
+    {
       "icon_id": "4608980",
       "name": "更多",
       "font_class": "more",

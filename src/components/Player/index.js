@@ -40,7 +40,10 @@ const Headers = () => {
             const [detaileSongs] = (detaileObj && detaileObj.songs) || {}
             const { al: { name: mp3Name = '', picUrl: mp3Pic = '' } = {}, ar: author = [] } = detaileSongs
             setSongMp3Info({ mp3Name, mp3Pic, mp3Url, author })
-            drawerShowFun(true)
+            setTimeout(() => {
+                drawerShowFun(true)
+            })
+
         })
     }, [songId])
 
