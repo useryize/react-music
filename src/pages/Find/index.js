@@ -11,7 +11,7 @@ const Find = (props) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     return (
         <createContextFind.Provider value={{ state, dispatch, props }}>
-//             <Header />
+            {/* <Header /> */}
             <Banner />
             <Iconnav />
             <Recom />
