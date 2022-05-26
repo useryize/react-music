@@ -38,7 +38,7 @@ const App = () => {
                         {
                             routesDom.map(item => {
                                 const { path } = item
-                                return <Route key={path} path={path} element={<ElementDOM item={item} />}></Route>
+                                return <Route key={path} path={path} element={<ElementDOM key={path} item={item} />}></Route>
                             })
                         }
                         <Route path='*' element={<Navigate to="/find" />}></Route>
