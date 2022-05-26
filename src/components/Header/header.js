@@ -1,7 +1,7 @@
 import React from 'react'
 // import history from '../../utils/history'
 import { useNavigate } from "react-router-dom";
-import { NavBar, Popup, Button, Avatar, Input } from 'antd-mobile'
+import { NavBar, Popup, Button, Avatar } from 'antd-mobile'
 import styles from './index.module.less'
 
 const {
