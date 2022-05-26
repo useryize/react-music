@@ -18,7 +18,7 @@ const Header = lazy(() => import('./components/Header/header'));
 
 const App = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
-    const [heaterTitle, setHeaterTitle] = useState(null)
+    const [heaterTitle, setHeaterTitle] = useState({})
     const ElementDOM = ({ item }) => {
         useEffect(() => {
             setHeaterTitle(item)
@@ -38,7 +38,7 @@ const App = () => {
                         {
                             routesDom.map(item => {
                                 const { path } = item
-                                return <Route key={path} path={path} element={<ElementDOM key={path} item={item} />}></Route>
+                                return <Route key={path} path={path} element={<item.element />}></Route>
                             })
                         }
                         <Route path='*' element={<Navigate to="/find" />}></Route>
