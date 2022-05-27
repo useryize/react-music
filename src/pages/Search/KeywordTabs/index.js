@@ -3,6 +3,7 @@ import createContextSearch from '../../../hooks/Search/createContextSearch'
 import { searchTypeFunction } from '../../../hooks/Search/useReducerSearch'
 import { Tabs } from 'antd-mobile'
 import { tabsJson } from './tabs'
+import styles from './index.module.less'
 const {
     useContext,
     useState
@@ -14,7 +15,7 @@ const KeywordTabs = () => {
     } = useContext(createContextSearch)
     const [activeKey, setActiveKey] = useState('1')
     return (
-        <>
+        <div className={styles.tabsBox}>
             <Tabs activeKey={activeKey} onChange={(val) => {
                 const newVal = Number(val)
                 setActiveKey(val)
@@ -26,7 +27,7 @@ const KeywordTabs = () => {
                     })
                 }
             </Tabs>
-        </>
+        </div>
     )
 }
 export default KeywordTabs
