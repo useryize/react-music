@@ -1,17 +1,27 @@
 import React from 'react'
 // import history from '../../utils/history'
+import createContextApp from '../../hooks/App/createContextApp'
+import { searchInputTextFunctionApp } from '../../hooks/App/useReducerApp'
 import { useNavigate } from "react-router-dom";
-import { NavBar, Popup, Button, Avatar } from 'antd-mobile'
+import { NavBar, Popup, Button, Avatar, SearchBar } from 'antd-mobile'
 import styles from './index.module.less'
 
 const {
     useState,
-    useEffect
+    useEffect,
+    useContext
 } = React
 
 const Header = (_props) => {
     const navigate = useNavigate();
     const { heaterTitle = {} } = _props
+
+    const { state: {
+        searchInput
+    } = {},
+        dispatch
+    } = useContext(createContextApp)
+    console.error(searchInput);
     let [drawerShow, drawerShowFun] = useState(false);
     let [userData, setUserData] = useState({});
     const toLogin = () => {
@@ -51,18 +61,33 @@ const Header = (_props) => {
     // 中间部分展示内容
     const childrenDom = () => {
         const { id } = heaterTitle
-        const pathType = id === 'find'
-        return pathType ? (
-            <div className={styles.childrenBox} onClick={toSearch}>
-                <div className={`iconfont search ${styles.childrenIcon}`}></div>
-                <div className={styles.childrenTest}>许嵩</div>
-            </div>
-        ) : null
+        const domObj = {
+            'find': (
+                <div className={styles.childrenBox} onClick={toSearch}>
+                    <div className={styles.findBox}>
+                        <div className={`iconfont search ${styles.icon}`}></div>
+                        <div className={styles.test}>许嵩</div>
+                    </div>
+                </div>
+            ),
+            'search': (
+                <div className={styles.childrenBox}>
+                    <div className={styles.searchBox}>
+                        <SearchBar placeholder={'许嵩'} onBlur={(val) => {
+                            searchInputTextFunctionApp({ dispatch, params: val.target.value || '许嵩' })
+                        }} />
+                    </div>
+                </div>
+
+
+            )
+        }
+        return domObj[id] || null
     }
 
     // 右侧按钮
     const rightDom = () => {
-        return <div className={`iconfont search ${styles.buttonRightIcon}`} onClick={toSearch}></div>
+        return null
     }
 
 
