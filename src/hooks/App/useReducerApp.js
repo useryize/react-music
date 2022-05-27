@@ -4,6 +4,7 @@ const GET_SONG_DETAIL_FUNCTION = 'GET_SONG_DETAIL_FUNCTION';
 const SONG_ID_FUNCTION = 'SONG_ID_FUNCTION';
 const SONG_URL_FUNCTION = 'SONG_URL_FUNCTION';
 const HEADER_TITLE_INFO_FUNCTION = 'HEADER_TITLE_INFO_FUNCTION';
+const SEARCH_INPUT_FUCTION = 'SEARCH_INPUT_FUCTION';
 export const initialState = {
     songDetailArr: [],
     songId: '',
@@ -11,7 +12,8 @@ export const initialState = {
     headerTitle: {
         backgroundColor: '#ffffff',
         textColor: '#333333'
-    }
+    },
+	searchInput: ''
 }
 export const reducer = (state = initialState, action) => {
     if (action.type === GET_SONG_DETAIL_FUNCTION) {
@@ -36,6 +38,12 @@ export const reducer = (state = initialState, action) => {
         return {
             ...state,
             headerTitle: action.headerTitle,
+        }
+    }
+    if (action.type === SEARCH_INPUT_FUCTION) {
+        return {
+            ...state,
+            searchInput: action.searchInput,
         }
     }
     return state;
@@ -77,11 +85,15 @@ export const getSongUrlApp = ({ dispatch, params } = {}) => {
 };
 
 // 听歌打卡
-
 export const setScrobblePunchinApp = ({ dispatch = h => h, params = {} }) => {
     const axiosRes = axiosGet({
         url: scrobble,
         params
     })
     return axiosRes
+}
+
+// 搜索关键字
+export const searchInputTextFunctionApp = ({ dispatch = h => h, params = '' }) => {
+    dispatch({ type: SEARCH_INPUT_FUCTION, searchInput: params })
 }
