@@ -3,7 +3,7 @@ import styles from './index.module.less';
 import { Slider, ProgressCircle, Popup, Image } from 'antd-mobile'
 import { PlayOutline, DownOutline } from 'antd-mobile-icons'
 import createContextApp from '../../hooks/App/createContextApp'
-import { getSongUrlApp, getSongDetailApp } from '../../hooks/App/useReducerApp'
+import { getSongUrlApp, getSongDetailApp, setScrobblePunchinApp } from '../../hooks/App/useReducerApp'
 import _ from 'lodash'
 // import history from '../../utils/history'
 // import mp3 from './index.mp3'
@@ -25,9 +25,10 @@ const Headers = () => {
 
     const [songMp3Info, setSongMp3Info] = useState({}) // mp3信息汇总
     let [drawerShow, drawerShowFun] = useState(false);
-    // 监听音乐id 获取音乐详情
+    // 监听音乐id
     useEffect(() => {
         if (!songId) return
+        // 获取音乐 url/音乐详情
         Promise.all([
             getSongUrlApp({ dispatch, params: { id: songId } }),
             getSongDetailApp({ dispatch, params: { ids: songId } })
@@ -43,8 +44,9 @@ const Headers = () => {
             setTimeout(() => {
                 drawerShowFun(true)
             })
-
         })
+        // 听歌打卡
+        setScrobblePunchinApp({ dispatch, params: { id: songId } })
     }, [songId])
 
     // 监听音乐信息 播放暂停歌曲
