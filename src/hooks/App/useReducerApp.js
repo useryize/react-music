@@ -1,5 +1,5 @@
 import { axiosGet } from '../../utils/axios';
-import { songUrl, songtDetail } from '../../utils/apis';
+import { songUrl, songtDetail, scrobble } from '../../utils/apis';
 const GET_SONG_DETAIL_FUNCTION = 'GET_SONG_DETAIL_FUNCTION';
 const SONG_ID_FUNCTION = 'SONG_ID_FUNCTION';
 const SONG_URL_FUNCTION = 'SONG_URL_FUNCTION';
@@ -75,3 +75,13 @@ export const getSongUrlApp = ({ dispatch, params } = {}) => {
     })
     return axiosRes
 };
+
+// 听歌打卡
+
+export const setScrobblePunchinApp = ({ dispatch = h => h, params = {} }) => {
+    const axiosRes = axiosGet({
+        url: scrobble,
+        params
+    })
+    return axiosRes
+}
