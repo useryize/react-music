@@ -11,6 +11,7 @@ export const personalized = `${SERVER}/personalized` // 推荐歌单
 export const playlistDetail = `${SERVER}/playlist/detail` // 获取歌单详情
 export const songtDetail = `${SERVER}/song/detail` // 获取歌曲详情
 export const songUrl = `${SERVER}/song/url` // 获取歌曲url
+export const scrobble = `${SERVER}/scrobble` // 听歌打卡
 export const search = `${SERVER}/search` // 搜索
 export const searchDefault = `${SERVER}/search/default` // 默认搜索关键词
 
