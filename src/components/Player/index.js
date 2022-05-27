@@ -45,6 +45,9 @@ const Headers = () => {
                 drawerShowFun(true)
             })
         })
+        
+        // 听歌打卡
+        setScrobblePunchinApp({ dispatch, params: { id: songId, time: audioRef.current.duration || 60 } })
 
     }, [songId])
 
@@ -58,10 +61,7 @@ const Headers = () => {
     const playSongs = () => {
         if (!songMp3Info.mp3Url) return
         audioRef.current.paused ? audioRef.current.play() : audioRef.current.pause()
-        // 听歌打卡
-        setScrobblePunchinApp({ dispatch, params: { id: songId, time: audioRef.current.duration || 60 } })
     }
-
 
     // 转换为时分秒
     const getTime = (time) => {
