@@ -2,8 +2,7 @@ import React from 'react'
 import { useNavigate } from "react-router-dom";
 import createContextSearch from '../../../hooks/Search/createContextSearch'
 import { getSearch } from '../../../hooks/Search/useReducerSearch'
-// import createContextApp from '../../../hooks/App/createContextApp'
-// import { getSongUrlFunction } from '../../../hooks/App/useReducerApp'
+import createContextApp from '../../../hooks/App/createContextApp'
 import { Image, List } from 'antd-mobile'
 // import history from '../../../utils/history'
 import styles from './index.module.less'
@@ -20,7 +19,6 @@ const KeywordTabs = () => {
     const {
         state: {
             srarchType,
-            searchInput,
             searchList: {
                 playlists = [],
                 songs = []
@@ -30,10 +28,11 @@ const KeywordTabs = () => {
     } = useContext(createContextSearch)
 
     // app数据
-    // const {
-    //     dispatch: dispatchApp
-    // } = useContext(createContextApp)
-
+    const {
+        state: {
+            searchInput
+        } = {}
+    } = useContext(createContextApp)
     useEffect(() => {
         getSearch({ dispatch, params: { type: srarchType, keywords: searchInput } })
     }, [srarchType, searchInput])
