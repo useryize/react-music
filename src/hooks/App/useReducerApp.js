@@ -13,7 +13,7 @@ export const initialState = {
         backgroundColor: '#ffffff',
         textColor: '#333333'
     },
-	searchInput: ''
+	searchInput: '许嵩'
 }
 export const reducer = (state = initialState, action) => {
     if (action.type === GET_SONG_DETAIL_FUNCTION) {
