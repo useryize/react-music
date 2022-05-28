@@ -113,8 +113,9 @@ const Headers = () => {
                             <ProgressCircle
                                 percent={currentTimeRate}
                             >
-                                <div className={`iconfont  ${audioRef.current && audioRef.current.paused ? 'play' : 'suspend'} ${styles.paly}`} onClick={playSongs}></div>
+                                <div className={`iconfont  ${audioRef.current && audioRef.current.paused ? 'play' : 'suspend'} ${styles.palyIcon}`} onClick={playSongs}></div>
                             </ProgressCircle>
+                            <div className={`iconfont more ${styles.moreIcon}`}></div>
 
                         </div>
                     </div>
