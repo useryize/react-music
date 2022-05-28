@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.module.less';
 import { Slider, ProgressCircle, Popup, Image } from 'antd-mobile'
-import { PlayOutline, DownOutline } from 'antd-mobile-icons'
+import { DownOutline } from 'antd-mobile-icons'
 import createContextApp from '../../hooks/App/createContextApp'
 import { getSongUrlApp, getSongDetailApp, setScrobblePunchinApp } from '../../hooks/App/useReducerApp'
 import _ from 'lodash'
@@ -15,7 +15,7 @@ const {
     useState
 } = React
 const Headers = () => {
-    const { state: { songId = '', headerTitle } = {}, dispatch } = useContext(createContextApp)
+    const { state: { songId = '' } = {}, dispatch } = useContext(createContextApp)
 
     const audioRef = useRef(null)
 
@@ -24,7 +24,10 @@ const Headers = () => {
     const [currentTimeRate, setCurrentTimeRate] = useState(0) // 当前播放百分比
 
     const [songMp3Info, setSongMp3Info] = useState({}) // mp3信息汇总
-    let [drawerShow, drawerShowFun] = useState(false);
+    let [drawerShow, drawerShowFun] = useState(false); // 打开弹出层
+    // let [transformRotate, setTransformRotate] = useState(0); // 控制图片自动旋转角度
+    // let [transformKey, setTransformKey] = useState(''); // 控制图片自动旋转角度
+
     // 监听音乐id
     useEffect(() => {
         if (!songId) return
@@ -45,7 +48,7 @@ const Headers = () => {
                 drawerShowFun(true)
             })
         })
-        
+
         // 听歌打卡
         setScrobblePunchinApp({ dispatch, params: { id: songId, time: audioRef.current.duration || 60 } })
 
@@ -91,7 +94,7 @@ const Headers = () => {
             setCurrentTime(getTime(audio.currentTime)) // 当前播放时间 单位s
             setCurrentTimeRate((audio.currentTime / audio.duration) * 100)
         }, 1000))
-        console.error('headerTitle', headerTitle);
+
     }, [])
     return (
         <>
@@ -101,24 +104,26 @@ const Headers = () => {
                     <div className={styles.playerFixed}>
                         <div className={styles.imgBox} >
                             <div className={styles.img} onClick={() => drawerShowFun(!drawerShow)}>
-
-                                <ProgressCircle
-                                    percent={currentTimeRate}
-                                >
-                                    <img src={songMp3Info.mp3Pic} alt='' />
-                                </ProgressCircle>
+                                {/* <img src={songMp3Info.mp3Pic} style={{ transform: `rotate(${transformRotate}deg)` }} alt='' /> */}
+                                <img src={songMp3Info.mp3Pic} alt='' />
                             </div>
                             <div className={styles.name}>{songMp3Info && songMp3Info.mp3Name}</div>
                         </div>
                         <div className={styles.player}>
-                            <PlayOutline fontSize='.2rem' onClick={playSongs} />
+                            <ProgressCircle
+                                percent={currentTimeRate}
+                            >
+                                <div className={`iconfont  ${audioRef.current && audioRef.current.paused ? 'play' : 'suspend'} ${styles.paly}`} onClick={playSongs}></div>
+                            </ProgressCircle>
+
                         </div>
                     </div>
                 </div>
             }
             <Popup
                 position="bottom"
-                visible={drawerShow}
+                // visible={drawerShow}
+                visible={false}
                 onMaskClick={() => drawerShowFun(false)}
             >
                 <div className={styles.jukebox}>
