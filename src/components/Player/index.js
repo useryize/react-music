@@ -4,6 +4,7 @@ import { Slider, ProgressCircle, Popup, Image } from 'antd-mobile'
 import { DownOutline } from 'antd-mobile-icons'
 import createContextApp from '../../hooks/App/createContextApp'
 import { getSongUrlApp, getSongDetailApp, setScrobblePunchinApp } from '../../hooks/App/useReducerApp'
+import SongListPublic from '../SongListPublic/index'
 import _ from 'lodash'
 // import history from '../../utils/history'
 // import mp3 from './index.mp3'
@@ -15,8 +16,7 @@ const {
     useState
 } = React
 const Headers = () => {
-    const { state: { songId = '' } = {}, dispatch } = useContext(createContextApp)
-
+    const { state: { songId = '', songAllId = '', currentPalyAll } = {}, dispatch } = useContext(createContextApp)
     const audioRef = useRef(null)
 
     const [durationTime, setDurationTime] = useState('00:00') // 总时间
@@ -24,7 +24,11 @@ const Headers = () => {
     const [currentTimeRate, setCurrentTimeRate] = useState(0) // 当前播放百分比
 
     const [songMp3Info, setSongMp3Info] = useState({}) // mp3信息汇总
-    let [drawerShow, drawerShowFun] = useState(false); // 打开弹出层
+
+    const [songPalyType, setSongPalyType] = useState(false); // 音乐播放器弹出层
+    const [currentPalyType, setCurrentPalyType] = useState(false); // 当前播放歌曲弹出层
+
+
     // let [transformRotate, setTransformRotate] = useState(0); // 控制图片自动旋转角度
     // let [transformKey, setTransformKey] = useState(''); // 控制图片自动旋转角度
 
@@ -44,9 +48,8 @@ const Headers = () => {
             const [detaileSongs] = (detaileObj && detaileObj.songs) || {}
             const { al: { name: mp3Name = '', picUrl: mp3Pic = '' } = {}, ar: author = [] } = detaileSongs
             setSongMp3Info({ mp3Name, mp3Pic, mp3Url, author })
-            setTimeout(() => {
-                drawerShowFun(true)
-            })
+            setSongPalyType(true)
+
         })
 
         // 听歌打卡
@@ -96,14 +99,24 @@ const Headers = () => {
         }, 1000))
 
     }, [])
+
+    useEffect(() => {
+        if (!songAllId) return
+        getSongDetailApp({ dispatch, params: { ids: songAllId }, type: 'ALL' })
+    }, [songAllId])
+    useEffect(() => {
+        console.error(currentPalyAll);
+    }, [currentPalyAll])
     return (
         <>
             <audio ref={audioRef} src={songMp3Info.mp3Url} controls={false} loop={true} />
+
+            {/* 简易播放器 */}
             {
                 songMp3Info.mp3Url && <div className={styles.playerBox}>
                     <div className={styles.playerFixed}>
                         <div className={styles.imgBox} >
-                            <div className={styles.img} onClick={() => drawerShowFun(!drawerShow)}>
+                            <div className={styles.img} onClick={() => setSongPalyType(!songPalyType)}>
                                 {/* <img src={songMp3Info.mp3Pic} style={{ transform: `rotate(${transformRotate}deg)` }} alt='' /> */}
                                 <img src={songMp3Info.mp3Pic} alt='' />
                             </div>
@@ -115,23 +128,24 @@ const Headers = () => {
                             >
                                 <div className={`iconfont  ${audioRef.current && audioRef.current.paused ? 'play' : 'suspend'} ${styles.palyIcon}`} onClick={playSongs}></div>
                             </ProgressCircle>
-                            <div className={`iconfont more ${styles.moreIcon}`}></div>
+                            <div className={`iconfont more ${styles.moreIcon}`} onClick={() => setCurrentPalyType(true)}></div>
 
                         </div>
                     </div>
                 </div>
             }
+
+            {/* 音乐播放器弹出层 */}
             <Popup
                 position="bottom"
-                // visible={drawerShow}
-                visible={false}
-                onMaskClick={() => drawerShowFun(false)}
+                visible={songPalyType}
+                onMaskClick={() => setSongPalyType(false)}
             >
                 <div className={styles.jukebox}>
                     <div className={styles.backPic} style={{ backgroundImage: `url(${songMp3Info.mp3Pic})` }}></div>
                     <div className={styles.jukeboxDetaile}>
                         <div className={styles.clonePop}>
-                            <DownOutline onClick={() => drawerShowFun(false)} />
+                            <DownOutline onClick={() => setSongPalyType(false)} />
                         </div>
                         <div className={styles.songName}>
                             <div className={styles.title}>{songMp3Info && songMp3Info.mp3Name}</div>
@@ -168,7 +182,14 @@ const Headers = () => {
                         </div>
                     </div>
                 </div>
-
+            </Popup>
+            <Popup
+                position="bottom"
+                visible={currentPalyType}
+                onMaskClick={() => setCurrentPalyType(false)}
+                bodyStyle={{ width: '100vw', height: '60vh' }}
+            >
+                <SongListPublic dataInfo={(currentPalyAll && currentPalyAll.songs || [])} />
             </Popup>
         </>
 

@@ -1,25 +1,25 @@
 import { axiosGet } from '../../utils/axios';
 import { songUrl, songtDetail, scrobble } from '../../utils/apis';
-const GET_SONG_DETAIL_FUNCTION = 'GET_SONG_DETAIL_FUNCTION';
+const CURRENT_PALY_ALL_FUNCTION_APP = 'CURRENT_PALY_ALL_FUNCTION_APP';
 const SONG_ID_FUNCTION = 'SONG_ID_FUNCTION';
-const SONG_URL_FUNCTION = 'SONG_URL_FUNCTION';
+const SONG_ALL_ID_FUNCTION = 'SONG_ALL_ID_FUNCTION';
 const HEADER_TITLE_INFO_FUNCTION = 'HEADER_TITLE_INFO_FUNCTION';
 const SEARCH_INPUT_FUCTION = 'SEARCH_INPUT_FUCTION';
 export const initialState = {
-    songDetailArr: [],
+    currentPalyAll: {}, // 当前播放歌曲列表
     songId: '',
-    songUrlArr: [],
+    songAllId: '',
     headerTitle: {
         backgroundColor: '#ffffff',
         textColor: '#333333'
     },
-	searchInput: '许嵩'
+    searchInput: '许嵩'
 }
 export const reducer = (state = initialState, action) => {
-    if (action.type === GET_SONG_DETAIL_FUNCTION) {
+    if (action.type === CURRENT_PALY_ALL_FUNCTION_APP) {
         return {
             ...state,
-            songDetailArr: action.songDetailArr,
+            currentPalyAll: action.currentPalyAll,
         }
     }
     if (action.type === SONG_ID_FUNCTION) {
@@ -28,10 +28,10 @@ export const reducer = (state = initialState, action) => {
             songId: action.songId,
         }
     }
-    if (action.type === SONG_URL_FUNCTION) {
+    if (action.type === SONG_ALL_ID_FUNCTION) {
         return {
             ...state,
-            songUrlArr: action.songUrlArr,
+            songAllId: action.songAllId,
         }
     }
     if (action.type === HEADER_TITLE_INFO_FUNCTION) {
@@ -54,20 +54,29 @@ export const setHeaderTitle = ({ dispatch, params }) => {
 }
 
 // 获取歌曲详情
-export const getSongDetailApp = ({ dispatch, params }) => {
+export const getSongDetailApp = ({ dispatch, params, type = '' }) => {
     const axiosRes = axiosGet({
         url: songtDetail,
         params
     })
-    axiosRes.then((res) => {
-        dispatch({ type: GET_SONG_DETAIL_FUNCTION, songDetailArr: (res && res.songs) || [] })
-    })
+    if (type === 'ALL') {
+        // 当前播放歌曲列表
+        axiosRes.then((res) => {
+            dispatch({ type: CURRENT_PALY_ALL_FUNCTION_APP, currentPalyAll: res || {} })
+        })
+    }
+
     return axiosRes
 }
 
 // 获取音乐id
 export const getSongIdApp = ({ dispatch, params }) => {
     dispatch({ type: SONG_ID_FUNCTION, songId: params })
+}
+
+// 获取全部id
+export const getSongALLIdApp = ({ dispatch, params }) => {
+    dispatch({ type: SONG_ALL_ID_FUNCTION, songAllId: params })
 }
 
 // 获取歌曲url
@@ -77,9 +86,6 @@ export const getSongUrlApp = ({ dispatch, params } = {}) => {
         params: {
             ...params
         }
-    })
-    axiosRes.then((res) => {
-        dispatch({ type: SONG_URL_FUNCTION, songUrlArr: (res && res.data) || [] })
     })
     return axiosRes
 };
