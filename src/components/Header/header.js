@@ -16,12 +16,10 @@ const Header = (_props) => {
     const navigate = useNavigate();
     const { heaterTitle = {} } = _props
 
-    const { state: {
-        searchInput
-    } = {},
+    const {
         dispatch
     } = useContext(createContextApp)
-    console.error(searchInput);
+
     let [drawerShow, drawerShowFun] = useState(false);
     let [userData, setUserData] = useState({});
     const toLogin = () => {
