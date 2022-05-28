@@ -38,6 +38,7 @@ const SongListCom = () => {
     return (
         <>
             <div className={styles.songPicBox}>
+                <div className={styles.songBackground} style={{ backgroundImage: `url(${playlist.coverImgUrl})` }}></div>
                 <div className={styles.songPic}>
                     <div className={styles.left}>
                         <Image lazy src={playlist.coverImgUrl} placeholder={null} />
@@ -60,7 +61,6 @@ const SongListCom = () => {
                         <div className={styles.doc}>{playlist.description}</div>
                     </div>
                 </div>
-
             </div>
             <SongListPublic dataInfo={songs} />
         </>
