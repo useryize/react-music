@@ -13,6 +13,7 @@
         display: flex;
         justify-content: space-between;
         padding-bottom: .15rem;
+
         .imgBox {
             display: flex;
             align-items: center;
@@ -83,193 +84,230 @@
     }
 }
 
-:global {
-    .adm-popup {
+.jukeboxPop {
+    :global {
         .adm-popup-body {
             width: 100%;
             height: 100%;
         }
     }
-}
 
-.jukebox {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-
-    .backPic {
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 0;
+    .jukebox {
         width: 100%;
         height: 100%;
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        filter: blur(4px);
-        -webkit-filter: blur(4px);
-        transform: scale(5);
-        -webkit-transform: scale(5);
+        position: relative;
         overflow: hidden;
-    }
 
-    .jukeboxDetaile {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 1;
-        box-sizing: border-box;
-
-        .clonePop {
-            position: absolute;
-            left: .15rem;
-            top: .1rem;
-            font-size: .26rem;
-            z-index: 3;
-            color: #FFFCF3;
-        }
-
-        .songName {
-            width: 100%;
+        .backPic {
             position: absolute;
             left: 0;
-            top: .1rem;
-            z-index: 2;
-            text-align: center;
+            top: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            filter: blur(4px);
+            -webkit-filter: blur(4px);
+            transform: scale(5);
+            -webkit-transform: scale(5);
+            overflow: hidden;
+        }
 
-            .title {
-                font-size: .15rem;
+        .jukeboxDetaile {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            box-sizing: border-box;
+
+            .clonePop {
+                position: absolute;
+                left: .15rem;
+                top: .1rem;
+                font-size: .26rem;
+                z-index: 3;
                 color: #FFFCF3;
             }
 
-            .author {
-                font-size: .13rem;
-                color: #C6BBAF;
+            .songName {
+                width: 100%;
+                position: absolute;
+                left: 0;
+                top: .1rem;
+                z-index: 2;
+                text-align: center;
+
+                .title {
+                    font-size: .15rem;
+                    color: #FFFCF3;
+                }
+
+                .author {
+                    font-size: .13rem;
+                    color: #C6BBAF;
+                }
             }
-        }
 
-        .songPay {
-            .mp3Pic {
-                width: 2rem;
-                height: 2rem;
-                border-radius: 50%;
-                overflow: hidden;
-                border: #000 solid .5rem;
-                position: relative;
-                margin: 20vh auto 0 auto;
-
-                img {
+            .songPay {
+                .mp3Pic {
                     width: 2rem;
                     height: 2rem;
                     border-radius: 50%;
-                    animation: rotate 10s linear infinite;
+                    overflow: hidden;
+                    border: #000 solid .5rem;
+                    position: relative;
+                    margin: 20vh auto 0 auto;
+
+                    img {
+                        width: 2rem;
+                        height: 2rem;
+                        border-radius: 50%;
+                        animation: rotate 10s linear infinite;
+                    }
                 }
             }
-        }
 
-        .controlBox {
-            width: 100%;
-            position: absolute;
-            bottom: .2rem;
-            left: 0;
+            .controlBox {
+                width: 100%;
+                position: absolute;
+                bottom: .2rem;
+                left: 0;
 
-            .progress {
-                display: flex;
-                align-items: center;
-                padding: 0 .15rem;
+                .progress {
+                    display: flex;
+                    align-items: center;
+                    padding: 0 .15rem;
 
-                .timeLeft,
-                .timeRight {
-                    font-size: .12rem;
-                }
-
-                .timeLeft {
-                    color: #BDBABE;
-                }
-
-                .timeRight {
-                    color: #555155;
-                }
-
-                .timecen {
-                    flex: 1;
-                    margin: 0 .08rem;
-                }
-
-                // 滑块
-                :global {
-
-                    .adm-slider,
-                    .adm-slider-track-container {
-                        padding: 0;
+                    .timeLeft,
+                    .timeRight {
+                        font-size: .12rem;
                     }
 
-                    // 轨道
-                    .adm-slider-track {
-                        height: .02rem;
-                        background-color: #5E5C60;
+                    .timeLeft {
+                        color: #BDBABE;
                     }
 
-                    // 选中长度
-                    .adm-slider-fill {
-                        height: .02rem;
-                        background-color: #B5B0B5;
+                    .timeRight {
+                        color: #555155;
                     }
 
-                    .adm-slider-thumb-container {
-                        background-color: #FFFEFC;
-                        width: .06rem;
-                        height: .06rem;
+                    .timecen {
+                        flex: 1;
+                        margin: 0 .08rem;
+                    }
 
-                        .adm-slider-thumb {
-                            display: none;
+                    // 滑块
+                    :global {
+
+                        .adm-slider,
+                        .adm-slider-track-container {
+                            padding: 0;
+                        }
+
+                        // 轨道
+                        .adm-slider-track {
+                            height: .02rem;
+                            background-color: #5E5C60;
+                        }
+
+                        // 选中长度
+                        .adm-slider-fill {
+                            height: .02rem;
+                            background-color: #B5B0B5;
+                        }
+
+                        .adm-slider-thumb-container {
+                            background-color: #FFFEFC;
+                            width: .06rem;
+                            height: .06rem;
+
+                            .adm-slider-thumb {
+                                display: none;
+                            }
                         }
                     }
                 }
-            }
 
-            .buttonBox {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-top: .1rem;
-
-                .le,
-                .ri,
-                .cen {
-                    font-size: .22rem;
-                    color: #FEFEFE;
-                }
-
-                .cen {
+                .buttonBox {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    width: .4rem;
-                    height: .4rem;
-                    margin: 0 .3rem;
-                    border: #FEFEFE solid .01rem;
-                    border-radius: 50%;
-                    font-size: .18rem;
+                    margin-top: .1rem;
 
-
-
-                }
-
-                :global {
-                    .play::before {
-                        transform: translate(.02rem, 0);
-                        -webkit-transform: translate(.02rem, 0);
+                    .le,
+                    .ri,
+                    .cen {
+                        font-size: .22rem;
+                        color: #FEFEFE;
                     }
-                }
 
+                    .cen {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: .4rem;
+                        height: .4rem;
+                        margin: 0 .3rem;
+                        border: #FEFEFE solid .01rem;
+                        border-radius: 50%;
+                        font-size: .18rem;
+
+
+
+                    }
+
+                    :global {
+                        .play::before {
+                            transform: translate(.02rem, 0);
+                            -webkit-transform: translate(.02rem, 0);
+                        }
+                    }
+
+                }
             }
         }
     }
 }
+
+.currentPalyPop {
+    .currentPalyBox {
+        width: 100%;
+        height: 60vh;
+        overflow: hidden;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            /*滚动条整体样式*/
+            width: 0;
+            /*高宽分别对应横竖滚动条的尺寸*/
+            height: 0;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            /*滚动条里面小方块*/
+            border-radius: 5px;
+            border: none;
+            -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0);
+            background: #3a4685;
+        }
+
+        &::-webkit-scrollbar-track {
+            /*滚动条里面轨道*/
+            -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0);
+            border-radius: 5px;
+            background: #1c2239 !important;
+        }
+
+        &::-webkit-scrollbar-track-piece {
+            background: #1c2239 !important;
+        }
+    }
+}
+
+
 
 @keyframes rotate {
     0% {

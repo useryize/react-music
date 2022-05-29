@@ -3,7 +3,7 @@ import styles from './index.module.less';
 import { Slider, ProgressCircle, Popup, Image } from 'antd-mobile'
 import { DownOutline } from 'antd-mobile-icons'
 import createContextApp from '../../hooks/App/createContextApp'
-import { getSongUrlApp, getSongDetailApp, setScrobblePunchinApp } from '../../hooks/App/useReducerApp'
+import { getSongUrlApp, getSongDetailApp, setScrobblePunchinApp, getSongIdApp } from '../../hooks/App/useReducerApp'
 import SongListPublic from '../SongListPublic/index'
 import _ from 'lodash'
 // import history from '../../utils/history'
@@ -100,13 +100,14 @@ const Headers = () => {
 
     }, [])
 
+    // 当前播放歌曲列表
     useEffect(() => {
         if (!songAllId) return
         getSongDetailApp({ dispatch, params: { ids: songAllId }, type: 'ALL' })
+        const [id] = songAllId.split(',')
+        getSongIdApp({ dispatch, params: id }) // 默认播放第一首
     }, [songAllId])
-    useEffect(() => {
-        console.error(currentPalyAll);
-    }, [currentPalyAll])
+
     return (
         <>
             <audio ref={audioRef} src={songMp3Info.mp3Url} controls={false} loop={true} />
@@ -137,6 +138,7 @@ const Headers = () => {
 
             {/* 音乐播放器弹出层 */}
             <Popup
+                className={styles.jukeboxPop}
                 position="bottom"
                 visible={songPalyType}
                 onMaskClick={() => setSongPalyType(false)}
@@ -184,12 +186,14 @@ const Headers = () => {
                 </div>
             </Popup>
             <Popup
+                className={styles.currentPalyPop}
                 position="bottom"
                 visible={currentPalyType}
                 onMaskClick={() => setCurrentPalyType(false)}
-                bodyStyle={{ width: '100vw', height: '60vh' }}
             >
-                <SongListPublic dataInfo={(currentPalyAll && currentPalyAll.songs || [])} />
+                <div className={`scrollbar ${styles.currentPalyBox}`}>
+                    <SongListPublic dataInfo={(currentPalyAll && currentPalyAll.songs) || []} />
+                </div>
             </Popup>
         </>
 
