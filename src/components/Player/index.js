@@ -118,24 +118,24 @@ const Headers = () => {
         // 实际开发的时候，这个事件每250毫秒出发一次。这个事件可用来实时显示播放进度。
         // 节流 频率改为1s
         audio.addEventListener("timeupdate", _.throttle((e) => {
+            console.error('timeupdate', currentPalySongs)
             setCurrentTime(getTime(audio.currentTime)) // 当前播放时间 单位s
             setCurrentTimeRate((audio.currentTime / audio.duration) * 100)
 
             // 歌曲播放完后切换下一曲
             if (audio.currentTime === audio.duration) {
-                // setAutotoggleType(+autotoggleType + 1)
-                playNextSong('next')
+                setAutotoggleType(+autotoggleType + 1)
             }
         }, 1000))
     }, [])
 
     // 监听autotoggleType 自动播放下一曲
     // audio ended 拿不到数据
-    // useEffect(() => {
-    //     console.error('autotoggleType', autotoggleType);
-    //     if (!autotoggleType) return
-    //     playNextSong('next')
-    // }, [autotoggleType])
+    useEffect(() => {
+        console.error('autotoggleType', autotoggleType);
+        if (!autotoggleType) return
+        playNextSong('next')
+    }, [autotoggleType])
     // 当前播放歌曲列表
     useEffect(() => {
         if (!songAllId) return
