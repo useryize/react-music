@@ -1,5 +1,5 @@
 import { axiosGet } from '../../utils/axios';
-import { songUrl, songtDetail, scrobble } from '../../utils/apis';
+import { songUrl, songtDetail, scrobble, likeSong } from '../../utils/apis';
 const CURRENT_PALY_ALL_FUNCTION_APP = 'CURRENT_PALY_ALL_FUNCTION_APP';
 const SONG_ID_FUNCTION = 'SONG_ID_FUNCTION';
 const SONG_ALL_ID_FUNCTION = 'SONG_ALL_ID_FUNCTION';
@@ -103,3 +103,12 @@ export const setScrobblePunchinApp = ({ dispatch = h => h, params = {} }) => {
 export const searchInputTextFunctionApp = ({ dispatch = h => h, params = '' }) => {
     dispatch({ type: SEARCH_INPUT_FUCTION, searchInput: params })
 }
+
+// 喜欢音乐
+export const getLikeSongApp = ({ dispatch, params } = {}) => {
+    const axiosRes = axiosGet({
+        url: likeSong,
+        params
+    })
+    return axiosRes
+};
