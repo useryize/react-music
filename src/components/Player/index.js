@@ -80,7 +80,7 @@ const Headers = () => {
             return
         }
         let currentIndex = 0
-        currentPalySongs.map((item, index) => {
+        currentPalySongs.forEach((item, index) => {
             if (+item.id === +songId) {
                 currentIndex = index
             }
