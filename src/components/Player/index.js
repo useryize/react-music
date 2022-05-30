@@ -129,7 +129,7 @@ const Headers = () => {
     }, [])
 
     // 监听autotoggleType 自动播放下一曲
-    // audio ended 拿不到数据
+    // audio监听为当时的state状态 后续值获取不到
     useEffect(() => {
         console.error('autotoggleType', autotoggleType);
         if (!autotoggleType) return
@@ -215,10 +215,11 @@ const Headers = () => {
                                 <div className={styles.timeRight}>{durationTime}</div>
                             </div>
                             <div className={`${styles.buttonBox} ${currentPalySongs.length === 0 ? styles.noOther : ''}`}>
-                                <div className={`iconfont lastsong ${styles.le}`} onClick={() => playNextSong('up')}></div>
-                                <div className={`iconfont  ${audioRef.current && audioRef.current.paused ? 'play' : 'suspend'} ${styles.cen}`} onClick={playSongs}></div>
-                                <div className={`iconfont nextsong ${styles.ri}`} onClick={() => playNextSong('next')}></div>
-                                <div className={`iconfont more ${styles.ri}`} onClick={() => setCurrentPalyType(true)}></div>
+                                <div className={`iconfont favorites ${styles.liking}`}></div>
+                                <div className={`iconfont lastsong ${styles.lastsong}`} onClick={() => playNextSong('up')}></div>
+                                <div className={`iconfont  ${styles.togglePlay} ${audioRef.current && audioRef.current.paused ? 'play' : 'suspend'}`} onClick={playSongs}></div>
+                                <div className={`iconfont nextsong ${styles.nextSong}`} onClick={() => playNextSong('next')}></div>
+                                <div className={`iconfont more ${styles.morePlay}`} onClick={() => setCurrentPalyType(true)}></div>
                             </div>
                         </div>
                     </div>
