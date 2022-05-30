@@ -121,20 +121,21 @@ const Headers = () => {
             setCurrentTime(getTime(audio.currentTime)) // 当前播放时间 单位s
             setCurrentTimeRate((audio.currentTime / audio.duration) * 100)
 
+            // 歌曲播放完后切换下一曲
+            if (audio.currentTime === audio.duration) {
+                // setAutotoggleType(+autotoggleType + 1)
+                playNextSong('next')
+            }
         }, 1000))
-
-        // 当整个音频文件播放完毕的时候触发ended事件
-        audio.addEventListener("ended", () => {
-            setAutotoggleType(+autotoggleType + 1)
-        });
     }, [])
 
     // 监听autotoggleType 自动播放下一曲
     // audio ended 拿不到数据
-    useEffect(() => {
-        if (!autotoggleType) return
-        playNextSong('next')
-    }, [autotoggleType])
+    // useEffect(() => {
+    //     console.error('autotoggleType', autotoggleType);
+    //     if (!autotoggleType) return
+    //     playNextSong('next')
+    // }, [autotoggleType])
     // 当前播放歌曲列表
     useEffect(() => {
         if (!songAllId) return
