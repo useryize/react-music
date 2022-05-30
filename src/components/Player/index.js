@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.module.less';
-import { Slider, ProgressCircle, Popup, Image } from 'antd-mobile'
+import { Slider, ProgressCircle, Popup, Image, Toast } from 'antd-mobile'
 import { DownOutline } from 'antd-mobile-icons'
 import createContextApp from '../../hooks/App/createContextApp'
 import { getSongUrlApp, getSongDetailApp, setScrobblePunchinApp, getSongIdApp } from '../../hooks/App/useReducerApp'
@@ -67,6 +67,26 @@ const Headers = () => {
     const playSongs = () => {
         if (!songMp3Info.mp3Url) return
         audioRef.current.paused ? audioRef.current.play() : audioRef.current.pause()
+    }
+
+    // 上一曲/下一曲
+    const playNextSong = (type) => {
+        if (currentPalySongs.length === 0 && !type) {
+            Toast.show({
+                duration: '3000',
+                content: '暂无更多',
+                position: 'center',
+            })
+            return
+        }
+        let currentIndex = 0
+        currentPalySongs.map((item, index) => {
+            if (+item.id === +songId) {
+                currentIndex = index
+            }
+        })
+        let currentItem = currentPalySongs[type === 'up' ? currentIndex - 1 : currentIndex + 1]
+        getSongIdApp({ dispatch, params: currentItem.id })
     }
 
     // 转换为时分秒
@@ -176,10 +196,10 @@ const Headers = () => {
                                 </div>
                                 <div className={styles.timeRight}>{durationTime}</div>
                             </div>
-                            <div className={`${styles.buttonBox} ${currentPalySongs.length > 0 ? 'noOther' : ''}`}>
-                                <div className={`iconfont lastsong ${styles.le}`}></div>
+                            <div className={`${styles.buttonBox} ${currentPalySongs.length === 0 ? styles.noOther : ''}`}>
+                                <div className={`iconfont lastsong ${styles.le}`} onClick={() => playNextSong('up')}></div>
                                 <div className={`iconfont  ${audioRef.current && audioRef.current.paused ? 'play' : 'suspend'} ${styles.cen}`} onClick={playSongs}></div>
-                                <div className={`iconfont nextsong ${styles.ri}`}></div>
+                                <div className={`iconfont nextsong ${styles.ri}`} onClick={() => playNextSong('next')}></div>
                             </div>
                         </div>
                     </div>
