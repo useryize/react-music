@@ -121,7 +121,8 @@ const Headers = () => {
         }, 1000))
 
         // 当整个音频文件播放完毕的时候触发ended事件
-        audio.addEventListener("ended", function () {
+        audio.addEventListener("ended", () =>{
+            console.error('audio', currentPalySongs)
             playNextSong('next')
         });
 
