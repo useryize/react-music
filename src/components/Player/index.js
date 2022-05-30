@@ -119,14 +119,18 @@ const Headers = () => {
             setCurrentTime(getTime(audio.currentTime)) // 当前播放时间 单位s
             setCurrentTimeRate((audio.currentTime / audio.duration) * 100)
         }, 1000))
+    }, [])
 
+    // 在currentPalySongs有值时执行audio
+    useEffect(() => {
+        const audio = audioRef.current
         // 当整个音频文件播放完毕的时候触发ended事件
-        audio.addEventListener("ended", () =>{
+        audio.addEventListener("ended", () => {
             console.error('audio', currentPalySongs)
             playNextSong('next')
         });
+    }, [currentPalySongs])
 
-    }, [])
 
     // 当前播放歌曲列表
     useEffect(() => {
