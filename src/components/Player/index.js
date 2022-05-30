@@ -28,6 +28,8 @@ const Headers = () => {
     const [songPalyType, setSongPalyType] = useState(false); // 音乐播放器弹出层
     const [currentPalyType, setCurrentPalyType] = useState(false); // 当前播放歌曲弹出层
 
+    const [autotoggleType, setAutotoggleType] = useState(''); // 自动播放下一曲
+
 
     // let [transformRotate, setTransformRotate] = useState(0); // 控制图片自动旋转角度
     // let [transformKey, setTransformKey] = useState(''); // 控制图片自动旋转角度
@@ -71,7 +73,7 @@ const Headers = () => {
 
     // 上一曲/下一曲
     const playNextSong = (type) => {
-        console.error(currentPalySongs);
+		console.error(currentPalySongs);
         if (currentPalySongs.length === 0) {
             Toast.show({
                 duration: '3000',
@@ -118,20 +120,21 @@ const Headers = () => {
         audio.addEventListener("timeupdate", _.throttle((e) => {
             setCurrentTime(getTime(audio.currentTime)) // 当前播放时间 单位s
             setCurrentTimeRate((audio.currentTime / audio.duration) * 100)
-        }, 1000))
-    }, [])
 
-    // 在currentPalySongs有值时执行audio
-    useEffect(() => {
-        const audio = audioRef.current
+        }, 1000))
+
         // 当整个音频文件播放完毕的时候触发ended事件
         audio.addEventListener("ended", () => {
-            console.error('audio', currentPalySongs)
-            playNextSong('next')
+            setAutotoggleType(+autotoggleType + 1)
         });
-    }, [currentPalySongs])
+    }, [])
 
-
+    // 监听autotoggleType 自动播放下一曲
+    // audio ended 拿不到数据
+    userEvent(() => {
+        if(!autotoggleType) return
+        playNextSong('next')
+    }, [autotoggleType])
     // 当前播放歌曲列表
     useEffect(() => {
         if (!songAllId) return
