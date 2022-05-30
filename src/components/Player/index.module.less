@@ -235,16 +235,19 @@
                     display: flex;
                     align-items: center;
                     // justify-content: center;
-					justify-content:space-around;
+                    justify-content: space-around;
                     margin-top: .1rem;
 
-                    .le,
-                    .ri,
-                    .cen {
+                    .liking,
+                    .lastsong,
+                    .togglePlay,
+                    .nextSong,
+                    .morePlay {
                         font-size: .22rem;
                         color: #FEFEFE;
                     }
 
+                    // 无更多播放列表
                     &.noOther {
 
                         .le,
@@ -253,7 +256,7 @@
                         }
                     }
 
-                    .cen {
+                    .togglePlay {
                         display: flex;
                         align-items: center;
                         justify-content: center;
