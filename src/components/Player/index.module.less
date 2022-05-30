@@ -244,6 +244,14 @@
                         color: #FEFEFE;
                     }
 
+                    &.noOther {
+
+                        .le,
+                        .ri {
+                            color: #b7a4a4;
+                        }
+                    }
+
                     .cen {
                         display: flex;
                         align-items: center;
@@ -254,9 +262,6 @@
                         border: #FEFEFE solid .01rem;
                         border-radius: 50%;
                         font-size: .18rem;
-
-
-
                     }
 
                     :global {
@@ -273,12 +278,13 @@
 }
 
 .currentPalyPop {
-	:global {
+    :global {
         .adm-popup-body {
             width: 100%;
             height: 60vh;
         }
     }
+
     .currentPalyBox {
         width: 100%;
         height: 60vh;
