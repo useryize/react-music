@@ -73,7 +73,7 @@ const Headers = () => {
 
     // 上一曲/下一曲
     const playNextSong = (type) => {
-		console.error(currentPalySongs);
+        console.error(currentPalySongs);
         if (currentPalySongs.length === 0) {
             Toast.show({
                 duration: '3000',
@@ -131,8 +131,8 @@ const Headers = () => {
 
     // 监听autotoggleType 自动播放下一曲
     // audio ended 拿不到数据
-    userEvent(() => {
-        if(!autotoggleType) return
+    useEffect(() => {
+        if (!autotoggleType) return
         playNextSong('next')
     }, [autotoggleType])
     // 当前播放歌曲列表
