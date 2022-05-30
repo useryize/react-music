@@ -71,6 +71,7 @@ const Headers = () => {
 
     // 上一曲/下一曲
     const playNextSong = (type) => {
+        console.error(currentPalySongs);
         if (currentPalySongs.length === 0) {
             Toast.show({
                 duration: '3000',
