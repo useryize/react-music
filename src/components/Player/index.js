@@ -46,7 +46,7 @@ const Headers = () => {
             const { url: mp3Url = '' } = urlData
 
             const [detaileSongs] = (detaileObj && detaileObj.songs) || {}
-            const { al: { name: mp3Name = '', picUrl: mp3Pic = '' } = {}, ar: author = [] } = detaileSongs
+            const { name: mp3Name = '', al: { picUrl: mp3Pic = '' } = {}, ar: author = [] } = detaileSongs
             setSongMp3Info({ mp3Name, mp3Pic, mp3Url, author })
             setSongPalyType(true)
 
@@ -136,7 +136,7 @@ const Headers = () => {
 
     return (
         <>
-            <audio ref={audioRef} src={songMp3Info.mp3Url} controls={false} loop={true} />
+            <audio ref={audioRef} src={songMp3Info.mp3Url} controls={false} loop={false} />
 
             {/* 简易播放器 */}
             {
@@ -147,7 +147,10 @@ const Headers = () => {
                                 {/* <img src={songMp3Info.mp3Pic} style={{ transform: `rotate(${transformRotate}deg)` }} alt='' /> */}
                                 <img src={songMp3Info.mp3Pic} alt='' />
                             </div>
-                            <div className={styles.name}>{songMp3Info && songMp3Info.mp3Name}</div>
+                            <div className={styles.name}>
+                                {songMp3Info && songMp3Info.mp3Name} -
+                                {songMp3Info && songMp3Info.author && songMp3Info.author.map(item => item.name).join('/')}
+                            </div>
                         </div>
                         <div className={styles.player}>
                             <ProgressCircle
