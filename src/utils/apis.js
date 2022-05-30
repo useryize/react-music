@@ -15,4 +15,5 @@ export const songUrl = `${SERVER}/song/url` // 获取歌曲url
 export const scrobble = `${SERVER}/scrobble` // 听歌打卡
 export const search = `${SERVER}/search` // 搜索
 export const searchDefault = `${SERVER}/search/default` // 默认搜索关键词
+export const likeSong = `${SERVER}/like` // 喜欢音乐
 
