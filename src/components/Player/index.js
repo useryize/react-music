@@ -118,15 +118,12 @@ const Headers = () => {
         // 实际开发的时候，这个事件每250毫秒出发一次。这个事件可用来实时显示播放进度。
         // 节流 频率改为1s
         audio.addEventListener("timeupdate", _.throttle((e) => {
-            let type = 0
             setCurrentTime(getTime(audio.currentTime)) // 当前播放时间 单位s
             setCurrentTimeRate((audio.currentTime / audio.duration) * 100)
 
             // 歌曲播放完后切换下一曲
             if (audio.currentTime === audio.duration) {
-                type = type + 1
-                console.error(type);
-                setAutotoggleType(type)
+                setAutotoggleType(_.random(1, 100000000))
             }
         }, 1000))
     }, [])
