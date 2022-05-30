@@ -16,7 +16,7 @@ const {
     useState
 } = React
 const Headers = () => {
-    const { state: { songId = '', songAllId = '', currentPalyAll } = {}, dispatch } = useContext(createContextApp)
+    const { state: { songId = '', songAllId = '', currentPalyAll: { songs: currentPalySongs = [] } = {} } = {}, dispatch } = useContext(createContextApp)
     const audioRef = useRef(null)
 
     const [durationTime, setDurationTime] = useState('00:00') // 总时间
@@ -176,7 +176,7 @@ const Headers = () => {
                                 </div>
                                 <div className={styles.timeRight}>{durationTime}</div>
                             </div>
-                            <div className={styles.buttonBox}>
+                            <div className={`${styles.buttonBox} ${currentPalySongs.length > 0 ? 'noOther' : ''}`}>
                                 <div className={`iconfont lastsong ${styles.le}`}></div>
                                 <div className={`iconfont  ${audioRef.current && audioRef.current.paused ? 'play' : 'suspend'} ${styles.cen}`} onClick={playSongs}></div>
                                 <div className={`iconfont nextsong ${styles.ri}`}></div>
@@ -192,7 +192,7 @@ const Headers = () => {
                 onMaskClick={() => setCurrentPalyType(false)}
             >
                 <div className={`scrollbar ${styles.currentPalyBox}`}>
-                    <SongListPublic dataInfo={(currentPalyAll && currentPalyAll.songs) || []} />
+                    <SongListPublic dataInfo={currentPalySongs} />
                 </div>
             </Popup>
         </>
