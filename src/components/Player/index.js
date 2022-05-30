@@ -81,11 +81,12 @@ const Headers = () => {
         }
         let currentIndex = 0
         currentPalySongs.forEach((item, index) => {
-            if (+item.id === +songId) {
+            if (Number(item.id) === Number(songId)) {
                 currentIndex = index
+                console.error(index);
             }
         })
-        let currentItem = currentPalySongs[type === 'up' ? currentIndex - 1 : currentIndex + 1]
+        let currentItem = currentPalySongs[type === 'up' ? currentIndex - 1 : currentIndex + 1] || {}
         getSongIdApp({ dispatch, params: currentItem.id })
     }
 
@@ -117,6 +118,11 @@ const Headers = () => {
             setCurrentTime(getTime(audio.currentTime)) // 当前播放时间 单位s
             setCurrentTimeRate((audio.currentTime / audio.duration) * 100)
         }, 1000))
+
+        // 当整个音频文件播放完毕的时候触发ended事件
+        audio.addEventListener("ended", function () {
+            playNextSong('next')
+        });
 
     }, [])
 
@@ -200,6 +206,7 @@ const Headers = () => {
                                 <div className={`iconfont lastsong ${styles.le}`} onClick={() => playNextSong('up')}></div>
                                 <div className={`iconfont  ${audioRef.current && audioRef.current.paused ? 'play' : 'suspend'} ${styles.cen}`} onClick={playSongs}></div>
                                 <div className={`iconfont nextsong ${styles.ri}`} onClick={() => playNextSong('next')}></div>
+                                <div className={`iconfont more ${styles.ri}`} onClick={() => setCurrentPalyType(true)}></div>
                             </div>
                         </div>
                     </div>
