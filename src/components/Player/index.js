@@ -3,7 +3,10 @@ import styles from './index.module.less';
 import { Slider, ProgressCircle, Popup, Image, Toast } from 'antd-mobile'
 import { DownOutline } from 'antd-mobile-icons'
 import createContextApp from '../../hooks/App/createContextApp'
-import { getSongUrlApp, getSongDetailApp, setScrobblePunchinApp, getSongIdApp } from '../../hooks/App/useReducerApp'
+import {
+    getSongUrlApp, getSongDetailApp, setScrobblePunchinApp, getSongIdApp,
+    getLikeSongApp
+} from '../../hooks/App/useReducerApp'
 import SongListPublic from '../SongListPublic/index'
 import _ from 'lodash'
 // import history from '../../utils/history'
@@ -33,65 +36,6 @@ const Headers = () => {
 
     // let [transformRotate, setTransformRotate] = useState(0); // 控制图片自动旋转角度
     // let [transformKey, setTransformKey] = useState(''); // 控制图片自动旋转角度
-
-    // 监听音乐id
-    useEffect(() => {
-        if (!songId) return
-        // 获取音乐 url/音乐详情
-        Promise.all([
-            getSongUrlApp({ dispatch, params: { id: songId } }),
-            getSongDetailApp({ dispatch, params: { ids: songId } })
-        ]).then(res => {
-            const [urlObj = {}, detaileObj = {}] = res
-
-            const [urlData] = (urlObj && urlObj.data) || {}
-            const { url: mp3Url = '' } = urlData
-
-            const [detaileSongs] = (detaileObj && detaileObj.songs) || {}
-            const { name: mp3Name = '', al: { picUrl: mp3Pic = '' } = {}, ar: author = [] } = detaileSongs
-            setSongMp3Info({ mp3Name, mp3Pic, mp3Url, author })
-            setSongPalyType(true)
-
-        })
-
-        // 听歌打卡
-        setScrobblePunchinApp({ dispatch, params: { id: songId, time: audioRef.current.duration || 60 } })
-
-    }, [songId])
-
-    // 监听音乐信息 播放暂停歌曲
-    useEffect(() => {
-        playSongs()
-    }, [songMp3Info])
-
-
-    // 暂停/播放
-    const playSongs = () => {
-        if (!songMp3Info.mp3Url) return
-        audioRef.current.paused ? audioRef.current.play() : audioRef.current.pause()
-    }
-
-    // 上一曲/下一曲
-    const playNextSong = (type) => {
-        console.error(currentPalySongs);
-        if (currentPalySongs.length === 0) {
-            Toast.show({
-                duration: '3000',
-                content: '暂无更多',
-                position: 'center',
-            })
-            return
-        }
-        let currentIndex = 0
-        currentPalySongs.forEach((item, index) => {
-            if (Number(item.id) === Number(songId)) {
-                currentIndex = index
-                console.error(index);
-            }
-        })
-        let currentItem = currentPalySongs[type === 'up' ? currentIndex - 1 : currentIndex + 1] || {}
-        getSongIdApp({ dispatch, params: currentItem.id })
-    }
 
     // 转换为时分秒
     const getTime = (time) => {
@@ -128,6 +72,38 @@ const Headers = () => {
         }, 1000))
     }, [])
 
+
+    // 监听音乐id
+    useEffect(() => {
+        if (!songId) return
+        // 获取音乐 url/音乐详情
+        Promise.all([
+            getSongUrlApp({ dispatch, params: { id: songId } }),
+            getSongDetailApp({ dispatch, params: { ids: songId } })
+        ]).then(res => {
+            const [urlObj = {}, detaileObj = {}] = res
+
+            const [urlData] = (urlObj && urlObj.data) || {}
+            const { url: mp3Url = '' } = urlData
+
+            const [detaileSongs] = (detaileObj && detaileObj.songs) || {}
+            const { name: mp3Name = '', al: { picUrl: mp3Pic = '' } = {}, ar: author = [] } = detaileSongs
+            setSongMp3Info({ mp3Name, mp3Pic, mp3Url, author })
+            setSongPalyType(true)
+
+        })
+
+        // 听歌打卡
+        setScrobblePunchinApp({ dispatch, params: { id: songId, time: audioRef.current.duration || 60 } })
+
+    }, [songId])
+
+    // 监听音乐信息 播放暂停歌曲
+    useEffect(() => {
+        playSongs()
+    }, [songMp3Info])
+
+
     // 监听autotoggleType 自动播放下一曲
     // audio监听为当时的state状态 后续值获取不到
     useEffect(() => {
@@ -135,6 +111,8 @@ const Headers = () => {
         if (!autotoggleType) return
         playNextSong('next')
     }, [autotoggleType])
+
+
     // 当前播放歌曲列表
     useEffect(() => {
         if (!songAllId) return
@@ -142,6 +120,47 @@ const Headers = () => {
         const [id] = songAllId.split(',')
         getSongIdApp({ dispatch, params: id }) // 默认播放第一首
     }, [songAllId])
+
+
+    // 暂停/播放
+    const playSongs = () => {
+        if (!songMp3Info.mp3Url) return
+        audioRef.current.paused ? audioRef.current.play() : audioRef.current.pause()
+    }
+
+    // 上一曲/下一曲
+    const playNextSong = (type) => {
+        console.error(currentPalySongs);
+        if (currentPalySongs.length === 0) {
+            Toast.show({
+                duration: '3000',
+                content: '暂无更多',
+                position: 'center',
+            })
+            return
+        }
+        let currentIndex = 0
+        currentPalySongs.forEach((item, index) => {
+            if (Number(item.id) === Number(songId)) {
+                currentIndex = index
+                console.error(index);
+            }
+        })
+        let currentItem = currentPalySongs[type === 'up' ? currentIndex - 1 : currentIndex + 1] || {}
+        getSongIdApp({ dispatch, params: currentItem.id })
+    }
+
+    const likeFunction = async () => {
+        const res = await getLikeSongApp({ dispatch, params: { id: songId } })
+        if (res.code === 200) {
+            Toast.show({
+                duration: '3000',
+                content: '收藏成功',
+                position: 'center',
+            })
+        }
+    }
+
 
     return (
         <>
@@ -215,7 +234,7 @@ const Headers = () => {
                                 <div className={styles.timeRight}>{durationTime}</div>
                             </div>
                             <div className={`${styles.buttonBox} ${currentPalySongs.length === 0 ? styles.noOther : ''}`}>
-                                <div className={`iconfont favorites ${styles.liking}`}></div>
+                                <div className={`iconfont favorites ${styles.liking}`} onClick={likeFunction}></div>
                                 <div className={`iconfont lastsong ${styles.lastsong}`} onClick={() => playNextSong('up')}></div>
                                 <div className={`iconfont  ${styles.togglePlay} ${audioRef.current && audioRef.current.paused ? 'play' : 'suspend'}`} onClick={playSongs}></div>
                                 <div className={`iconfont nextsong ${styles.nextSong}`} onClick={() => playNextSong('next')}></div>
