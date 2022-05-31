@@ -19,7 +19,7 @@ const SongListPublic = (_props) => {
         <div className={styles.songBox}>
             {
                 dataInfo.map((item, index) => (
-                    <div className={styles.item} key={index} onClick={async () => {
+                    <div className={`${styles.item} clickActive`} key={index} onClick={async () => {
                         setSongFocu(index)
                         getSongIdApp({ dispatch, params: item.id })
                     }}>

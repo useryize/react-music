@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app';
 import './utils/flexible';
-import './assets/style/global.module.css';
+import './assets/style/global.module.less';
 // import './assets/iconfont/iconfont.css'
 import VConsole from 'vconsole';
 import 'antd-mobile/es/global'
