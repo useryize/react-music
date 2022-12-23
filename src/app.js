@@ -2,7 +2,7 @@ import React from 'react';
 import { HashRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import createContextFind from './hooks/App/createContextApp'
 import { reducer, initialState } from './hooks/App/useReducerApp'
-// import history from './utils/history';
+// import history from './utils/history'; 
 import routesDom from './routes'
 const {
     lazy, Suspense,
